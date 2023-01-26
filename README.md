@@ -1,1 +1,1 @@
-# rs-clone
+# rs-clone by @pnmrvvtl @zhannach @adwasar
