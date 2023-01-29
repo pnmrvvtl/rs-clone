@@ -1,16 +1,17 @@
 import React from "react"
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
-import Navigation from "./components/navigation";
-import Analytics from "./pages/analytics";
+import Navigation from "./components/navigation/navigation";
+import HistoryPage from "./pages/history-page/history-page";
+import ErrorPage from "./pages/error-page/error-page";
 
 let router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Navigation/>}>
-            <Route index element={<h2>Index</h2>} />
-            <Route path="game1" element={<h2>Game1</h2>} />
-            <Route path="game2" element={<h2>Game2</h2>} />
-            <Route path="game3" element={<h2>Game3</h2>} />
-            <Route path="analytics" element={<Analytics/>} />
+        <Route path="/" element={<Navigation/>} errorElement={<Navigation><ErrorPage /></Navigation>}>
+            <Route index element={<h2>Index</h2>}/>
+            <Route path="location" element={<h2>Location</h2>}/>
+            <Route path="today" element={<h2>Today</h2>} />
+            <Route path="week" element={<h2>History</h2>} />
+            <Route path="history" element={<HistoryPage/>} />
         </Route>
     )
 );

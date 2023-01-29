@@ -12,10 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {Link, Outlet} from "react-router-dom";
-import Footer from "./footer";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import {Link, Outlet} from 'react-router-dom';
+import Footer from '../footer/footer';
+import styles from './navigation.module.scss';
+import {ReactNode} from "react";
 
-const pages = ['Game1', 'Game2', 'Game3', 'Analytics'];
+const pages = ['Location', 'Today', 'Week', 'History'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function RestoreIcon() {
@@ -30,7 +33,11 @@ function LocationOnIcon() {
     return null;
 }
 
-function Navigation() {
+interface Props {
+    children?: ReactNode
+}
+
+function Navigation({ children, ...props }: Props) {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -54,7 +61,7 @@ function Navigation() {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
+                        <WbSunnyIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                         <Typography
                             variant="h6"
                             noWrap
@@ -70,7 +77,7 @@ function Navigation() {
                                 textDecoration: 'none',
                             }}
                         >
-                            LOGO
+                            RS-Weather
                         </Typography>
 
                         <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
@@ -103,20 +110,22 @@ function Navigation() {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                            <Link style={{textDecoration:"none",color:"white"}}to={`/${page}`}>{page}</Link>
-                                        </Typography>
-                                    </MenuItem>
+                                    <Link style={{textDecoration: "none", color: "black"}} to={`/${page}`}>
+                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">
+                                                {page}
+                                            </Typography>
+                                        </MenuItem>
+                                    </Link>
                                 ))}
                             </Menu>
                         </Box>
-                        <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+                        <WbSunnyIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                         <Typography
                             variant="h5"
                             noWrap
                             component="a"
-                            href=""
+                            href="/"
                             sx={{
                                 mr: 2,
                                 display: {xs: 'flex', md: 'none'},
@@ -128,7 +137,7 @@ function Navigation() {
                                 textDecoration: 'none',
                             }}
                         >
-                            LOGO
+                            RS-Weather
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (
@@ -137,7 +146,7 @@ function Navigation() {
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
-                                    <Link style={{textDecoration:"none",color:"white"}}to={`/${page}`}>{page}</Link>
+                                    <Link style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
                                 </Button>
                             ))}
                         </Box>
@@ -174,7 +183,7 @@ function Navigation() {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Outlet/>
+            {children || <Outlet/>}
             <Footer/>
         </>
     );
