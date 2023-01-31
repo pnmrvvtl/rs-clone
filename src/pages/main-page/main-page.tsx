@@ -1,8 +1,8 @@
-import styles from 'main-page.module.scss';
+import styles from './main-page.module.scss';
 
 export default function () {
     return (
-        <div>
+        <div className={styles.container}>
             Main-Page
         </div>
     )
