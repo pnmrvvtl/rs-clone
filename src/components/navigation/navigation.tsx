@@ -18,7 +18,7 @@ import Footer from '../footer/footer';
 import styles from './navigation.module.scss';
 import {ReactNode} from "react";
 
-const pages = ['Location', 'Today', 'Week', 'History'];
+const pages = ['Data', 'Results', 'Meals'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function RestoreIcon() {

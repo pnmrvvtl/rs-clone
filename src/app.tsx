@@ -1,17 +1,19 @@
 import React from "react"
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
 import Navigation from "./components/navigation/navigation";
-import HistoryPage from "./pages/history-page/history-page";
 import ErrorPage from "./pages/error-page/error-page";
+import MainPage from "./pages/main-page/main-page";
+import DataPage from "./pages/data-page/data-page";
+import ResultsPage from "./pages/results-page/results-page";
+import Meal from "./components/meal/meal";
 
 let router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Navigation/>} errorElement={<Navigation><ErrorPage /></Navigation>}>
-            <Route index element={<h2>Index</h2>}/>
-            <Route path="location" element={<h2>Location</h2>}/>
-            <Route path="today" element={<h2>Today</h2>} />
-            <Route path="week" element={<h2>History</h2>} />
-            <Route path="history" element={<HistoryPage/>} />
+            <Route index element={<MainPage/>}/>
+            <Route path="data" element={<DataPage/>}/>
+            <Route path="results" element={<ResultsPage/>} />
+            <Route path="meals" element={<Meal/>} />
         </Route>
     )
 );

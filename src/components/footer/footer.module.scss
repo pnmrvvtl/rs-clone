@@ -1,7 +1,8 @@
+@import "../../scss/constants";
 
 .footer {
   position: fixed;
-  background-color: #1976d2;
+  background-color: $footer-color;
   bottom: 0;
   width: 100%;
   color: white;
@@ -30,7 +31,7 @@
   .logo {
     width: 100px;
     height: 30px;
-    background-image: url("https://rs.school/images/rs_school_js.svg");
+    background-image: url('https://rs.school/images/rs_school_js.svg');
     background-repeat: no-repeat;
   }
 }
