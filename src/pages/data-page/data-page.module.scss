@@ -8,13 +8,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 50px;
   box-sizing: border-box;
   flex-direction: column;
   background-color: $background-light;
-  min-height: calc(100vh - 100px);
   width: 100%;
-  padding-bottom: 100px;
+  min-height: calc(100vh - 130px);
 
   .progress {
     width: 300px;
@@ -23,6 +21,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 50px;
+    padding-top: 30px;
 
     .arrow {
       background-image: url("../../assets/icons/arrow.svg");
@@ -30,6 +29,10 @@
       margin-right: 20px;
       height: 15px;
       background-repeat: no-repeat;
+
+      &.hidden {
+        background-image: none;
+      }
     }
 
     .bar {
@@ -46,17 +49,45 @@
         height: 100%;
         border-radius: 5px;
         background-color: $button-color;
+        transition: width 0.5s ease;
+
         &.mult2 {
           width: 20%;
         }
+
         &.mult3 {
           width: 30%;
         }
+
         &.mult4 {
           width: 40%;
         }
+
+        &.mult5 {
+          width: 50%;
+        }
+
+        &.mult6 {
+          width: 60%;
+        }
+
+        &.mult7 {
+          width: 70%;
+        }
+
+        &.mult8 {
+          width: 80%;
+        }
+
+        &.mult9 {
+          width: 90%;
+        }
       }
     }
+  }
+
+  .hidden {
+    display: none;
   }
 
   .question {
@@ -72,13 +103,15 @@
     h2 {
       margin-bottom: 20px;
       text-align: center;
+      max-width: 40vw;
     }
 
     .button {
       margin: 10px;
       width: 300px;
-      height: 50px;
+      min-height: 50px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       border-radius: 7px;
@@ -86,10 +119,27 @@
       background-color: $background-super-light;
       color: $font-color-main;
 
+      p {
+        padding: 0;
+        margin: 10px;
+        width: 100%;
+      }
+
+      p:nth-child(1) {
+        color: $font-color-main;
+      }
+
+      p:nth-child(2) {
+        color: $font-color-sub;
+        font-weight: lighter;
+      }
 
       &.selected {
         background-color: $button-color;
         color: $font-color-inverted;
+        p {
+          color: $font-color-inverted;
+        }
       }
 
       &:hover {
@@ -128,6 +178,7 @@
         background-color: $background-super-light;
         border: 3px solid $background-strip;
         box-sizing: border-box;
+        transition: background-color 0.3s ease;
 
         &.checked {
           &:before {
@@ -136,9 +187,125 @@
             left: 6px;
             color: $font-color-main;
           }
+
           background-color: $button-color;
         }
       }
     }
+
+    //question 3
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input[type='number'] {
+      height: 40px;
+      width: 100px;
+      border: none;
+      box-shadow: $background-strip 0px 0px 15px 0px;
+      border-radius: 7px;
+      position: relative;
+      margin: 10px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .ft-div > div, .cm-div > div, .pounds-div > div, .kilos-div > div {
+      position: relative;
+    }
+
+    .ft-div {
+      display: flex;
+      &.hidden {
+        display: none;
+      }
+    }
+
+    input[type=number] + span {
+      position: absolute;
+      top: 20px;
+      right: 15px;
+    }
+
+    .height-system {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      background-color: $background-super-light;
+      border-radius: 30px;
+      width: 200px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .height-system-ft {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        height: 100%;
+        width: 50%;
+        background-color: $background-super-light;
+        transition: background-color 0.5s ease;
+
+        &.selected {
+          background-color: $background-strip;
+        }
+      }
+
+      .height-system-cm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        height: 100%;
+        width: 50%;
+        background-color: $background-super-light;
+        transition: background-color 0.5s ease;
+
+        &.selected {
+          background-color: $background-strip;
+        }
+      }
+    }
+
+    .weights-title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pounds-div, .kilos-div {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .data-graph {
+      width: 300px;
+      height: 220px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url("../../assets/images/data-graph.webp");
+      margin-bottom: 30px;
+    }
+
   }
 }

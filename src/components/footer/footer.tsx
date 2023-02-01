@@ -14,6 +14,5 @@ export default function Footer() {
                 <div className={styles.logo}></div>
             </a>
         </div>
-    )
-        ;
+    );
 }
