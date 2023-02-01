@@ -1,0 +1,144 @@
+@import "../../scss/constants";
+
+* {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 50px;
+  box-sizing: border-box;
+  flex-direction: column;
+  background-color: $background-light;
+  min-height: calc(100vh - 100px);
+  width: 100%;
+  padding-bottom: 100px;
+
+  .progress {
+    width: 300px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+
+    .arrow {
+      background-image: url("../../assets/icons/arrow.svg");
+      width: 20px;
+      margin-right: 20px;
+      height: 15px;
+      background-repeat: no-repeat;
+    }
+
+    .bar {
+      background-color: $background-super-light;
+      width: 100%;
+      height: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-radius: 5px;
+
+      .inbar {
+        width: 10%;
+        height: 100%;
+        border-radius: 5px;
+        background-color: $button-color;
+        &.mult2 {
+          width: 20%;
+        }
+        &.mult3 {
+          width: 30%;
+        }
+        &.mult4 {
+          width: 40%;
+        }
+      }
+    }
+  }
+
+  .question {
+    &.hidden {
+      display: none;
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .button {
+      margin: 10px;
+      width: 300px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      font-weight: bolder;
+      background-color: $background-super-light;
+      color: $font-color-main;
+
+
+      &.selected {
+        background-color: $button-color;
+        color: $font-color-inverted;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: $background-strip 0px 0px 15px 0px;
+      }
+    }
+
+    p {
+      margin-top: 10px;
+      line-height: 150%;
+      width: 45%;
+      text-align: center;
+    }
+
+    .goal {
+
+      width: 300px;
+      min-height: 70px;
+      background-color: $background-super-light;
+      color: $font-color-main;
+      border-radius: 7px;
+      margin: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 150%;
+      font-weight: bolder;
+      padding: 10px;
+
+      .check {
+        min-width: 30px;
+        min-height: 30px;
+        margin: 10px;
+        border-radius: 7px;
+        background-color: $background-super-light;
+        border: 3px solid $background-strip;
+        box-sizing: border-box;
+
+        &.checked {
+          &:before {
+            content: '\2713';
+            position: relative;
+            left: 6px;
+            color: $font-color-main;
+          }
+          background-color: $button-color;
+        }
+      }
+    }
+  }
+}
