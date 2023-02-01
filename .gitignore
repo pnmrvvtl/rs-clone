@@ -104,3 +104,9 @@ dist
 
 #
 .idea
+
+./src/constants
+
+src/constants/constants.ts
+# Local Netlify folder
+.netlify
