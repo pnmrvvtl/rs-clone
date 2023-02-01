@@ -1,13 +1,113 @@
 @import "../../scss/constants";
 
+@mixin btn-link {
+  color: #fff;
+  background-color: $button-color;
+  width: 200px;
+  height: 55px;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: $button-color-hover;
+  }
+}
+
 .container {
   background-color: $background-strip;
   width: 100%;
   height: 600px;
+  font-family: 'Ubuntu';
 }
 
-.image-container {
-  background-image: url("../../assets/hf.jpg");
-  width: 300px;
-  height: 300px;
+.about {
+  margin: 2px auto;
+  position: relative;
+
+}
+.about-title {
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: $font-color-main;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+}
+.about-subtitle {
+  color: $font-color-sub;
+  font-size: 1.5rem;
+  line-height: 1.2rem;
+  margin: 30px 0;
+  text-align: center;
+  line-height: 2rem;
+  position: absolute;
+  top: 37%;
+  left: 30%;
+}
+
+.about-img {
+  background-image: url("../../assets/image//main-img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  width: 100%;
+  height: 900px;
+  border-radius: 0 0 60% 60%;
+}
+.about-btn {
+  position: absolute;
+  @include btn-link();
+  top: 55%;
+  left: 40%;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background-light;
+  padding: 60px 0 40px;
+
+}
+.benefits-title {
+  color: $font-color-main;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.benefits-list {
+  display: flex;
+  justify-content: space-around;
+}
+.benefit {
+  flex: 0 1 20%;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+.benefit-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+
+}
+.benefit-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: $font-color-main;
+  margin-bottom: 10px;
+}
+.benefit-text {
+  color: $font-color-main;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.benefit-btn {
+  @include btn-link();
+  margin-top: 60px;
+  
 }
