@@ -7,7 +7,7 @@ import RadioSubList from "../../components/data/radio-sub-list";
 
 export default function DataPage() {
     const [selectedSex, setSelectedSex] = useState('');
-    const [currentQuestion, setCurrentQuestion] = useState(28);
+    const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
     const [healthConditions, setHealthConditions] = useState<string[]>([]);
     const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
@@ -134,36 +134,17 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 1 && styles.hidden}`}>
                 <h2>What sex best describes you?</h2>
-                {sexArr.map((el, index) => (
-                    <div key={index} className={`${styles.button} ${selectedSex === el && styles.selected}`}
-                         onClick={() => {
-                             setSelectedSex(el);
-                             setCurrentQuestion(currentQuestion + 1);
-                         }}
-                    >
-                        {el}
-                    </div>
-                ))}
+                <RadioList classButton={styles.button} classSelected={styles.selected} data={sexArr}
+                           dispatchSelected={selectedSex} dispatcher={setSelectedSex}
+                           dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
                 <p>Your sex hormone levels, both currently and what they were during your adolescence, affect your
                     protein and energy needs.</p>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 2 && styles.hidden}`}>
                 <h2>What are your main goals right now?</h2>
-                {goalsArr.map((el, index) => (
-                    <div key={index} className={styles.goal} onClick={() => {
-                        if (currentGoals.indexOf(el) !== -1) {
-                            setCurrentGoals([...currentGoals.filter((inEl) => inEl !== el)])
-                        } else {
-                            setCurrentGoals([...currentGoals, el]);
-                        }
-                    }}>
-                        <div className={`${styles.check} 
-                        ${currentGoals.indexOf(el) !== -1 && styles.checked}`}
-                        />
-                        {el}
-                    </div>
-                ))}
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={goalsArr} dispatchData={currentGoals} dispatcher={setCurrentGoals} />
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -268,6 +249,7 @@ export default function DataPage() {
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
+
             <div className={`${styles.question} ${currentQuestion !== 5 && styles.hidden}`}>
                 <h2>Diet Doctor creates sustainable results by helping you eat better, without restrictive dieting or
                     counting calories.</h2>
@@ -278,17 +260,10 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 6 && styles.hidden}`}>
                 <h2>How physically active are you?</h2>
-                {basicActArr.map((el, index) => (
-                    <div key={index} className={`${styles.button} ${basicAct === el[0] && styles.selected}`}
-                         onClick={() => {
-                             setBasicAct(el[0]);
-                             setCurrentQuestion(currentQuestion + 1);
-                         }}
-                    >
-                        <p className={styles['button-p-one']}>{el[0]}</p>
-                        <p className={styles['button-p-two']}>{el[1]}</p>
-                    </div>
-                ))}
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={basicActArr} dispatchSelected={basicAct} dispatcher={setBasicAct}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 7 && styles.hidden}`}>
@@ -305,20 +280,8 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 8 && styles.hidden}`}>
                 <h2>Do you have any of these health conditions?</h2>
-                {healthConditionsArr.map((el, index) => (
-                    <div key={index} className={styles.goal} onClick={() => {
-                        if (healthConditions.indexOf(el) !== -1) {
-                            setHealthConditions([...healthConditions.filter((inEl) => inEl !== el)])
-                        } else {
-                            setHealthConditions([...healthConditions, el]);
-                        }
-                    }}>
-                        <div className={`${styles.check} 
-                        ${healthConditions.indexOf(el) !== -1 && styles.checked}`}
-                        />
-                        {el}
-                    </div>
-                ))}
+               <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                              data={healthConditionsArr} dispatchData={healthConditions} dispatcher={setHealthConditions} />
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -345,20 +308,8 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 11 && styles.hidden}`}>
                 <h2>How do you feel about food at the moment?</h2>
-                {foodAtTheMomentArr.map((el, index) => (
-                    <div key={index} className={styles.goal} onClick={() => {
-                        if (foodAtTheMoment.indexOf(el) !== -1) {
-                            setFoodAtTheMoment([...foodAtTheMoment.filter((inEl) => inEl !== el)])
-                        } else {
-                            setFoodAtTheMoment([...foodAtTheMoment, el]);
-                        }
-                    }}>
-                        <div className={`${styles.check} 
-                        ${foodAtTheMoment.indexOf(el) !== -1 && styles.checked}`}
-                        />
-                        {el}
-                    </div>
-                ))}
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodAtTheMomentArr} dispatchData={foodAtTheMoment} dispatcher={setFoodAtTheMoment} />
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -436,32 +387,18 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 20 && styles.hidden}`}>
                 <h2>What’s your food budget?</h2>
-                {foodBudgetArr.map((el, index) => (
-                    <div key={index} className={`${styles.button} ${foodBudget === el[0] && styles.selected}`}
-                         onClick={() => {
-                             setFoodBudget(el[0]);
-                             setCurrentQuestion(currentQuestion + 1);
-                         }}
-                    >
-                        <p className={styles['button-p-one']}>{el[0]}</p>
-                        <p className={styles['button-p-two']}>{el[1]}</p>
-                    </div>
-                ))}
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={foodBudgetArr} dispatchSelected={foodBudget} dispatcher={setFoodBudget}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 21 && styles.hidden}`}>
                 <h2>How much time do you have to cook?</h2>
-                {foodCookTimeArr.map((el, index) => (
-                    <div key={index} className={`${styles.button} ${foodCookTime === el[0] && styles.selected}`}
-                         onClick={() => {
-                             setFoodCookTime(el[0]);
-                             setCurrentQuestion(currentQuestion + 1);
-                         }}
-                    >
-                        <p className={styles['button-p-one']}>{el[0]}</p>
-                        <p className={styles['button-p-two']}>{el[1]}</p>
-                    </div>
-                ))}
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={foodCookTimeArr} dispatchSelected={foodCookTime} dispatcher={setFoodCookTime}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 22 && styles.hidden}`}>
@@ -490,17 +427,10 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 24 && styles.hidden}`}>
                 <h2>How low carb do you want to go?</h2>
-                {foodCookCarbArr.map((el, index) => (
-                    <div key={index} className={`${styles.button} ${foodCookCarb === el[0] && styles.selected}`}
-                         onClick={() => {
-                             setFoodCookCarb(el[0]);
-                             setCurrentQuestion(currentQuestion + 1);
-                         }}
-                    >
-                        <p className={styles['button-p-one']}>{el[0]}</p>
-                        <p className={styles['button-p-two']}>{el[1]}</p>
-                    </div>
-                ))}
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={foodCookCarbArr} dispatchSelected={foodCookCarb} dispatcher={setFoodCookCarb}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 25 && styles.hidden}`}>
