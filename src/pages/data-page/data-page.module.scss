@@ -13,6 +13,7 @@
   background-color: $background-light;
   width: 100%;
   min-height: calc(100vh - 130px);
+  color: $font-color-main;
 
   .progress {
     width: 300px;
@@ -30,6 +31,10 @@
       height: 15px;
       background-repeat: no-repeat;
 
+      &:hover {
+      cursor: pointer;
+    }
+
       &.hidden {
         background-image: none;
       }
@@ -45,42 +50,83 @@
       border-radius: 5px;
 
       .inbar {
-        width: 10%;
+        width: 5%;
         height: 100%;
         border-radius: 5px;
         background-color: $button-color;
         transition: width 0.5s ease;
 
         &.mult2 {
-          width: 20%;
+          width: 10%;
         }
 
         &.mult3 {
-          width: 30%;
+          width: 15%;
         }
 
         &.mult4 {
-          width: 40%;
+          width: 20%;
         }
 
         &.mult5 {
-          width: 50%;
+          width: 25%;
         }
 
         &.mult6 {
-          width: 60%;
+          width: 30%;
         }
 
         &.mult7 {
-          width: 70%;
+          width: 35%;
         }
 
         &.mult8 {
-          width: 80%;
+          width: 40%;
         }
 
         &.mult9 {
+          width: 45%;
+        }
+
+        &.mult10 {
+          width: 50%;
+        }
+
+        &.mult11 {
+          width: 55%;
+        }
+
+        &.mult12 {
+          width: 60%;
+        }
+
+        &.mult13 {
+          width: 65%;
+        }
+
+        &.mult14 {
+          width: 70%;
+        }
+
+        &.mult15 {
+          width: 75%;
+        }
+
+        &.mult16 {
+          width: 80%;
+        }
+
+        &.mult17 {
+          width: 86%;
+        }
+        &.mult18 {
           width: 90%;
+        }
+        &.mult19 {
+          width: 95%;
+        }
+        &.mult20 {
+          width: 100%;
         }
       }
     }
@@ -113,6 +159,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       justify-content: center;
       border-radius: 7px;
       font-weight: bolder;
@@ -165,10 +212,14 @@
       margin: 7px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       line-height: 150%;
       font-weight: bolder;
       padding: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       .check {
         min-width: 30px;
@@ -284,6 +335,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      p {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+      }
+
     }
 
     .pounds-div, .kilos-div {
@@ -307,5 +366,72 @@
       margin-bottom: 30px;
     }
 
+
+    .before-after {
+      width: 30vw;
+      height: 500px;
+      border-radius: 20px;
+      background-color: $background-super-light;
+      background-image: url("../../assets/images/data-before-after.webp");
+      background-position: top;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 50px;
+
+      h4 {
+        font-size: 1.3rem;
+        font-weight: lighter;
+      }
+
+      p {
+        width: 80%;
+        font-weight: bolder;
+        font-size: 1.2rem;
+      }
+    }
+
+    h2 + p, p + p{
+      width: 30vw;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .midway {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p:nth-child(1) {
+        font-size: 9rem;
+        margin-bottom: 50px;
+      }
+
+      h4 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+
+      h4 + p {
+        width: 100%;
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+      }
+    }
+
+    .pizza-img {
+      width: 30vw;
+      height: 200px;
+      border-radius: 20px;
+      background-image: url("../../assets/images/pizza-hamburger.webp");
+      background-position: top;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
   }
+
 }

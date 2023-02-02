@@ -1,10 +1,20 @@
 import styles from './data-page.module.scss';
 import React, {useState} from "react";
+import ContinueButton from "../../components/data/continue-button";
+import CheckableList from "../../components/data/checkable-list";
+import RadioList from "../../components/data/radio-list";
 
 export default function DataPage() {
     const [selectedSex, setSelectedSex] = useState('');
-    const [currentQuestion, setCurrentQuestion] = useState(6);
+    const [currentQuestion, setCurrentQuestion] = useState(19);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
+    const [healthConditions, setHealthConditions] = useState<string[]>([]);
+    const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
+    const [foodScenario, setFoodScenario] = useState<string[]>([]);
+    const [foodCuisines, setFoodCuisines] = useState<string[]>([]);
+    const [foodKinds, setFoodKinds] = useState<string[]>([]);
+    const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>([]);
+    const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>([]);
     const [currentCmHeight, setCmHeight] = useState('180');
     const [currentAge, setAge] = useState('20');
     const [currentFtHeight, setFtHeight] = useState('5');
@@ -16,6 +26,7 @@ export default function DataPage() {
     const [heightSystem, setHeightSystem] = useState('cm');
     const [weightSystem, setWeightSystem] = useState('pounds');
     const [basicAct, setBasicAct] = useState('');
+    const [pastPain, setPastPain] = useState('');
 
     const sexArr = ['Male', 'Female', 'Other'];
     const goalsArr = ['Lose weight so I can look and feel better',
@@ -26,9 +37,40 @@ export default function DataPage() {
         'Find support from experts and others with similar experiences',
         'Learn about health and nutrition from the latest evidence-based science'
     ];
-    const basicActArr = [['Less active','I exercise up to once per week'],
-        ['Moderately active','I exercise 1 to 3 times per week'],
-        ['Very active','I exercise 4 or more times per week']];
+    const healthConditionsArr = [
+        'Type 1 diabetes',
+        'Type 2 diabetes',
+        'High blood pressure'];
+    const basicActArr = [['Less active', 'I exercise up to once per week'],
+        ['Moderately active', 'I exercise 1 to 3 times per week'],
+        ['Very active', 'I exercise 4 or more times per week']];
+    const foodAtTheMomentArr = [
+      'I have a lot of cravings','I eat when I’m stressed','I have a good relationship with food',
+      'I eat when I’m bored','I try to make healthy choices but am unsure what’s best','I have an emotional attachment to certain foods'
+    ];
+    const foodScenarioArr = [
+      'I lack support from family','I always gain the weight back','I don’t know what foods are best for me',
+      'I get confused by conflicting nutrition advice','I get bored with a lack of variety','Special events and holidays are my downfall',
+      'I make poor choices when I haven’t planned well'
+    ];
+    const pastPainArr = [
+        'Feeling hungry too often','Cravings for carbs/sweets','The food wasn’t very good',
+        'Options were too limited','I haven\'t dieted/I\'m not here to lose weight'
+    ];
+    const foodCuisinesArr = [
+        'Indian','Asian','Mexican',
+        'Italian','Middle Eastern','Mediterranean'
+    ];
+    const foodKindsArr = [
+        'Salads', 'Casseroles', 'Soups & stews',
+        'Grill', 'Pizza', 'Stir-fry', 'Omelette'
+    ];
+    const foodAvoidProteinsArr = [
+      'Beef', 'Pork', 'Poultry', 'Lamb', 'Fish', 'Shellfish', 'Avoid all (vegetarian)'
+    ];
+    const foodAvoidOthersArr = [
+        'Dairy', 'Eggs', 'Nuts'
+    ];
 
 
     const onNumberChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -81,10 +123,8 @@ export default function DataPage() {
                         {el}
                     </div>
                 ))}
-                <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-                    Continue
-                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 3 && styles.hidden}`}>
@@ -130,10 +170,8 @@ export default function DataPage() {
                         metric
                     </div>
                 </div>
-                <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-                    Next
-                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 4 && styles.hidden}`}>
@@ -186,19 +224,15 @@ export default function DataPage() {
                         kilos
                     </div>
                 </div>
-                <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-                    Next
-                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
             <div className={`${styles.question} ${currentQuestion !== 5 && styles.hidden}`}>
                 <h2>Diet Doctor creates sustainable results by helping you eat better, without restrictive dieting or
                     counting calories.</h2>
                 <div className={styles['data-graph']}></div>
-                <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-                    Next
-                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 6 && styles.hidden}`}>
@@ -214,6 +248,139 @@ export default function DataPage() {
                         <p>{el[1]}</p>
                     </div>
                 ))}
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 7 && styles.hidden}`}>
+                <h2>We know that changing how you eat can be hard</h2>
+                <p>We simplify it for you, like we have for over 2,000,000 people.</p>
+                <div className={styles['before-after']}>
+                    <h4>Jane <b>lost 278 lbs</b></h4>
+                    <p>“I no longer think of food as a comfort or an escape. I think of it as precious fuel for my body
+                        and mind.”</p>
+                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 8 && styles.hidden}`}>
+                <h2>Do you have any of these health conditions?</h2>
+                {healthConditionsArr.map((el, index) => (
+                    <div key={index} className={styles.goal} onClick={() => {
+                        if (healthConditions.indexOf(el) !== -1) {
+                            setHealthConditions([...healthConditions.filter((inEl) => inEl !== el)])
+                        } else {
+                            setHealthConditions([...healthConditions, el]);
+                        }
+                    }}>
+                        <div className={`${styles.check} 
+                        ${healthConditions.indexOf(el) !== -1 && styles.checked}`}
+                        />
+                        {el}
+                    </div>
+                ))}
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 9 && styles.hidden}`}>
+                <h2>We help people with metabolic health issues</h2>
+                <p>We’re experts at helping people with type 1 or type 2 diabetes, or who need assistance lowering blood
+                    pressure.</p>
+                <p>Our approach involves reducing carbohydrates which can cause complications when taking certain
+                    medications. Therefore, we recommended checking in with a healthcare provider first.</p>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 10 && styles.hidden}`}>
+                <div className={styles.midway}>
+                    <p>🎉</p>
+                    <h4>You are doing great!</h4>
+                    <p>Time to talk about food</p>
+                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 11 && styles.hidden}`}>
+                <h2>How do you feel about food at the moment?</h2>
+                {foodAtTheMomentArr.map((el, index) => (
+                    <div key={index} className={styles.goal} onClick={() => {
+                        if (foodAtTheMoment.indexOf(el) !== -1) {
+                            setFoodAtTheMoment([...foodAtTheMoment.filter((inEl) => inEl !== el)])
+                        } else {
+                            setFoodAtTheMoment([...foodAtTheMoment, el]);
+                        }
+                    }}>
+                        <div className={`${styles.check} 
+                        ${foodAtTheMoment.indexOf(el) !== -1 && styles.checked}`}
+                        />
+                        {el}
+                    </div>
+                ))}
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 12 && styles.hidden}`}>
+                <h2>Which of these scenarios can you relate to?</h2>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodScenarioArr} dispatchData={foodScenario} dispatcher={setFoodScenario}/>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 13 && styles.hidden}`}>
+                <h2>If you’ve tried dieting in the past, what was your biggest pain point?</h2>
+                <RadioList classButton={styles.button} classSelected={styles.selected} data={pastPainArr} dispatchSelected={pastPain} dispatcher={setPastPain} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 14 && styles.hidden}`}>
+                <div className={styles.midway}>
+                    <p>🎉</p>
+                    <h4>Keep it up!</h4>
+                    <p>You're just a few questions away from a delicious, personalized experience.</p>
+                </div>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 15 && styles.hidden}`}>
+                <h2>What cuisines make your mouth water?</h2>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodCuisinesArr} dispatchData={foodCuisines} dispatcher={setFoodCuisines}/>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 16 && styles.hidden}`}>
+                <h2>What kind of dishes do you like?</h2>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodKindsArr} dispatchData={foodKinds} dispatcher={setFoodKinds}/>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 17 && styles.hidden}`}>
+                <h2>Proteins to avoid?</h2>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodAvoidProteinsArr} dispatchData={foodAvoidProteins} dispatcher={setFoodAvoidProteins}/>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 18 && styles.hidden}`}>
+                <h2>Other foods to avoid?</h2>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodAvoidOthersArr} dispatchData={foodAvoidOthers} dispatcher={setFoodAvoidOthers}/>
+                <p>All of our recipes are gluten-free</p>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 19 && styles.hidden}`}>
+                <h2>Our approach helps you feel fuller for longer</h2>
+                <div className={styles['pizza-img']}></div>
+                <p>You’ll enjoy delicious and satisfying food — so it doesn’t feel like a diet and is easier to stick to.</p>
+                <p>Our programs and recipes are developed by our registered dietitians and medical team.</p>
+                <p>Establish healthy habits and learn what foods are best for you.</p>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
         </div>
     )
