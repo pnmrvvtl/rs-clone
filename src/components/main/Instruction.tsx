@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from '../../pages/main-page/main-page.module.scss'
-import step1 from '../../assets/image/step-1.jpg'
-import step2 from '../../assets/image/step-2.jpg'
-import step3 from '../../assets/image/step-3.jpg'
+import step1 from '../../assets/image/main/step-1.jpg'
+import step2 from '../../assets/image/main/step-2.jpg'
+import step3 from '../../assets/image/main/step-3.jpg'
 
 export default function Instuction() {
   const benefits = [

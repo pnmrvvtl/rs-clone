@@ -1,14 +1,15 @@
-import photo from '../../assets/hf.jpg';
-import styles from './main-page.module.scss'
 import AboutInfo from '../../components/main/AboutInfo'
 import Benefits from '../../components/main/Benefits'
+import Instruction from '../../components/main/Instruction'
+import Slider from '../../components/main/Slider';
 
 export default function MainPage () {
     return (
        <div>
        <AboutInfo/>
        <Benefits/>
-       {/* <Slides/> */}
+       <Instruction/>
+       <Slider/>
        </div>
     )
 }

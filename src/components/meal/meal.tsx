@@ -1,5 +1,5 @@
 import styles from './meal.module.scss';
-import photo from "../../assets/hf.jpg";
+import photo from "../../assets/image/hf.jpg";
 
 export default function Meal() {
     return (

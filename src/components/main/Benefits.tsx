@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from '../../pages/main-page/main-page.module.scss'
-import motive from '../../assets/image/motivate.svg'
-import life from '../../assets/image/life.svg'
-import peace from '../../assets/image/peace.svg'
-import simple from '../../assets/image/simple.svg'
+import motive from '../../assets/image/main/motivate.svg'
+import life from '../../assets/image/main/life.svg'
+import peace from '../../assets/image/main/peace.svg'
+import simple from '../../assets/image/main/simple.svg'
 
 export default function Benefits() {
   const benefits = [
@@ -41,7 +41,6 @@ export default function Benefits() {
           </li>
         ))}
       </ul>
-      <button className={styles["benefit-btn"]}>Start free trial</button>
     </section>
   )
 }
