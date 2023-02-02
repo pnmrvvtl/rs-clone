@@ -51,20 +51,36 @@
                 margin-bottom: 12px;
             }
 		}
-
-		.recipe-section {
-			width: auto;
-			.recipe-steps-title {
-				margin-top: 64px;
-				margin-bottom: 12px;
-				color: #06b05b;
-			}
-			.recipe-steps-list li {
-				margin-top: 1.5em;
-				list-style: none
-			}
-		}
 	}
+}
+
+.recipe-section {
+    width: auto;
+    .recipe-steps-title {
+        margin-top: 64px;
+        margin-bottom: 12px;
+        color: #06b05b;
+    }
+    .recipe-steps-list {
+        padding-left: 2.5em;
+        li {
+            margin-top: 1.5em;
+            list-style: none;
+            span {
+                position: absolute;
+                // display: flex;
+                // align-items: center;
+                margin-left: -2.5em;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                background-color: #06b05b;
+                border-radius: 59%;
+                text-align: center;
+                color: #fff;
+            }
+        }
+    }
 }
 
 .content-wrapper {

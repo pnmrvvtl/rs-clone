@@ -54,27 +54,23 @@ const RecipeSection = () => {
     return (
         <div className={styles['recipe-section']}>
             <h3 className={styles['recipe-steps-title']}>Instructions</h3>
-            <ol className={styles['recipe-steps-list']}>
-                <li><Text /></li>
-                <li>some step</li>
-                <li>some step</li>
-                <li>some step</li>
-                <li>some step</li>
-                <li>some step</li>
-            </ol>
+            <ul className={styles['recipe-steps-list']}>
+                <li><span>1</span><Text /></li>
+                <li><span>2</span><Text /></li>
+                <li><span>3</span><Text /></li>
+                <li><span>4</span><Text /></li>
+            </ul>
         </div>
     )
 }
 
 const Text = () => {
     return (
-        <div>
             <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
             </p>
-        </div>
     )
 }
