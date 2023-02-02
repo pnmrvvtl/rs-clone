@@ -50,82 +50,114 @@
       border-radius: 5px;
 
       .inbar {
-        width: 5%;
+        width: 3%;
         height: 100%;
         border-radius: 5px;
         background-color: $button-color;
         transition: width 0.5s ease;
 
         &.mult2 {
-          width: 10%;
+          width: 6%;
         }
 
         &.mult3 {
-          width: 15%;
+          width: 9%;
         }
 
         &.mult4 {
-          width: 20%;
+          width: 12%;
         }
 
         &.mult5 {
-          width: 25%;
+          width: 15%;
         }
 
         &.mult6 {
-          width: 30%;
+          width: 19%;
         }
 
         &.mult7 {
-          width: 35%;
+          width: 24%;
         }
 
         &.mult8 {
-          width: 40%;
+          width: 27%;
         }
 
         &.mult9 {
-          width: 45%;
+          width: 32%;
         }
 
         &.mult10 {
-          width: 50%;
+          width: 35%;
         }
 
         &.mult11 {
-          width: 55%;
+          width: 38%;
         }
 
         &.mult12 {
-          width: 60%;
+          width: 44%;
         }
 
         &.mult13 {
-          width: 65%;
+          width: 47%;
         }
 
         &.mult14 {
-          width: 70%;
+          width: 50%;
         }
 
         &.mult15 {
-          width: 75%;
+          width: 53%;
         }
 
         &.mult16 {
-          width: 80%;
+          width: 56%;
         }
 
         &.mult17 {
-          width: 86%;
+          width: 60%;
         }
         &.mult18 {
-          width: 90%;
+          width: 64%;
         }
         &.mult19 {
-          width: 95%;
+          width: 67%;
         }
         &.mult20 {
+          width: 72%;
+        }
+
+        &.mult21 {
+          width: 75%;
+        }
+
+        &.mult22 {
+          width: 78%;
+        }
+
+        &.mult23 {
+          width: 82%;
+        }
+
+        &.mult24 {
+          width: 85%;
+        }
+
+        &.mult25 {
+          width: 89%;
+        }
+
+        &.mult26 {
+          width: 93%;
+        }
+
+        &.mult27 {
+          width: 98%;
+        }
+
+        &.mult28 {
           width: 100%;
         }
       }
@@ -442,6 +474,45 @@
     .data-graph2 {
       background-image: url("../../assets/images/data-graph2.webp");
     }
+
+    .experts {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 50%;
+      background-color: $background-super-light;
+      border-radius: 30px;
+
+      div {
+        border-radius: 30px;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: flex-end;
+        width: 200px;
+        height: 250px;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: transparent;
+        font-weight: bolder;
+      }
+
+      div:nth-child(1) {
+        background-image: url("../../assets/images/expert1.webp");
+      }
+
+      div:nth-child(2) {
+        background-image: url("../../assets/images/expert2.webp");
+      }
+
+      div:nth-child(3) {
+        background-image: url("../../assets/images/expert3.webp");
+      }
+    }
+
+
   }
 
 }

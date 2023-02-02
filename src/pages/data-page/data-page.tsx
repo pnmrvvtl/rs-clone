@@ -7,7 +7,7 @@ import RadioSubList from "../../components/data/radio-sub-list";
 
 export default function DataPage() {
     const [selectedSex, setSelectedSex] = useState('');
-    const [currentQuestion, setCurrentQuestion] = useState(22);
+    const [currentQuestion, setCurrentQuestion] = useState(28);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
     const [healthConditions, setHealthConditions] = useState<string[]>([]);
     const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
@@ -33,6 +33,8 @@ export default function DataPage() {
     const [foodCookSkills, setFoodCookSkills] = useState('');
     const [foodCookCarb, setFoodCookCarb] = useState('');
     const [foodCookProtein, setFoodCookProtein] = useState('');
+    const [mealsCount, setMealsCount] = useState('');
+    const [lunchLeftovers, setLunchLeftovers] = useState('');
 
     const sexArr = ['Male', 'Female', 'Other'];
     const goalsArr = ['Lose weight so I can look and feel better',
@@ -101,7 +103,15 @@ export default function DataPage() {
         ['I\'m not sure', 'Let us choose the best one for you'],
         ['Moderate', '90 to 120 grams per day'],
         ['High', 'More than 120 grams per day'],
-    ]
+    ];
+    const mealsCountArr = [
+        ['2', 'Breakfast, lunch, and dinner'],
+        ['3', 'Lunch and dinner (intermittent fasting)'],
+    ];
+    const lunchLeftoversArr = [
+        ['Yes', 'I want to save some time'],
+        ['No', 'I really like variation'],
+    ];
 
 
     const onNumberChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -500,6 +510,35 @@ export default function DataPage() {
                               dispatchSelected={foodCookProtein} dispatcher={setFoodCookProtein} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
+            <div className={`${styles.question} ${currentQuestion !== 26 && styles.hidden}`}>
+                <h2>How many meals per day?</h2>
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']} data={mealsCountArr}
+                              dispatchSelected={mealsCount} dispatcher={setMealsCount} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 27 && styles.hidden}`}>
+                <h2>Leftovers for lunch?</h2>
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={lunchLeftoversArr} dispatchSelected={lunchLeftovers} dispatcher={setLunchLeftovers}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+            </div>
+
+
+            <div className={`${styles.question} ${currentQuestion !== 28 && styles.hidden}`}>
+                <h2>Developed by leading nutrition experts</h2>
+                <div className={styles.experts}>
+                    <div>Andreas Eenfeldt, MD</div>
+                    <div>Bret Scher, MD</div>
+                    <div>Franziska Spritzler, RD</div>
+                </div>
+                <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
+                <div className={`${styles.button} ${styles.selected}`}
+                     onClick={() => true}>
+                    Generate my meal plan
+                </div>
+            </div>
         </div>
     )
 }
