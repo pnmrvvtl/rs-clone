@@ -1,11 +1,95 @@
 @import "../../scss/constants";
 
 .container {
-  background-color: $background-light;
-  width: 100%;
+	background-color: $background-light;
+	.background-img {
+		width: 100%;
+		height: calc(100vh - 130px);
+		background-image: url('../../assets/food.jpg');
+		background-size: cover;
+		.description-box-wrapper {
+			padding-top: 30px;
+			.description-box {
+                position: relative;
+				min-width: 390px;
+				width: 40%;
+				padding: 62px 35px;
+				box-sizing: border-box;
+				border-radius: 15px;
+				background-color: rgba(255, 255, 255, .85) ;
+                .description-box__title {
+                    font-size: 38px;
+                    line-height: 1.2;
+                }
+                .description-box__time-info {
+                    position: absolute;
+                    top: 35px;
+                    font-size: 15px;
+                    color: #95989a;
+                    .description-box__time-icon {
+                        margin-right: 5px;
+                    }
+                    .description-box__time-level {
+                        border-left: solid 1px;
+                        margin-left: 10px;
+                        padding-left: 10px;
+                    }
+                }
+			}
+		}
+	}
 }
 
-.image-container {
-  width: 300px;
-  height: 300px;
+.content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px 60px;
+    .ingredients {
+        padding: 50px 35px;
+        background-color: #f6fdea;
+        h3 {
+            margin-top: 14px;
+            margin-bottom: 12px;
+        }
+    }
+    .instructions {
+        width: auto;
+        .instructions-title {
+            margin-top: 64px;
+            margin-bottom: 12px;
+            color: $font-color-link;
+        }
+        .instructions-list {
+            padding-left: 2.5em;
+            li {
+                margin-top: 1.5em;
+                list-style: none;
+                span {
+                    position: absolute;
+                    margin-left: -2.5em;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    background-color: $font-color-link;
+                    border-radius: 59%;
+                    text-align: center;
+                    color: $font-color-inverted;
+                }
+            }
+        }
+    }
+}
+
+.tip {
+    h3 {
+        margin-top: 64px;
+        margin-bottom: 12px;
+    }
+}
+
+.content-wrapper {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	height: 100%;
 }
