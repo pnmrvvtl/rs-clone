@@ -1,4 +1,5 @@
 $button-color: rgba(5, 170, 88);
+$button-color-hover: rgb(21, 138, 80);
 $font-color-main: rgba(64, 64, 64);
 $font-color-sub: rgba(149, 149, 149);
 $font-color-link: rgba(5, 170, 88);
@@ -10,6 +11,7 @@ $background-dark: rgba(22, 60, 78);
 $filter-color: rgba(243, 242, 239);
 $selected-filter-color: rgba(55, 102, 78);
 $footer-color: rgba(14, 52, 120);
+$font-family: 'Ubuntu';
 
 :export {
   button-color: $button-color;
