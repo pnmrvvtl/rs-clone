@@ -1,8 +1,6 @@
 import styles from './meal.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MealPopup from "../meal-popup/meal-popup";
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 
