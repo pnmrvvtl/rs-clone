@@ -38,48 +38,54 @@
 			}
 		}
 	}
-	.recipe {
-		display: grid;
-		grid-template-columns: 1fr 2fr;
-		grid-gap: 30px 60px;
-		.recipe-ingredients {
-			padding: 50px 35px;
-			height: 754px;
-			background-color: #f6fdea;
-            h3 {
-                margin-top: 14px;
-                margin-bottom: 12px;
-            }
-		}
-	}
 }
 
-.recipe-section {
-    width: auto;
-    .recipe-steps-title {
-        margin-top: 64px;
-        margin-bottom: 12px;
-        color: #06b05b;
+.content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px 60px;
+    .ingredients {
+        padding: 50px 35px;
+        height: 600px;
+        overflow: scroll;
+        background-color: #f6fdea;
+        h3 {
+            margin-top: 14px;
+            margin-bottom: 12px;
+        }
     }
-    .recipe-steps-list {
-        padding-left: 2.5em;
-        li {
-            margin-top: 1.5em;
-            list-style: none;
-            span {
-                position: absolute;
-                // display: flex;
-                // align-items: center;
-                margin-left: -2.5em;
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
-                background-color: #06b05b;
-                border-radius: 59%;
-                text-align: center;
-                color: #fff;
+    .instructions {
+        width: auto;
+        .instructions-title {
+            margin-top: 64px;
+            margin-bottom: 12px;
+            color: $font-color-link;
+        }
+        .instructions-list {
+            padding-left: 2.5em;
+            li {
+                margin-top: 1.5em;
+                list-style: none;
+                span {
+                    position: absolute;
+                    margin-left: -2.5em;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    background-color: $font-color-link;
+                    border-radius: 59%;
+                    text-align: center;
+                    color: $font-color-inverted;
+                }
             }
         }
+    }
+}
+
+.tip {
+    h3 {
+        margin-top: 64px;
+        margin-bottom: 12px;
     }
 }
 

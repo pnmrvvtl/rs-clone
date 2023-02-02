@@ -13,9 +13,12 @@ export default function Meal() {
                 </div>
             </div>
             <div className={styles['content-wrapper']}>
-                <div className={styles.recipe}>
-                    <RecipeIngredients />
-                    <RecipeSection />
+                <div className={styles.content}>
+                    <Ingredients />
+                    <div className={styles['main-content']}>
+                        <RecipeSection />
+                        <Tip />
+                    </div>
                 </div>
             </div>
             <div className={styles['for-margin-bottom']}></div>
@@ -41,9 +44,9 @@ const DescriptionBox = () => {
     )
 }
 
-const RecipeIngredients = () => {
+const Ingredients = () => {
     return (
-        <div className={styles['recipe-ingredients']}>
+        <div className={styles['ingredients']}>
             <h3>Ingredients</h3>
             <Text />
         </div>
@@ -52,9 +55,9 @@ const RecipeIngredients = () => {
 
 const RecipeSection = () => {
     return (
-        <div className={styles['recipe-section']}>
-            <h3 className={styles['recipe-steps-title']}>Instructions</h3>
-            <ul className={styles['recipe-steps-list']}>
+        <div className={styles['instructions']}>
+            <h3 className={styles['instructions-title']}>Instructions</h3>
+            <ul className={styles['instructions-list']}>
                 <li><span>1</span><Text /></li>
                 <li><span>2</span><Text /></li>
                 <li><span>3</span><Text /></li>
@@ -64,13 +67,22 @@ const RecipeSection = () => {
     )
 }
 
+const Tip = () => {
+    return (
+        <div className={styles.tip}>
+            <h3>Tip!</h3>
+            <Text />
+        </div>
+    )
+}
+
 const Text = () => {
     return (
-            <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        </p>
     )
 }
