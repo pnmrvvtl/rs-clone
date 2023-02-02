@@ -172,11 +172,14 @@
         width: 100%;
       }
 
-      p:nth-child(1) {
+      p.button-p-one{
         color: $font-color-main;
+        font-size: 1.2rem;
+        margin: 5px;
       }
 
-      p:nth-child(2) {
+      p.button-p-two {
+        margin: 5px;
         color: $font-color-sub;
         font-weight: lighter;
       }
@@ -197,8 +200,9 @@
 
     p {
       margin-top: 10px;
+      margin-bottom: 10px;
       line-height: 150%;
-      width: 45%;
+      width: 65%;
       text-align: center;
     }
 
@@ -381,10 +385,12 @@
       align-items: center;
       justify-content: flex-end;
       margin-bottom: 50px;
+      margin-top: 30px;
 
       h4 {
         font-size: 1.3rem;
         font-weight: lighter;
+        margin-bottom: 50px;
       }
 
       p {
@@ -394,31 +400,24 @@
       }
     }
 
-    h2 + p, p + p{
-      width: 30vw;
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-    }
-
     .midway {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      p:nth-child(1) {
-        font-size: 9rem;
-        margin-bottom: 50px;
-      }
-
       h4 {
         font-size: 2rem;
         margin-bottom: 30px;
       }
 
-      h4 + p {
+      p:nth-child(1) {
+        font-size: 9rem;
+      }
+
+
+      p:nth-child(3) {
         width: 100%;
-        font-size: 1.5rem;
         margin-bottom: 30px;
       }
     }
@@ -431,6 +430,17 @@
       background-position: top;
       background-size: cover;
       background-repeat: no-repeat;
+    }
+
+    .pizza-img + p {
+      font-size: 1.4rem;
+      width: 55%;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .data-graph2 {
+      background-image: url("../../assets/images/data-graph2.webp");
     }
   }
 

@@ -3,10 +3,11 @@ import React, {useState} from "react";
 import ContinueButton from "../../components/data/continue-button";
 import CheckableList from "../../components/data/checkable-list";
 import RadioList from "../../components/data/radio-list";
+import RadioSubList from "../../components/data/radio-sub-list";
 
 export default function DataPage() {
     const [selectedSex, setSelectedSex] = useState('');
-    const [currentQuestion, setCurrentQuestion] = useState(19);
+    const [currentQuestion, setCurrentQuestion] = useState(22);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
     const [healthConditions, setHealthConditions] = useState<string[]>([]);
     const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
@@ -15,6 +16,7 @@ export default function DataPage() {
     const [foodKinds, setFoodKinds] = useState<string[]>([]);
     const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>([]);
     const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>([]);
+    const [foodBudget, setFoodBudget] = useState<string>('');
     const [currentCmHeight, setCmHeight] = useState('180');
     const [currentAge, setAge] = useState('20');
     const [currentFtHeight, setFtHeight] = useState('5');
@@ -27,6 +29,10 @@ export default function DataPage() {
     const [weightSystem, setWeightSystem] = useState('pounds');
     const [basicAct, setBasicAct] = useState('');
     const [pastPain, setPastPain] = useState('');
+    const [foodCookTime, setFoodCookTime] = useState('');
+    const [foodCookSkills, setFoodCookSkills] = useState('');
+    const [foodCookCarb, setFoodCookCarb] = useState('');
+    const [foodCookProtein, setFoodCookProtein] = useState('');
 
     const sexArr = ['Male', 'Female', 'Other'];
     const goalsArr = ['Lose weight so I can look and feel better',
@@ -45,32 +51,57 @@ export default function DataPage() {
         ['Moderately active', 'I exercise 1 to 3 times per week'],
         ['Very active', 'I exercise 4 or more times per week']];
     const foodAtTheMomentArr = [
-      'I have a lot of cravings','I eat when I’m stressed','I have a good relationship with food',
-      'I eat when I’m bored','I try to make healthy choices but am unsure what’s best','I have an emotional attachment to certain foods'
+        'I have a lot of cravings', 'I eat when I’m stressed', 'I have a good relationship with food',
+        'I eat when I’m bored', 'I try to make healthy choices but am unsure what’s best', 'I have an emotional attachment to certain foods'
     ];
     const foodScenarioArr = [
-      'I lack support from family','I always gain the weight back','I don’t know what foods are best for me',
-      'I get confused by conflicting nutrition advice','I get bored with a lack of variety','Special events and holidays are my downfall',
-      'I make poor choices when I haven’t planned well'
+        'I lack support from family', 'I always gain the weight back', 'I don’t know what foods are best for me',
+        'I get confused by conflicting nutrition advice', 'I get bored with a lack of variety', 'Special events and holidays are my downfall',
+        'I make poor choices when I haven’t planned well'
     ];
     const pastPainArr = [
-        'Feeling hungry too often','Cravings for carbs/sweets','The food wasn’t very good',
-        'Options were too limited','I haven\'t dieted/I\'m not here to lose weight'
+        'Feeling hungry too often', 'Cravings for carbs/sweets', 'The food wasn’t very good',
+        'Options were too limited', 'I haven\'t dieted/I\'m not here to lose weight'
     ];
     const foodCuisinesArr = [
-        'Indian','Asian','Mexican',
-        'Italian','Middle Eastern','Mediterranean'
+        'Indian', 'Asian', 'Mexican',
+        'Italian', 'Middle Eastern', 'Mediterranean'
     ];
     const foodKindsArr = [
         'Salads', 'Casseroles', 'Soups & stews',
         'Grill', 'Pizza', 'Stir-fry', 'Omelette'
     ];
     const foodAvoidProteinsArr = [
-      'Beef', 'Pork', 'Poultry', 'Lamb', 'Fish', 'Shellfish', 'Avoid all (vegetarian)'
+        'Beef', 'Pork', 'Poultry', 'Lamb', 'Fish', 'Shellfish', 'Avoid all (vegetarian)'
     ];
     const foodAvoidOthersArr = [
         'Dairy', 'Eggs', 'Nuts'
     ];
+    const foodBudgetArr = [
+        ['Minimal', 'Show me budget-friendly options'],
+        ['Average', 'Medium food budget'],
+        ['Bigger', 'Fewer budget concerns']];
+    const foodCookTimeArr = [
+        ['Minimal', 'Up to 15 minutes per meal'],
+        ['Average', 'Up to 45 minutes per meal'],
+        ['Plenty', 'More than 45 minutes per meal'],
+    ];
+    const foodCookSkillsArr = [
+        ['Beginner', 'I\'m still learning'],
+        ['Average', 'I know my way around'],
+        ['Pro', 'Prepare to be wowed'],
+    ];
+    const foodCookCarbArr = [
+        ['Keto', 'Less than 20 grams of carbs per day'],
+        ['Moderate', '20 to 50 grams of carbs per day'],
+        ['Liberal', '50 to 100 grams of carbs per day'],
+        ['I\'m not sure', 'Let us choose the best one for you'],
+    ];
+    const foodCookProteinArr = [
+        ['I\'m not sure', 'Let us choose the best one for you'],
+        ['Moderate', '90 to 120 grams per day'],
+        ['High', 'More than 120 grams per day'],
+    ]
 
 
     const onNumberChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -244,8 +275,8 @@ export default function DataPage() {
                              setCurrentQuestion(currentQuestion + 1);
                          }}
                     >
-                        <p>{el[0]}</p>
-                        <p>{el[1]}</p>
+                        <p className={styles['button-p-one']}>{el[0]}</p>
+                        <p className={styles['button-p-two']}>{el[1]}</p>
                     </div>
                 ))}
             </div>
@@ -324,14 +355,17 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 12 && styles.hidden}`}>
                 <h2>Which of these scenarios can you relate to?</h2>
-                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodScenarioArr} dispatchData={foodScenario} dispatcher={setFoodScenario}/>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodScenarioArr} dispatchData={foodScenario} dispatcher={setFoodScenario}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 13 && styles.hidden}`}>
                 <h2>If you’ve tried dieting in the past, what was your biggest pain point?</h2>
-                <RadioList classButton={styles.button} classSelected={styles.selected} data={pastPainArr} dispatchSelected={pastPain} dispatcher={setPastPain} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+                <RadioList classButton={styles.button} classSelected={styles.selected} data={pastPainArr}
+                           dispatchSelected={pastPain} dispatcher={setPastPain} dispatcherQuestion={setCurrentQuestion}
+                           currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 14 && styles.hidden}`}>
@@ -346,28 +380,34 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 15 && styles.hidden}`}>
                 <h2>What cuisines make your mouth water?</h2>
-                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodCuisinesArr} dispatchData={foodCuisines} dispatcher={setFoodCuisines}/>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodCuisinesArr} dispatchData={foodCuisines} dispatcher={setFoodCuisines}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 16 && styles.hidden}`}>
                 <h2>What kind of dishes do you like?</h2>
-                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodKindsArr} dispatchData={foodKinds} dispatcher={setFoodKinds}/>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodKindsArr} dispatchData={foodKinds} dispatcher={setFoodKinds}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 17 && styles.hidden}`}>
                 <h2>Proteins to avoid?</h2>
-                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodAvoidProteinsArr} dispatchData={foodAvoidProteins} dispatcher={setFoodAvoidProteins}/>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodAvoidProteinsArr} dispatchData={foodAvoidProteins}
+                               dispatcher={setFoodAvoidProteins}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 18 && styles.hidden}`}>
                 <h2>Other foods to avoid?</h2>
-                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked} data={foodAvoidOthersArr} dispatchData={foodAvoidOthers} dispatcher={setFoodAvoidOthers}/>
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={foodAvoidOthersArr} dispatchData={foodAvoidOthers}
+                               dispatcher={setFoodAvoidOthers}/>
                 <p>All of our recipes are gluten-free</p>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
@@ -376,12 +416,90 @@ export default function DataPage() {
             <div className={`${styles.question} ${currentQuestion !== 19 && styles.hidden}`}>
                 <h2>Our approach helps you feel fuller for longer</h2>
                 <div className={styles['pizza-img']}></div>
-                <p>You’ll enjoy delicious and satisfying food — so it doesn’t feel like a diet and is easier to stick to.</p>
+                <p>You’ll enjoy delicious and satisfying food — so it doesn’t feel like a diet and is easier to stick
+                    to.</p>
                 <p>Our programs and recipes are developed by our registered dietitians and medical team.</p>
                 <p>Establish healthy habits and learn what foods are best for you.</p>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 20 && styles.hidden}`}>
+                <h2>What’s your food budget?</h2>
+                {foodBudgetArr.map((el, index) => (
+                    <div key={index} className={`${styles.button} ${foodBudget === el[0] && styles.selected}`}
+                         onClick={() => {
+                             setFoodBudget(el[0]);
+                             setCurrentQuestion(currentQuestion + 1);
+                         }}
+                    >
+                        <p className={styles['button-p-one']}>{el[0]}</p>
+                        <p className={styles['button-p-two']}>{el[1]}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 21 && styles.hidden}`}>
+                <h2>How much time do you have to cook?</h2>
+                {foodCookTimeArr.map((el, index) => (
+                    <div key={index} className={`${styles.button} ${foodCookTime === el[0] && styles.selected}`}
+                         onClick={() => {
+                             setFoodCookTime(el[0]);
+                             setCurrentQuestion(currentQuestion + 1);
+                         }}
+                    >
+                        <p className={styles['button-p-one']}>{el[0]}</p>
+                        <p className={styles['button-p-two']}>{el[1]}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 22 && styles.hidden}`}>
+                <h2>There is no one-size-fits-all diet. That’s why 90% of diets fail.</h2>
+                <div className={`${styles['data-graph']} ${styles['data-graph2']}`}></div>
+                <p>Our unique algorithm recommends recipes tailored to your preferences — and goals.</p>
+                <p>Discover healthier options and foods you’ll love, while creating a sustainable lifestyle.</p>
+                <ContinueButton classes={`${styles.button} ${styles.selected}`}
+                                clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 23 && styles.hidden}`}>
+                <h2>How are your cooking skills?</h2>
+                {foodCookSkillsArr.map((el, index) => (
+                    <div key={index} className={`${styles.button} ${foodCookSkills === el[0] && styles.selected}`}
+                         onClick={() => {
+                             setFoodCookSkills(el[0]);
+                             setCurrentQuestion(currentQuestion + 1);
+                         }}
+                    >
+                        <p className={styles['button-p-one']}>{el[0]}</p>
+                        <p className={styles['button-p-two']}>{el[1]}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 24 && styles.hidden}`}>
+                <h2>How low carb do you want to go?</h2>
+                {foodCookCarbArr.map((el, index) => (
+                    <div key={index} className={`${styles.button} ${foodCookCarb === el[0] && styles.selected}`}
+                         onClick={() => {
+                             setFoodCookCarb(el[0]);
+                             setCurrentQuestion(currentQuestion + 1);
+                         }}
+                    >
+                        <p className={styles['button-p-one']}>{el[0]}</p>
+                        <p className={styles['button-p-two']}>{el[1]}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className={`${styles.question} ${currentQuestion !== 25 && styles.hidden}`}>
+                <h2>What’s your protein target?</h2>
+                <RadioSubList classButton={styles.button} classSelected={styles.selected}
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']} data={foodCookProteinArr}
+                              dispatchSelected={foodCookProtein} dispatcher={setFoodCookProtein} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+            </div>
+
         </div>
     )
 }
