@@ -14,6 +14,5 @@ import styles from './footer.module.scss';
                     <div className={styles.logo}></div>
                 </a>
             </div>
-        )
-            ;
+        );
     }
