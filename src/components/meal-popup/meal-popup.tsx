@@ -1,9 +1,16 @@
 import styles from './meal.popup.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function MealPopup() {
     return (
         <div className={styles.container}>
             <div className={styles.window}>
+                <div
+                    onClick={close}
+                    className={styles.xmark}>
+                    <FontAwesomeIcon icon={faXmark} />
+                </div>
                 <div className={styles['description']}>
                     <div className={styles['description__img']}></div>
                     <div className={styles['description__text']}>
@@ -89,13 +96,10 @@ export default function MealPopup() {
                                     <li><span>4</span><Text /></li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>
-            <div className={styles['compositions']}></div>
             </div>
-            {/* <button className={styles.close}>Close</button> */}
         </div>
     )
 }
@@ -109,4 +113,8 @@ const Text = () => {
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
         </p>
     )
+}
+
+const closeWindow = () => {
+    console.log(1);
 }

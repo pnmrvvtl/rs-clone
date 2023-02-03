@@ -1,8 +1,7 @@
 import styles from './meal.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MealPopup from "../meal-popup/meal-popup";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 export default function Meal() {
     return (
@@ -21,7 +20,7 @@ export default function Meal() {
                     </div>
                 </div>
             </div>
-            <div className={styles['for-margin-bottom']}></div>
+            <div className={styles['for-margin-bottom']}></div>xq
         </div>
     )
 }
