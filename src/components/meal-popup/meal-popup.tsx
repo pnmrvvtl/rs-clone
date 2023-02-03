@@ -79,6 +79,17 @@ export default function MealPopup() {
                                     <span className={styles['property']}>48</span>
                                 </div>
                             </div>
+
+                            <div className={styles['instructions']}>
+                                <h3 className={styles['instructions-title']}>Instructions</h3>
+                                <ul className={styles['instructions-list']}>
+                                    <li><span>1</span><Text /></li>
+                                    <li><span>2</span><Text /></li>
+                                    <li><span>3</span><Text /></li>
+                                    <li><span>4</span><Text /></li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -86,5 +97,16 @@ export default function MealPopup() {
             </div>
             {/* <button className={styles.close}>Close</button> */}
         </div>
+    )
+}
+
+const Text = () => {
+    return (
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        </p>
     )
 }

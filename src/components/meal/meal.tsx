@@ -7,7 +7,6 @@ import { faClock } from '@fortawesome/free-solid-svg-icons'
 export default function Meal() {
     return (
         <div className={styles.container}>
-            {/* <MealPopup /> */}
             <div className={styles['background-img']}>
                 <div className={styles['content-wrapper']}>
                     <DescriptionBox />
@@ -80,8 +79,6 @@ const Tip = () => {
 const Text = () => {
     return (
         <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
         </p>

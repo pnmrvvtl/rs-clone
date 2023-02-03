@@ -8,17 +8,17 @@
     top: 0;
     background: rgba(0,0,0,.7);
     z-index: 100;
+    color: $font-color-main;
     .window {
+        padding: 48px 48px 48px 48px;
         margin: 32px auto;
         max-width: 960px;
-        height: 1374px;
         background-color: rgb(255, 255, 255);
         border-radius: 12px;
     }
 }
 
 .description {
-    padding: 48px 48px 24px 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
@@ -61,7 +61,7 @@
 }
 
 .composition {
-    padding: 0 48px;
+    margin-top: 36px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
@@ -69,6 +69,7 @@
         border-radius: 1em;
         border: 2px solid rgba(240,239,238);
         padding: 24px;
+        height: max-content;
         .composition__title{
             font-size: 30px;
         }
@@ -164,5 +165,34 @@
     .name {
         display: inline-block;
         width: 70%;
+    }
+}
+
+.instructions {
+    width: auto;
+    margin-top: 36px;
+    font-weight: 500;
+    .instructions-title {
+        margin: 0;
+        font-size: 36px;
+        font-weight: 500;
+    }
+    .instructions-list {
+        padding-left: 2.5em;
+        li {
+            margin-top: 1.5em;
+            list-style: none;
+            span {
+                position: absolute;
+                margin-left: -2.5em;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                background-color: #f3f3f3;
+                border-radius: 59%;
+                text-align: center;
+                color: $font-color-main;
+            }
+        }
     }
 }
