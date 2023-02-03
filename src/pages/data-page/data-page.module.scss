@@ -1,7 +1,7 @@
 @import "../../scss/constants";
 
 * {
-  font-family: sans-serif;
+  font-family: $font-family;
 }
 
 .container {
@@ -32,8 +32,8 @@
       background-repeat: no-repeat;
 
       &:hover {
-      cursor: pointer;
-    }
+        cursor: pointer;
+      }
 
       &.hidden {
         background-image: none;
@@ -119,12 +119,15 @@
         &.mult17 {
           width: 60%;
         }
+
         &.mult18 {
           width: 64%;
         }
+
         &.mult19 {
           width: 67%;
         }
+
         &.mult20 {
           width: 72%;
         }
@@ -204,7 +207,7 @@
         width: 100%;
       }
 
-      p.button-p-one{
+      p.button-p-one {
         color: $font-color-main;
         font-size: 1.2rem;
         margin: 5px;
@@ -219,6 +222,7 @@
       &.selected {
         background-color: $button-color;
         color: $font-color-inverted;
+
         p {
           color: $font-color-inverted;
         }
@@ -304,18 +308,22 @@
       box-sizing: border-box;
     }
 
-    .ft-div > div, .cm-div > div, .pounds-div > div, .kilos-div > div {
+    .ft-div>div,
+    .cm-div>div,
+    .pounds-div>div,
+    .kilos-div>div {
       position: relative;
     }
 
     .ft-div {
       display: flex;
+
       &.hidden {
         display: none;
       }
     }
 
-    input[type=number] + span {
+    input[type=number]+span {
       position: absolute;
       top: 20px;
       right: 15px;
@@ -381,7 +389,8 @@
 
     }
 
-    .pounds-div, .kilos-div {
+    .pounds-div,
+    .kilos-div {
       display: flex;
       width: 100%;
       align-items: center;
@@ -464,7 +473,7 @@
       background-repeat: no-repeat;
     }
 
-    .pizza-img + p {
+    .pizza-img+p {
       font-size: 1.4rem;
       width: 55%;
       margin-top: 20px;
