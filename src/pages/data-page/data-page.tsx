@@ -1,11 +1,17 @@
 import styles from './data-page.module.scss';
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import ContinueButton from "../../components/data/continue-button";
 import CheckableList from "../../components/data/checkable-list";
 import RadioList from "../../components/data/radio-list";
 import RadioSubList from "../../components/data/radio-sub-list";
+import {UserData} from "../../types/user-data";
+import {UserContext} from "../../context/user-context";
+import { useNavigate } from "react-router-dom";
 
 export default function DataPage() {
+    const {setUserData} = useContext(UserContext);
+    const navigate = useNavigate();
+
     const [selectedSex, setSelectedSex] = useState('');
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
@@ -21,20 +27,24 @@ export default function DataPage() {
     const [currentAge, setAge] = useState('20');
     const [currentFtHeight, setFtHeight] = useState('5');
     const [currentInHeight, setInHeight] = useState('5');
-    const [currentLbsWight, setCurrentLbsWeight] = useState('180');
+    const [currentLbsWeight, setCurrentLbsWeight] = useState('180');
     const [goalLbsWeight, setGoalLbsWeight] = useState('155');
-    const [currentKgWight, setCurrentKgWeight] = useState('100');
+    const [currentKgWeight, setCurrentKgWeight] = useState('100');
     const [goalKgWeight, setGoalKgWeight] = useState('70');
     const [heightSystem, setHeightSystem] = useState('cm');
-    const [weightSystem, setWeightSystem] = useState('pounds');
-    const [basicAct, setBasicAct] = useState('');
-    const [pastPain, setPastPain] = useState('');
+    const [weightSystem, setWeightSystem] = useState('kilos');
+    const [basicActivities, setBasicAct] = useState('');
+    const [pastPains, setPastPain] = useState('');
     const [foodCookTime, setFoodCookTime] = useState('');
     const [foodCookSkills, setFoodCookSkills] = useState('');
     const [foodCookCarb, setFoodCookCarb] = useState('');
     const [foodCookProtein, setFoodCookProtein] = useState('');
     const [mealsCount, setMealsCount] = useState('');
     const [lunchLeftovers, setLunchLeftovers] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [currentQuestion]);
 
     const sexArr = ['Male', 'Female', 'Other'];
     const goalsArr = ['Lose weight so I can look and feel better',
@@ -204,7 +214,7 @@ export default function DataPage() {
                 </div>
                 <div className={`${styles['pounds-div']} ${weightSystem !== 'pounds' && styles.hidden}`}>
                     <div>
-                        <input type="number" min={0} max={500} value={currentLbsWight} onChange={(event) => {
+                        <input type="number" min={0} max={500} value={currentLbsWeight} onChange={(event) => {
                             onNumberChange(event);
                             setCurrentLbsWeight(event.target.value)
                         }}/>
@@ -221,7 +231,7 @@ export default function DataPage() {
 
                 <div className={`${styles['kilos-div']} ${weightSystem !== 'kilos' && styles.hidden}`}>
                     <div>
-                        <input type="number" min={0} max={500} value={currentKgWight} onChange={(event) => {
+                        <input type="number" min={0} max={500} value={currentKgWeight} onChange={(event) => {
                             onNumberChange(event);
                             setCurrentKgWeight(event.target.value)
                         }}/>
@@ -262,7 +272,7 @@ export default function DataPage() {
                 <h2>How physically active are you?</h2>
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
-                              data={basicActArr} dispatchSelected={basicAct} dispatcher={setBasicAct}
+                              data={basicActArr} dispatchSelected={basicActivities} dispatcher={setBasicAct}
                               dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
             </div>
 
@@ -325,7 +335,7 @@ export default function DataPage() {
             <div className={`${styles.question} ${currentQuestion !== 13 && styles.hidden}`}>
                 <h2>If you’ve tried dieting in the past, what was your biggest pain point?</h2>
                 <RadioList classButton={styles.button} classSelected={styles.selected} data={pastPainArr}
-                           dispatchSelected={pastPain} dispatcher={setPastPain} dispatcherQuestion={setCurrentQuestion}
+                           dispatchSelected={pastPains} dispatcher={setPastPain} dispatcherQuestion={setCurrentQuestion}
                            currentQuestion={currentQuestion}/>
             </div>
 
@@ -465,7 +475,40 @@ export default function DataPage() {
                 </div>
                 <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
                 <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => true}>
+                     onClick={() => {
+                         const KG_IN_LBS = 0.453592;
+                         const CM_IN_FOOT = 30.48;
+                         const CM_IN_INCH = 2.54;
+                         const userData:UserData = {
+                             isEditedByUser: true,
+                             cmHeight: heightSystem === 'cm' ?
+                                 +currentCmHeight : (+currentFtHeight * CM_IN_FOOT + +currentInHeight * CM_IN_INCH),
+                             currentKgWeight: weightSystem === 'kilos' ?
+                                 +currentKgWeight : +currentLbsWeight *  KG_IN_LBS,
+                             goalKgWeight: weightSystem === 'kilos' ?
+                                 +goalKgWeight : +goalLbsWeight *  KG_IN_LBS,
+                             selectedSex,
+                             currentGoals,
+                             healthConditions,
+                             foodAtTheMoment,
+                             foodScenario,
+                             foodCuisines,
+                             foodKinds,
+                             foodAvoidProteins,
+                             foodAvoidOthers,
+                             foodBudget,
+                             basicActivities,
+                             pastPains,
+                             foodCookTime,
+                             foodCookSkills,
+                             foodCookCarb,
+                             foodCookProtein,
+                             mealsCount: +mealsCount,
+                             lunchLeftovers,
+                         }
+                         setUserData(userData);
+                         navigate('/results');
+                     }}>
                     Generate my meal plan
                 </div>
             </div>
