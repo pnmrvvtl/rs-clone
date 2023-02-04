@@ -1,0 +1,19 @@
+@import "../../scss/constants";
+
+.container {
+  width: 100%;
+  color: $font-color-main;
+
+  .current-meals {
+    padding: 0px 50px;
+    background-color: $background-light;
+
+    .meals {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+  }
+}
