@@ -1,5 +1,6 @@
 import styles from './meal-card.module.scss';
 import {MealCardInfo} from "../../types/meal-card-info";
+import React from "react";
 
 export default function MealCard(props: {mealCardInfo: MealCardInfo, isColumnLayout: boolean}) {
 

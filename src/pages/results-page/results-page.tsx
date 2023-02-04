@@ -249,8 +249,7 @@ export default function ResultsPage() {
                         }
                     }}
                     indicatorContainerProps={{
-                        style: {
-                        }
+                        style: {}
 
                     }}
                     IndicatorIcon={daysArray}
@@ -259,12 +258,12 @@ export default function ResultsPage() {
                     duration={700}
                     navButtonsProps={{
                         style: {
-                           // display: 'none'
+                            // display: 'none'
                         }
                     }}
                     navButtonsAlwaysVisible={true}>
                     {
-                        Array.from([1,2,3,4,5,6,7]).map((elem, idx) => {
+                        Array.from([1, 2, 3, 4, 5, 6, 7]).map((elem, idx) => {
                             return (<div className={styles.meals}>
                                 {meals.slice((elem - 1) * 3, elem * 3)
                                     .map((item, i) => (
@@ -277,9 +276,23 @@ export default function ResultsPage() {
             </section>
             <section className={styles['recipe-collections']}>
                 <h2>Recipe collections</h2>
+                <div className={styles.collection}>
+                    <div className={styles['collection-item']}>On a budget</div>
+                    <div className={styles['collection-item']}>High protein</div>
+                    <div className={styles['collection-item']}>Top 30</div>
+                    <div className={styles['collection-item']}>Chicken</div>
+                    <div className={styles['collection-item']}>Family-friendly</div>
+                    <div className={styles['collection-item']}>No-cook</div>
+                </div>
             </section>
             <section className={styles['dinner-ideas']}>
                 <h2>Dinner ideas</h2>
+                <div className={styles['ideas-cards']}>
+                    {meals.slice(0, 10)
+                        .map((item, i) => (
+                            <MealCard key={i} mealCardInfo={item} isColumnLayout={false}/>))
+                    }
+                </div>
             </section>
             <section>
                 {JSON.stringify(userData)}

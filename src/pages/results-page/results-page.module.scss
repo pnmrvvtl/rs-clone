@@ -16,4 +16,51 @@
       flex-wrap: wrap;
     }
   }
+
+  .recipe-collections {
+    padding: 0px 50px;
+    background-color: $background-strip;
+
+
+
+    .collection {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .collection-item {
+      background-color: $background-dark;
+      color: white;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      transition: background-color 0.5s ease, color 0.5s ease;
+
+      &:hover {
+        color: $font-color-main;
+        background-color: lighten($background-dark, 50%);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .dinner-ideas {
+    padding: 0px 50px;
+    background-color: $background-light;
+
+    .ideas-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      div {
+          margin-bottom: 10px;
+      }
+    }
+  }
 }
