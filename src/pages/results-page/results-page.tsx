@@ -294,9 +294,9 @@ export default function ResultsPage() {
                     }
                 </div>
             </section>
-            <section>
-                {JSON.stringify(userData)}
-            </section>
+            {/*<section style={{width: '200px'}}>*/}
+            {/*    {JSON.stringify(userData)}*/}
+            {/*</section>*/}
         </div>
     )
 }
