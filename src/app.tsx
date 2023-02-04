@@ -9,6 +9,7 @@ import Meal from "./components/meal/meal";
 import MealPopup from "./components/meal-popup/meal-popup";
 import {UserData} from "./types/user-data";
 import {UserContext} from "./context/user-context";
+import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
 
 let router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,6 +17,7 @@ let router = createBrowserRouter(
             <Route index element={<MainPage/>}/>
             <Route path="data" element={<DataPage/>}/>
             <Route path="results" element={<ResultsPage/>}/>
+            <Route path="meals-plan" element={<MealsPlanPage/>}/>
             <Route path="meals" element={<Meal/>}/>
             <Route path="meal-popup" element={<MealPopup/>}/>
         </Route>
