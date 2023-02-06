@@ -110,3 +110,7 @@ dist
 src/constants/constants.ts
 # Local Netlify folder
 .netlify
+
+# api-keys
+./src/api-key.ts
+api-key.ts

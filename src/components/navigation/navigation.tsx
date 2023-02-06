@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {Link, Outlet} from 'react-router-dom';
 import Footer from '../footer/footer';
@@ -109,8 +108,8 @@ function Navigation({ children, ...props }: Props) {
                                     display: {xs: 'block', md: 'none'},
                                 }}
                             >
-                                {pages.map((page) => (
-                                    <Link style={{textDecoration: "none", color: "black"}} to={`/${page}`}>
+                                {pages.map((page, idx) => (
+                                    <Link key = {idx} style={{textDecoration: "none", color: "black"}} to={`/${page}`}>
                                         <MenuItem key={page} onClick={handleCloseNavMenu}>
                                             <Typography textAlign="center">
                                                 {page}
@@ -140,23 +139,23 @@ function Navigation({ children, ...props }: Props) {
                             RS-Healthy
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                            {pages.map((page) => (
+                            {pages.map((page, idx) => (
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
-                                    <Link style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
+                                    <Link key={idx} style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
                                 </Button>
                             ))}
                         </Box>
 
                         <Box sx={{flexGrow: 0}}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-                                </IconButton>
-                            </Tooltip>
+                            {/*<Tooltip title="Open settings">*/}
+                            {/*    /!*<IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>*!/*/}
+                            {/*    /!*    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>*!/*/}
+                            {/*    /!*</IconButton>*!/*/}
+                            {/*</Tooltip>*/}
                             <Menu
                                 sx={{mt: '45px'}}
                                 id="menu-appbar"

@@ -10,6 +10,7 @@ import MealPopup from "./components/meal-popup/meal-popup";
 import {UserData} from "./types/user-data";
 import {UserContext} from "./context/user-context";
 import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
+import MealsApi from "./api/meals-api";
 
 let router = createBrowserRouter(
     createRoutesFromElements(

@@ -17,7 +17,7 @@ export default function MealCard(props: {mealCardInfo: MealCardInfo, isColumnLay
                 <span>{el.keto}g</span>
             </div>
             <div className={styles['meal-title']}>
-                <h5>Keto turkey plate</h5>
+                <h5>{el.title}</h5>
                 <span>★</span>{el.rating}{' '}|{' '}
                 <svg width="15" height="15" viewBox="0 0 17 17" className="m-0 mr-0.5 opacity-60"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
