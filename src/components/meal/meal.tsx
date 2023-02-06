@@ -1,13 +1,11 @@
 import styles from './meal.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MealPopup from "../meal-popup/meal-popup";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 export default function Meal() {
     return (
         <div className={styles.container}>
-            {/* <MealPopup /> */}
             <div className={styles['background-img']}>
                 <div className={styles['content-wrapper']}>
                     <DescriptionBox />
@@ -22,7 +20,7 @@ export default function Meal() {
                     </div>
                 </div>
             </div>
-            <div className={styles['for-margin-bottom']}></div>
+            <div className={styles['for-margin-bottom']}></div>xq
         </div>
     )
 }
@@ -80,8 +78,6 @@ const Tip = () => {
 const Text = () => {
     return (
         <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
         </p>
