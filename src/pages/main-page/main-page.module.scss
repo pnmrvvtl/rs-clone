@@ -66,7 +66,7 @@
   color: $font-color-main;
   font-size: 3rem;
   text-align: center;
-  margin-bottom: 40px;
+  margin: 0 8px 40px;
 }
 
 .benefits-list {
@@ -156,7 +156,7 @@
   font-size: 2.5rem;
   color: $font-color-main;
   text-align: center;
-  margin: 40px 0 20px;
+  margin: 40px 8px 20px;
 
 }
 
@@ -201,8 +201,8 @@
   }
 
   .members-slider {
-    width: 60%;
-    margin: 0 30px;
+    width: 70%;
+    margin: 0 20px;
   }
 }
 
@@ -218,10 +218,13 @@
   .about-subtitle {
     font-size: 1.2rem;
   }
+  .members {
+    margin: 50px 0 70px;
+  }
 
   .members-slider {
     width: 70%;
-    margin: 0 30px;
+    margin: 0 20px;
   }
 
   .benefit {
@@ -232,6 +235,7 @@
 
   .benefits-title {
     font-size: 2rem;
+    margin: 0 8px 20px;
   }
 
   .instructions {
@@ -240,13 +244,10 @@
 }
 
 @media (max-width: 900px) {
-  .members {
-    margin: 50px 0 70px;
-  }
 
   .members-slider {
-    width: 70%;
-    margin: 0 30px;
+    width: 80%;
+    margin: 0 20px;
   }
 
   .member-img {
@@ -294,6 +295,9 @@
     width: 100%;
     height: 90%;
   }
+  .member {
+    height: 500px;
+  }
 
   .members-slider {
     width: 80%;
@@ -322,7 +326,9 @@
   .benefit-title {
     font-size: 1.5rem;
   }
-
+  .member {
+    height: 390px;
+  }
   .benefit-text {
     font-size: 1rem;
   }
@@ -338,6 +344,9 @@
     flex: 0 1 50%;
     margin-bottom: 10px;
   }
+  .about-title {
+    font-size: 2.5rem;
+  }
 
   .member-info {
     display: none;
@@ -346,7 +355,9 @@
   .member {
     height: 380px;
   }
-
+  .members-slider {
+    width: 90%;
+  }
   .members-title {
     font-size: 2rem;
   }
@@ -355,6 +366,23 @@
 
 @media (max-width: 450px) {
   .member {
-    height: 350px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .member {
+    height: 260px;
+  }
+}
+
+@media (max-width: 300px) {
+  .about-btn {
+    width: 150px;
+    font-size: 1.2rem;
+  }
+  .benefits-subtitle{
+    margin: 10px 0;
+    font-size: 1.5rem;
   }
 }
