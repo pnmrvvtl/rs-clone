@@ -112,4 +112,6 @@ src/constants/constants.ts
 .netlify
 
 # api-keys
+./src/api-key.ts
+api-key.ts
 src/api-key.tsx

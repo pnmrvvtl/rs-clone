@@ -6,14 +6,15 @@ import RadioList from "../../components/data/radio-list";
 import RadioSubList from "../../components/data/radio-sub-list";
 import {UserData} from "../../types/user-data";
 import {UserContext} from "../../context/user-context";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import MealsApi from "../../api/meals-api";
 
 export default function DataPage() {
-    const {setUserData} = useContext(UserContext);
+    const {setUserData, setMealsByParametersResponse} = useContext(UserContext);
     const navigate = useNavigate();
 
     const [selectedSex, setSelectedSex] = useState('');
-    const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [currentQuestion, setCurrentQuestion] = useState(28);
     const [currentGoals, setCurrentGoals] = useState<string[]>([]);
     const [healthConditions, setHealthConditions] = useState<string[]>([]);
     const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
@@ -41,6 +42,7 @@ export default function DataPage() {
     const [foodCookProtein, setFoodCookProtein] = useState('');
     const [mealsCount, setMealsCount] = useState('');
     const [lunchLeftovers, setLunchLeftovers] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -154,7 +156,7 @@ export default function DataPage() {
             <div className={`${styles.question} ${currentQuestion !== 2 && styles.hidden}`}>
                 <h2>What are your main goals right now?</h2>
                 <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
-                               data={goalsArr} dispatchData={currentGoals} dispatcher={setCurrentGoals} />
+                               data={goalsArr} dispatchData={currentGoals} dispatcher={setCurrentGoals}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -273,7 +275,7 @@ export default function DataPage() {
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
                               data={basicActArr} dispatchSelected={basicActivities} dispatcher={setBasicAct}
-                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 7 && styles.hidden}`}>
@@ -290,8 +292,9 @@ export default function DataPage() {
 
             <div className={`${styles.question} ${currentQuestion !== 8 && styles.hidden}`}>
                 <h2>Do you have any of these health conditions?</h2>
-               <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
-                              data={healthConditionsArr} dispatchData={healthConditions} dispatcher={setHealthConditions} />
+                <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
+                               data={healthConditionsArr} dispatchData={healthConditions}
+                               dispatcher={setHealthConditions}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -319,7 +322,8 @@ export default function DataPage() {
             <div className={`${styles.question} ${currentQuestion !== 11 && styles.hidden}`}>
                 <h2>How do you feel about food at the moment?</h2>
                 <CheckableList classElem={styles.goal} classCheck={styles.check} classChecked={styles.checked}
-                               data={foodAtTheMomentArr} dispatchData={foodAtTheMoment} dispatcher={setFoodAtTheMoment} />
+                               data={foodAtTheMomentArr} dispatchData={foodAtTheMoment}
+                               dispatcher={setFoodAtTheMoment}/>
                 <ContinueButton classes={`${styles.button} ${styles.selected}`}
                                 clickHandler={() => setCurrentQuestion(currentQuestion + 1)}/>
             </div>
@@ -400,7 +404,7 @@ export default function DataPage() {
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
                               data={foodBudgetArr} dispatchSelected={foodBudget} dispatcher={setFoodBudget}
-                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 21 && styles.hidden}`}>
@@ -408,7 +412,7 @@ export default function DataPage() {
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
                               data={foodCookTimeArr} dispatchSelected={foodCookTime} dispatcher={setFoodCookTime}
-                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 22 && styles.hidden}`}>
@@ -440,21 +444,24 @@ export default function DataPage() {
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
                               data={foodCookCarbArr} dispatchSelected={foodCookCarb} dispatcher={setFoodCookCarb}
-                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion} />
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 25 && styles.hidden}`}>
                 <h2>What’s your protein target?</h2>
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
-                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']} data={foodCookProteinArr}
-                              dispatchSelected={foodCookProtein} dispatcher={setFoodCookProtein} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+                              classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']}
+                              data={foodCookProteinArr}
+                              dispatchSelected={foodCookProtein} dispatcher={setFoodCookProtein}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 26 && styles.hidden}`}>
                 <h2>How many meals per day?</h2>
                 <RadioSubList classButton={styles.button} classSelected={styles.selected}
                               classPOne={styles['button-p-one']} classPTwo={styles['button-p-two']} data={mealsCountArr}
-                              dispatchSelected={mealsCount} dispatcher={setMealsCount} dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
+                              dispatchSelected={mealsCount} dispatcher={setMealsCount}
+                              dispatcherQuestion={setCurrentQuestion} currentQuestion={currentQuestion}/>
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 27 && styles.hidden}`}>
@@ -473,20 +480,21 @@ export default function DataPage() {
                     <div>Bret Scher, MD</div>
                     <div>Franziska Spritzler, RD</div>
                 </div>
-                <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
+                <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes
+                    that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
                 <div className={`${styles.button} ${styles.selected}`}
-                     onClick={() => {
+                     onClick={async () => {
                          const KG_IN_LBS = 0.453592;
                          const CM_IN_FOOT = 30.48;
                          const CM_IN_INCH = 2.54;
-                         const userData:UserData = {
+                         const userData: UserData = {
                              isEditedByUser: true,
                              cmHeight: heightSystem === 'cm' ?
                                  +currentCmHeight : (+currentFtHeight * CM_IN_FOOT + +currentInHeight * CM_IN_INCH),
                              currentKgWeight: weightSystem === 'kilos' ?
-                                 +currentKgWeight : +currentLbsWeight *  KG_IN_LBS,
+                                 +currentKgWeight : +currentLbsWeight * KG_IN_LBS,
                              goalKgWeight: weightSystem === 'kilos' ?
-                                 +goalKgWeight : +goalLbsWeight *  KG_IN_LBS,
+                                 +goalKgWeight : +goalLbsWeight * KG_IN_LBS,
                              selectedSex,
                              currentGoals,
                              healthConditions,
@@ -507,11 +515,118 @@ export default function DataPage() {
                              lunchLeftovers,
                          }
                          setUserData(userData);
-                         navigate('/results');
+                         setIsLoading(true);
+                         window.scrollTo(0, 0);
+                         const meals = await new MealsApi().getMealsByParameters({
+                             query: 'a',
+                             cuisine: 'italian',
+                             excludeCuisine: 'greek',
+                             diet: 'vegetarian',
+                             intolerances: 'gluten',
+                             equipment: '',
+                             includeIngredients: '',
+                             excludeIngredients: '',
+                             type: '',
+                             instructionsRequired: true,
+                             fillIngredients: false,
+                             addRecipeNutrition: true,
+                             addRecipeInformation: true,
+                             titleMatch: '',
+                             maxReadyTime: 20,
+                             ignorePantry: true,
+                             sort: '',
+                             sortDirection: '',
+                             minCarbs: 10,
+                             maxCarbs: 100,
+                             minProtein: 10,
+                             maxProtein: 100,
+                             minCalories: 50,
+                             maxCalories: 800,
+                             minFat: 10,
+                             maxFat: 100,
+                             minAlcohol: 0,
+                             maxAlcohol: 100,
+                             minCaffeine: 0,
+                             maxCaffeine: 100,
+                             minCopper: 0,
+                             maxCopper: 100,
+                             minCalcium: 0,
+                             maxCalcium: 100,
+                             minCholine: 0,
+                             maxCholine: 100,
+                             minCholesterol: 0,
+                             maxCholesterol: 100,
+                             minFluoride: 0,
+                             maxFluoride: 100,
+                             minSaturatedFat: 0,
+                             maxSaturatedFat: 100,
+                             minVitaminA: 0,
+                             maxVitaminA: 100,
+                             minVitaminC: 0,
+                             maxVitaminC: 100,
+                             minVitaminD: 0,
+                             maxVitaminD: 100,
+                             minVitaminE: 0,
+                             maxVitaminE: 100,
+                             minVitaminK: 0,
+                             maxVitaminK: 100,
+                             minVitaminB1: 0,
+                             maxVitaminB1: 100,
+                             minVitaminB2: 0,
+                             maxVitaminB2: 100,
+                             minVitaminB5: 0,
+                             maxVitaminB5: 100,
+                             minVitaminB3: 0,
+                             maxVitaminB3: 100,
+                             minVitaminB6: 0,
+                             maxVitaminB6: 100,
+                             minVitaminB12: 0,
+                             maxVitaminB12: 100,
+                             minFiber: 0,
+                             maxFiber: 100,
+                             minFolate: 0,
+                             maxFolate: 100,
+                             minFolicAcid: 0,
+                             maxFolicAcid: 100,
+                             minIodine: 0,
+                             maxIodine: 100,
+                             minIron: 0,
+                             maxIron: 100,
+                             minMagnesium: 0,
+                             maxMagnesium: 100,
+                             minManganese: 0,
+                             maxManganese: 100,
+                             minPhosphorus: 0,
+                             maxPhosphorus: 100,
+                             minPotassium: 0,
+                             maxPotassium: 100,
+                             minSelenium: 0,
+                             maxSelenium: 100,
+                             minSodium: 0,
+                             maxSodium: 100,
+                             minSugar: 0,
+                             maxSugar: 100,
+                             minZinc: 0,
+                             maxZinc: 100,
+                             offset: 0,
+                             number: 10,
+                             limitLicense: false,
+                             ranking: 2
+                         });
+                         console.log(meals)
+                         setMealsByParametersResponse(meals);
+                         setIsLoading(false);
+                         setCurrentQuestion(1);
+                         navigate('/meals-plan');
                      }}>
                     Generate my meal plan
                 </div>
             </div>
+
+            {isLoading && <div className={styles.loading}>
+                <p>Please wait, we are calculating your fitness data...</p>
+                <span><i></i><i></i></span>
+            </div>}
         </div>
     )
 }

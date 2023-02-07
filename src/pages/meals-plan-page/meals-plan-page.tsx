@@ -1,5 +1,5 @@
 import styles from './meals-plan.page.module.scss';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from '../../context/user-context';
 import {MealCardInfo} from "../../types/meal-card-info";
 import MealCard from "../../components/meal-card/meal-card";
@@ -7,10 +7,11 @@ import Carousel from 'react-material-ui-carousel'
 
 
 export default function MealsPlanPage() {
-    const {userData} = useContext(UserContext);
+    const {userData, mealsByParametersResponse} = useContext(UserContext);
 
     useEffect(() => {
         //api calls here
+
 
     }, [/*userData*/]);
 
@@ -227,7 +228,6 @@ export default function MealsPlanPage() {
         },
     ];
     const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
     return (
         <div className={styles.container}>
             <section className={styles['current-meals']}>
@@ -294,9 +294,11 @@ export default function MealsPlanPage() {
             <section className={styles['dinner-ideas']}>
                 <h2>Dinner ideas</h2>
                 <div className={styles['ideas-cards']}>
-                    {meals.slice(0, 10)
-                        .map((item, i) => (
-                            <MealCard key={i} mealCardInfo={item} isColumnLayout={false}/>))
+                    {mealsByParametersResponse.results.map((item, i) => (
+                            <MealCard key={i} mealCardInfo={
+                                {difficult: 'hard', duration: item.readyInMinutes, rating: 4.5, keto: 6, day: '', foodTime: '', imageUrl: item.image,
+                                title: item.title}
+                            } isColumnLayout={false}/>))
                     }
                 </div>
             </section>
