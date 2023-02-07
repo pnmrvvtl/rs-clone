@@ -42,14 +42,13 @@ export default function Slider() {
             style: {
               backgroundColor: 'rgba(149, 149, 149)',
               borderRadius: 20,
-              left: 10,
             }
           }}
           navButtonsAlwaysVisible={true}>
           {
             items.map((item, i) => (
               <div className={styles.member} key={i}>
-                <img className={styles["member-img"]} src={item.photo} />
+                <img className={styles["member-img"]}src={item.photo} />
                 <div className={styles["member-info"]}>
                   <div className={styles["member-name"]}>{item.description}</div>
                   <div className={styles["member-comment"]}>{item.comment}</div>

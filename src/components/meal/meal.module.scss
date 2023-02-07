@@ -4,40 +4,42 @@
 	background-color: $background-light;
 	.background-img {
 		width: 100%;
-		height: calc(100vh - 130px);
+		height: 650px;
 		background-image: url('../../assets/food.jpg');
 		background-size: cover;
-		.description-box-wrapper {
-			padding-top: 30px;
-			.description-box {
-                position: relative;
-				min-width: 390px;
-				width: 40%;
-				padding: 62px 35px;
-				box-sizing: border-box;
-				border-radius: 15px;
-				background-color: rgba(255, 255, 255, .85) ;
-                .description-box__title {
-                    font-size: 38px;
-                    line-height: 1.2;
-                }
-                .description-box__time-info {
-                    position: absolute;
-                    top: 35px;
-                    font-size: 15px;
-                    color: #95989a;
-                    .description-box__time-icon {
-                        margin-right: 5px;
-                    }
-                    .description-box__time-level {
-                        border-left: solid 1px;
-                        margin-left: 10px;
-                        padding-left: 10px;
-                    }
-                }
-			}
-		}
 	}
+}
+
+.description-box-wrapper {
+    padding-top: 30px;
+    .description-box {
+        position: relative;
+        min-width: 390px;
+        margin: 20px;
+        width: 40%;
+        padding: 62px 35px;
+        box-sizing: border-box;
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, .85);
+        .description-box__title {
+            font-size: 38px;
+            line-height: 1.2;
+        }
+        .description-box__time-info {
+            position: absolute;
+            top: 35px;
+            font-size: 15px;
+            color: #95989a;
+            .description-box__time-icon {
+                margin-right: 5px;
+            }
+            .description-box__time-level {
+                border-left: solid 1px;
+                margin-left: 10px;
+                padding-left: 10px;
+            }
+        }
+    }
 }
 
 .content {
@@ -52,6 +54,7 @@
             margin-bottom: 12px;
         }
     }
+
     .instructions {
         width: auto;
         .instructions-title {
@@ -81,9 +84,9 @@
 }
 
 .tip {
+    padding-bottom: 12px;
     h3 {
         margin-top: 64px;
-        margin-bottom: 12px;
     }
 }
 
@@ -92,4 +95,42 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	height: 100%;
+}
+
+@media (max-width: 600px) {
+
+    .description-box {
+        padding: 31px 16px;
+    }
+
+    .description-box-wrapper {
+        .description-box {
+            padding: 62px 16px;
+            min-width: 280px;
+        }
+    }
+
+    .content {
+        display: block;
+
+        .ingredients {
+            padding: 25px 20px;
+        }
+
+        .instructions {
+            padding-left: 20px;
+            padding-right: 20px;
+            .instructions-title {
+                margin-top: 32px;
+            }
+        }
+    }
+
+    .tip {
+        padding-left: 20px;
+        padding-right: 20px;
+        h3 {
+            margin-top: 32px;
+        }
+    }
 }
