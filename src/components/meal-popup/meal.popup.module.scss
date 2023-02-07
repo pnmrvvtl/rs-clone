@@ -9,14 +9,16 @@
     background: rgba(0,0,0,.7);
     z-index: 100;
     color: $font-color-main;
-    .window {
-        padding: 48px 48px 48px 48px;
-        position: relative;
-        margin: 32px auto;
-        max-width: 960px;
-        background-color: rgb(255, 255, 255);
-        border-radius: 12px;
-    }
+    justify-content: center;
+}
+
+.window {
+    padding: 48px;
+    position: relative;
+    margin: 32px 60px;
+    max-width: 960px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
 }
 
 .description {
@@ -28,9 +30,10 @@
     .description__img {
         background-image: url('https://i.dietdoctor.com/wp-content/uploads/2017/11/DD-530-ketodeliroastbeefcoleslaw-2.jpg?auto=compress%2Cformat&w=1200&h=1200&fit=crop');
         background-size: cover;
+        background-position: center;
         border-radius: 12px;
         height: 100%;
-        max-height: 408px;
+        min-width: 320px;
     }
     .description__text {
         max-height: 408px;
@@ -206,4 +209,35 @@
     top: 12px;
     right: 12px;
     display: inline-block;
+    cursor: pointer;
+}
+
+@media (max-width: 980px) {
+    .window {
+        padding: 24px;
+    }
+
+    .description {
+        display: block;
+
+        .description__img {
+            height: 320px;
+            min-width: 270px;
+        }
+    }
+
+    .composition {
+        display: block;
+
+        .composition__nutrients {
+            .composition__title {
+                margin-top: 36px!important;
+            }
+        }
+    }
+
+    .xmark {
+        top: 0px;
+        right: 0px;
+    }
 }

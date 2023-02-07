@@ -2,12 +2,12 @@ import styles from './meal.popup.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function MealPopup() {
+const MealPopup = () => {
     return (
         <div className={styles.container}>
             <div className={styles.window}>
                 <div
-                    onClick={close}
+                    onClick={closeWindow}
                     className={styles.xmark}>
                     <FontAwesomeIcon icon={faXmark} />
                 </div>
@@ -118,3 +118,5 @@ const Text = () => {
 const closeWindow = () => {
     console.log(1);
 }
+
+export { MealPopup }

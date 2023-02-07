@@ -20,7 +20,7 @@ export default function Meal() {
                     </div>
                 </div>
             </div>
-            <div className={styles['for-margin-bottom']}></div>xq
+            <div className={styles['for-margin-bottom']}></div>
         </div>
     )
 }
