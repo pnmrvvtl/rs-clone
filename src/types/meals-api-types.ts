@@ -101,14 +101,14 @@ export interface MealsByParametersQuery {
 }
 
 export interface MealsByParametersResponse {
-    offset: 0,
-    number: 2,
+    offset: number,
+    number: number,
     results: {
         "id": number,
         "title": string,
         "image": string,
     } [],
-    totalResults: 86
+    totalResults: number
 }
 
 export interface MealByIdResponse{

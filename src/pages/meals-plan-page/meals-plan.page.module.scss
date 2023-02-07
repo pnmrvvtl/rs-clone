@@ -21,8 +21,6 @@
     padding: 0px 50px;
     background-color: $background-strip;
 
-
-
     .collection {
       display: flex;
       flex-wrap: wrap;
@@ -52,14 +50,27 @@
   .dinner-ideas {
     padding: 0px 50px;
     background-color: $background-light;
+    width: 100%;
 
     .ideas-cards {
+      width: 100%;
       display: flex;
+      align-items: center;
       justify-content: space-around;
       flex-wrap: wrap;
 
-      div {
+      & > div {
         margin-bottom: 10px;
+        width: 550px;
+
+        div:nth-child(1) {
+          width: 300px;
+        }
+
+        div:nth-child(2) {
+          width: 200px;
+        }
+
       }
     }
   }

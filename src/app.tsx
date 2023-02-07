@@ -10,7 +10,7 @@ import MealPopup from "./components/meal-popup/meal-popup";
 import {UserData} from "./types/user-data";
 import {UserContext} from "./context/user-context";
 import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
-import MealsApi from "./api/meals-api";
+import {MealsByParametersResponse} from "./types/meals-api-types";
 
 let router = createBrowserRouter(
     createRoutesFromElements(
@@ -50,11 +50,18 @@ export const App = () => {
         mealsCount: 3,
         lunchLeftovers: '',
     });
+    const [mealsByParametersResponse, setMealsByParametersResponse] = useState<MealsByParametersResponse>({
+        number: 0,
+        offset: 0,
+        results: [],
+        totalResults: 0
+    });
+
 
     return (
         <>
             <React.StrictMode>
-                <UserContext.Provider value={{userData, setUserData}}>
+                <UserContext.Provider value={{userData, setUserData, mealsByParametersResponse, setMealsByParametersResponse}}>
                     <RouterProvider router={router}/>
                 </UserContext.Provider>
             </React.StrictMode>
