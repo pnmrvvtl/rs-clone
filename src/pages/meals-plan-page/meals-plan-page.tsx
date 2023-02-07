@@ -296,7 +296,7 @@ export default function MealsPlanPage() {
                 <div className={styles['ideas-cards']}>
                     {mealsByParametersResponse.results.map((item, i) => (
                             <MealCard key={i} mealCardInfo={
-                                {difficult: 'hard', duration: 45, rating: 4.5, keto: 6, day: '', foodTime: '', imageUrl: item.image,
+                                {difficult: 'hard', duration: item.readyInMinutes, rating: 4.5, keto: 6, day: '', foodTime: '', imageUrl: item.image,
                                 title: item.title}
                             } isColumnLayout={false}/>))
                     }

@@ -523,18 +523,19 @@ export default function DataPage() {
                              excludeCuisine: 'greek',
                              diet: 'vegetarian',
                              intolerances: 'gluten',
-                             equipment: 'pan',
-                             includeIngredients: 'tomato,cheese',
-                             excludeIngredients: 'eggs',
-                             type: 'main course',
+                             equipment: '',
+                             includeIngredients: '',
+                             excludeIngredients: '',
+                             type: '',
                              instructionsRequired: true,
                              fillIngredients: false,
-                             addRecipeInformation: false,
+                             addRecipeNutrition: true,
+                             addRecipeInformation: true,
                              titleMatch: '',
                              maxReadyTime: 20,
                              ignorePantry: true,
-                             sort: 'calories',
-                             sortDirection: 'asc',
+                             sort: '',
+                             sortDirection: '',
                              minCarbs: 10,
                              maxCarbs: 100,
                              minProtein: 10,
@@ -612,6 +613,7 @@ export default function DataPage() {
                              limitLicense: false,
                              ranking: 2
                          });
+                         console.log(meals)
                          setMealsByParametersResponse(meals);
                          setIsLoading(false);
                          setCurrentQuestion(1);

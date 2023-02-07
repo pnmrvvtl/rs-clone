@@ -32,6 +32,7 @@ export default class MealsApi {
                 }
             };
         const response = await axios.request(options);
+        console.log(response);
         if (response.status === 200) {
             console.log(response.data)
             return await response.data;
@@ -41,7 +42,7 @@ export default class MealsApi {
     }
 
     async getMealsByParameters(params: MealsByParametersQuery): Promise<MealsByParametersResponse> {
-        return await this.getData<MealsByParametersQuery, MealsByParametersResponse>('recipes/complexSearch', params)
+        return await this.getData<MealsByParametersQuery, MealsByParametersResponse>('recipes/complexSearch', params);
     }
 
     async getMealById(mealId: number): Promise<MealByIdResponse> {
