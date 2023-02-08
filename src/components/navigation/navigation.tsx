@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {ReactNode, useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,17 +8,14 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {Link, Outlet} from 'react-router-dom';
 import Footer from '../footer/footer';
-import styles from './navigation.module.scss';
-import {ReactNode} from "react";
+import {UserContext} from "../../context/user-context";
 
-const pages = ['Data', 'Results', 'Meals'];
+const pages = [['Data collection' , 'data-collection'], ['Research result', 'research-results'], ['Meals page', 'meals-page']];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function RestoreIcon() {
@@ -39,6 +37,7 @@ interface Props {
 function Navigation({ children, ...props }: Props) {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const {userData} = useContext(UserContext);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -108,11 +107,11 @@ function Navigation({ children, ...props }: Props) {
                                     display: {xs: 'block', md: 'none'},
                                 }}
                             >
-                                {pages.map((page, idx) => (
-                                    <Link key = {idx} style={{textDecoration: "none", color: "black"}} to={`/${page}`}>
-                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                {userData.isEditedByUser && pages.map((page, idx) => (
+                                    <Link key = {idx} style={{textDecoration: "none", color: "black"}} to={`/${page[1]}`}>
+                                        <MenuItem key={page[1]} onClick={handleCloseNavMenu}>
                                             <Typography textAlign="center">
-                                                {page}
+                                                {page[0]}
                                             </Typography>
                                         </MenuItem>
                                     </Link>
@@ -139,13 +138,13 @@ function Navigation({ children, ...props }: Props) {
                             RS-Healthy
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                            {pages.map((page, idx) => (
+                            {userData.isEditedByUser && pages.map((page, idx) => (
                                 <Button
-                                    key={page}
+                                    key={page[1]}
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
-                                    <Link key={idx} style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
+                                    <Link key={idx} style={{textDecoration: "none", color: "white"}} to={`/${page[1]}`}>{page[0]}</Link>
                                 </Button>
                             ))}
                         </Box>

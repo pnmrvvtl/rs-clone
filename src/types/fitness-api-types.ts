@@ -11,11 +11,11 @@ export interface BMIParams {
 }
 
 export interface DailyCaloryParams extends BMIParams {
-    gender: string
+    gender: string,
+    activitylevel: string
 }
 
 export interface MacrosParams extends DailyCaloryParams {
-    activitylevel: string
     goal: string
 }
 

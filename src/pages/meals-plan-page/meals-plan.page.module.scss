@@ -1,6 +1,12 @@
 @import "../../scss/constants";
 
 .container {
+
+  a:link, a:active, a:hover, a:visited {
+    color: $font-color-main;
+    text-decoration: none;
+  }
+
   width: 100%;
   color: $font-color-main;
 
@@ -59,18 +65,16 @@
       justify-content: space-around;
       flex-wrap: wrap;
 
-      & > div {
+      & > a > div {
         margin-bottom: 10px;
-        width: 550px;
 
-        div:nth-child(1) {
-          width: 300px;
-        }
+          div:nth-child(1) {
+            width: 250px;
+          }
 
-        div:nth-child(2) {
-          width: 200px;
-        }
-
+          div:nth-child(2) {
+            width: 200px;
+          }
       }
     }
   }

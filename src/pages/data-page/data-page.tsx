@@ -8,9 +8,10 @@ import {UserData} from "../../types/user-data";
 import {UserContext} from "../../context/user-context";
 import {useNavigate} from "react-router-dom";
 import MealsApi from "../../api/meals-api";
+import FitnessApi from "../../api/fitness-api";
 
 export default function DataPage() {
-    const {setUserData, setMealsByParametersResponse} = useContext(UserContext);
+    const {setUserData, setMealsByParametersResponse, setFitnessApiResponse} = useContext(UserContext);
     const navigate = useNavigate();
 
     const [selectedSex, setSelectedSex] = useState('');
@@ -484,11 +485,15 @@ export default function DataPage() {
                     that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
                 <div className={`${styles.button} ${styles.selected}`}
                      onClick={async () => {
+                         if (isLoading) {
+                             return
+                         }
                          const KG_IN_LBS = 0.453592;
                          const CM_IN_FOOT = 30.48;
                          const CM_IN_INCH = 2.54;
                          const userData: UserData = {
                              isEditedByUser: true,
+                             currentAge: +currentAge,
                              cmHeight: heightSystem === 'cm' ?
                                  +currentCmHeight : (+currentFtHeight * CM_IN_FOOT + +currentInHeight * CM_IN_INCH),
                              currentKgWeight: weightSystem === 'kilos' ?
@@ -517,6 +522,33 @@ export default function DataPage() {
                          setUserData(userData);
                          setIsLoading(true);
                          window.scrollTo(0, 0);
+
+                         //need to repair hardcoded userData
+                         const bmi = await new FitnessApi().getBMI({
+                             age: userData.currentAge,
+                             height: userData.cmHeight,
+                             weight: userData.currentKgWeight
+                         });
+                         const calories = await new FitnessApi().getDailyCalory({
+                             age: userData.currentAge,
+                             height: userData.cmHeight,
+                             weight: userData.currentKgWeight,
+                             gender: 'male',
+                             activitylevel: 'level_1'
+                         });
+                         const macros = await new FitnessApi().getMacrosAmount({
+                             age: userData.currentAge,
+                             height: userData.cmHeight,
+                             weight: userData.currentKgWeight,
+                             gender: 'male',
+                             goal: 'extremelose',
+                             activitylevel: '5'
+                         });
+                         console.log('bmi = ', bmi);
+                         console.log('calories = ', calories);
+                         console.log('macros = ', macros);
+                         setFitnessApiResponse({bmi,calories,macros});
+
                          const meals = await new MealsApi().getMealsByParameters({
                              query: 'a',
                              cuisine: 'italian',
@@ -528,11 +560,11 @@ export default function DataPage() {
                              excludeIngredients: '',
                              type: '',
                              instructionsRequired: true,
-                             fillIngredients: false,
+                             fillIngredients: true,
                              addRecipeNutrition: true,
                              addRecipeInformation: true,
                              titleMatch: '',
-                             maxReadyTime: 20,
+                             maxReadyTime: 60,
                              ignorePantry: true,
                              sort: '',
                              sortDirection: '',
@@ -613,11 +645,16 @@ export default function DataPage() {
                              limitLicense: false,
                              ranking: 2
                          });
-                         console.log(meals)
                          setMealsByParametersResponse(meals);
+
+                         localStorage.setItem('user-data', JSON.stringify(userData));
+                         localStorage.setItem('meals-data', JSON.stringify(meals));
+                         localStorage.setItem('bmi-data', JSON.stringify(bmi));
+                         localStorage.setItem('calories-data', JSON.stringify(calories));
+                         localStorage.setItem('macros-data', JSON.stringify(macros));
                          setIsLoading(false);
                          setCurrentQuestion(1);
-                         navigate('/meals-plan');
+                         navigate('/research-results');
                      }}>
                     Generate my meal plan
                 </div>

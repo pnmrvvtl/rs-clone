@@ -3,6 +3,7 @@ import styles from '../../pages/main-page/main-page.module.scss'
 import step1 from '../../assets/image/main/step-1.jpg'
 import step2 from '../../assets/image/main/step-2.jpg'
 import step3 from '../../assets/image/main/step-3.jpg'
+import {useNavigate} from "react-router-dom";
 
 export default function Instuction() {
   const benefits = [
@@ -21,9 +22,11 @@ export default function Instuction() {
       title: 'Take it one step at a time',
       text: 'Our expert guidance keeps you on the right track.'
     },
-  ]
+  ];
 
-  return (
+    const navigator = useNavigate();
+
+    return (
     <section className={styles.instructions}>
       <h4 className={styles["benefits-sub"]}>HOW IT WORKS</h4>
       <h2 className={styles["benefits-subtitle"]}>You tell us your goals.</h2>
@@ -37,7 +40,7 @@ export default function Instuction() {
           </li>
         ))}
       </ul>
-      <button className={styles["benefit-btn"]}>Start free trial</button>
+      <button className={styles["benefit-btn"]} onClick={() => navigator('/data-collection')}>Start program</button>
     </section>
   )
 }
