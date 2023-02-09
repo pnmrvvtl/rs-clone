@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
+// import { CommentBankSharp } from '@mui/icons-material';
 
 export default function Meal() {
     const { id } = useParams();
@@ -15,7 +16,10 @@ export default function Meal() {
     }, [id]);
 
     const { mealsByParametersResponse } = useContext(UserContext);
+    console.log(mealsByParametersResponse)
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
+
+    // console.log(meal.summary)
 
     if (!meal) {
         return <ErrorPage />
@@ -25,14 +29,14 @@ export default function Meal() {
         <div className={styles.container}>
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
-                    <DescriptionBox title={meal.title} duration={meal.readyInMinutes} />
+                    <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />
                 </div>
                 <img
                     className={styles['description__meal-img']}
                     src={`${meal.image}`}>
                 </img>
-
             </div>
+
             <div className={styles['content-wrapper']}>
                 <div className={styles.content}>
                     <Ingredients />
@@ -48,18 +52,18 @@ export default function Meal() {
 }
 
 
-const DescriptionBox = (props: { title: string, duration: number }) => {
+const DescriptionBox = (props: { title: string, duration: number, summary: string }) => {
     return (
-        <div className={styles['description-box-wrapper']}>
-            <div className={styles['description-box']}>
-                <h1 className={styles['description-box__title']}>{props.title}</h1>
-                <Text />
-                <aside className={styles['description-box__time-info']}>
-                    <span className={styles['description-box__time-icon']}>
+        <div className={styles['summary-wrapper']}>
+            <div className={styles['summary']}>
+                <h1 className={styles['summary__title']}>{props.title}</h1>
+                <p dangerouslySetInnerHTML={{__html:`${props.summary}`}}></p>
+                <aside className={styles['summary__time-info']}>
+                    <span className={styles['summary__time-icon']}>
                         <FontAwesomeIcon icon={faClock} />
                     </span>
-                    <span className={styles['description-box__time-qty']}>{props.duration}m</span>
-                    <span className={styles['description-box__time-level']}>Beginner</span>
+                    <span className={styles['summary__time-qty']}>{props.duration}m</span>
+                    <span className={styles['summary__time-level']}>Beginner</span>
                 </aside>
             </div>
         </div>

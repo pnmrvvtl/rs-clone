@@ -14,8 +14,8 @@
 	}
 }
 
-.description-box-wrapper {
-    .description-box {
+.summary-wrapper {
+    .summary {
         position: relative;
         min-width: 390px;
         width: 100%;
@@ -24,20 +24,20 @@
         min-height: 250px;
         border-radius: 15px;
         background-color: rgba(255, 255, 255, .85);
-        .description-box__title {
+        .summary__title {
             font-size: 38px;
             line-height: 1.2;
         }
 
-        .description-box__time-info {
+        .summary__time-info {
             position: absolute;
             top: 35px;
             font-size: 15px;
             color: #95989a;
-            .description-box__time-icon {
+            .summary__time-icon {
                 margin-right: 5px;
             }
-            .description-box__time-level {
+            .summary__time-level {
                 border-left: solid 1px;
                 margin-left: 10px;
                 padding-left: 10px;
@@ -126,12 +126,12 @@
 }
 
 @media (max-width: 600px) {
-    .description-box {
+    .summary {
         padding: 31px 16px;
     }
 
-    .description-box-wrapper {
-        .description-box {
+    .summary-wrapper {
+        .summary {
             padding: 62px 16px;
             min-width: 280px;
         }
