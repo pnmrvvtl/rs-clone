@@ -544,10 +544,15 @@ export default function DataPage() {
                              goal: 'extremelose',
                              activitylevel: '5'
                          });
+                         const idealWeight = await new FitnessApi().getIdealWeigth({
+                            height: userData.cmHeight,
+                            gender: 'male',
+                         })
                          console.log('bmi = ', bmi);
                          console.log('calories = ', calories);
                          console.log('macros = ', macros);
-                         setFitnessApiResponse({bmi,calories,macros});
+                         console.log('macros = ', idealWeight);
+                         setFitnessApiResponse({bmi,calories,macros,idealWeight});
 
                          const meals = await new MealsApi().getMealsByParameters({
                              query: 'a',

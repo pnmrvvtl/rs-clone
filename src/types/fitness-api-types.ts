@@ -14,6 +14,7 @@ export interface DailyCaloryParams extends BMIParams {
     gender: string,
     activitylevel: string
 }
+export type IdealWeightParams = Pick<DailyCaloryParams, "gender" | "height">
 
 export interface MacrosParams extends DailyCaloryParams {
     goal: string
@@ -79,3 +80,10 @@ export type Macros = {
         carbs: number
     }
 }
+
+export type IdealWeight = {
+    Hamwi: number
+    Devine: number
+    Miller: number
+    Robinson: number
+  }

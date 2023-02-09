@@ -2,7 +2,7 @@ import {
     BMIParams,
     DailyCaloryParams,
     MacrosParams, BMI, Calory, Macros,
-    FitnessApiResponse
+    FitnessApiResponse, IdealWeight, IdealWeightParams
 } from '../types/fitness-api-types'
 import { fitnessApiKey } from '../api-key'
 
@@ -44,6 +44,9 @@ export default class FitnessApi {
 
     async getMacrosAmount(params: MacrosParams): Promise<Macros> {
         return await this.getData<MacrosParams, Macros>('macrocalculator', params);
+    }
+    async getIdealWeigth(params: IdealWeightParams): Promise<IdealWeight> {
+        return await this.getData<IdealWeightParams, IdealWeight>('idealweight', params);
     }
 }
 

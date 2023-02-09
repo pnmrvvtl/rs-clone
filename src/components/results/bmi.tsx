@@ -1,9 +1,14 @@
 import React from 'react'
 import styles from '../../pages/results-page/results-page.module.scss'
-import {BMI, Macros} from "../../types/fitness-api-types";
+import {BMI, IdealWeight, Macros} from "../../types/fitness-api-types";
+import { UserData } from '../../types/user-data';
 
-export default function BMI(props: {macros: Macros, bmi: BMI}) {
-    const {bmi, macros} = props;
+export default function BMI(props: {macros: Macros, bmi: BMI, idealWeight: IdealWeight}) {
+    const {bmi, macros, idealWeight} = props;
+      
+    const weightResponseValues = Object.values(idealWeight)
+    const sumValues = weightResponseValues.reduce((sum, value) => sum + value, 0)
+    const averageWeight = Math.ceil(sumValues / weightResponseValues.length)
 
 
   return (
@@ -18,7 +23,7 @@ export default function BMI(props: {macros: Macros, bmi: BMI}) {
         <span className={styles.value}> {bmi.bmi}</span>
       </div>
       <div className={styles.title}>Ideal weight:
-        <span className={styles.value}> 75 kg</span>
+        <span className={styles.value}> {averageWeight} kg</span>
       </div>
     </section>
   )

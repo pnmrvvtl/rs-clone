@@ -1,15 +1,15 @@
-import React, {createContext} from "react";
-import {UserData} from "../types/user-data";
-import {MealsByParametersResponse} from "../types/meals-api-types";
-import {BMI, Calory, Macros} from "../types/fitness-api-types";
+import React, { createContext } from "react";
+import { UserData } from "../types/user-data";
+import { MealsByParametersResponse } from "../types/meals-api-types";
+import { BMI, Calory, Macros, IdealWeight } from "../types/fitness-api-types";
 
 interface IUserContext {
     userData: UserData,
     setUserData: React.Dispatch<UserData>,
     mealsByParametersResponse: MealsByParametersResponse,
     setMealsByParametersResponse: React.Dispatch<MealsByParametersResponse>,
-    fitnessApiResponse: { bmi: BMI, macros: Macros, calories: Calory },
-    setFitnessApiResponse: React.Dispatch<{ bmi: BMI, macros: Macros, calories: Calory }>
+    fitnessApiResponse: { bmi: BMI, macros: Macros, calories: Calory, idealWeight: IdealWeight },
+     setFitnessApiResponse: React.Dispatch<{ bmi: BMI, macros: Macros, calories: Calory, idealWeight: IdealWeight }>
 }
 
 export const UserContext = createContext<IUserContext>({
@@ -104,7 +104,14 @@ export const UserContext = createContext<IUserContext>({
                 fat: 0,
                 carbs: 0,
             }
+        },
+        idealWeight: {
+            Hamwi: 0,
+            Devine: 0,
+            Miller: 0,
+            Robinson: 0,
         }
     },
+
     setFitnessApiResponse: () => false
-});
+})
