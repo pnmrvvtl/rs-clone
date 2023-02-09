@@ -13,7 +13,7 @@ import {MealsByParametersResponse} from "./types/meals-api-types";
 import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
 import {BMI, Calory, Macros} from "./types/fitness-api-types";
 
-let router = createBrowserRouter(
+const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Navigation/>} errorElement={<Navigation><ErrorPage/></Navigation>}>
             <Route index element={<MainPage/>}/>
