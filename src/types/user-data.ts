@@ -1,5 +1,6 @@
 export type UserData = {
     isEditedByUser: boolean;
+    currentAge: number;
     cmHeight: number;
     currentKgWeight: number;
     goalKgWeight: number;

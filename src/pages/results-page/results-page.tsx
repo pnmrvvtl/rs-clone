@@ -6,21 +6,26 @@ import Article from '../../components/results/article';
 import BmiChart from '../../components/results/bmi-chart';
 import MealPlan from '../../components/results/meal-plan';
 import GymMap from '../../components/results/gymMap';
+import ErrorPage from "../error-page/error-page";
 
 export default function ResultsPage() {
-    const { userData } = useContext(UserContext);
-
+    const { userData,fitnessApiResponse } = useContext(UserContext);
+    const { bmi, calories, macros} = fitnessApiResponse;
     useEffect(() => {
         //api calls here
 
     }, [/*userData*/]);
+
+    if(!userData.isEditedByUser) {
+        return <ErrorPage/>;
+    }
 
     return (
         <main className={styles.content}>
             <Article/>
             <h1 className={styles["result-title"]}>Your results</h1>
             <section className={styles.bmi}>
-                <BMI />
+                <BMI macros={macros} bmi={bmi}/>
                 <BmiChart />
                 {/* <section style={{width: '200px'}}>
                {JSON.stringify(userData)}

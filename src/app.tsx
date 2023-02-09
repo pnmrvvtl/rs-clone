@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
 import Navigation from "./components/navigation/navigation";
 import ErrorPage from "./pages/error-page/error-page";
@@ -9,59 +9,150 @@ import Meal from "./components/meal/meal";
 
 import {UserData} from "./types/user-data";
 import {UserContext} from "./context/user-context";
-import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
 import {MealsByParametersResponse} from "./types/meals-api-types";
-import { MealPopup } from "./components/meal-popup/meal-popup";
+import MealsPlanPage from "./pages/meals-plan-page/meals-plan-page";
+import {BMI, Calory, Macros} from "./types/fitness-api-types";
 
 let router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Navigation/>} errorElement={<Navigation><ErrorPage /></Navigation>}>
+        <Route path="/" element={<Navigation/>} errorElement={<Navigation><ErrorPage/></Navigation>}>
             <Route index element={<MainPage/>}/>
-            <Route path="data" element={<DataPage/>}/>
-            <Route path="results" element={<ResultsPage/>} />
-            <Route path="meals" element={<Meal/>} />
-            <Route path="meal-popup" element={<MealPopup/>} />
+            <Route path="meal/:id" element={<Meal/>}/>
+            <Route path="data-collection" element={<DataPage/>}/>
+            <Route path="research-results" element={<ResultsPage/>}/>
+            <Route path="meals-page" element={<MealsPlanPage/>}/>
         </Route>
     )
 );
 
 export const App = () => {
-    const [userData, setUserData] = useState<UserData>({
-        isEditedByUser: false,
-        cmHeight: 170,
-        currentKgWeight: 90,
-        goalKgWeight: 70,
-        selectedSex: '',
-        currentGoals: [],
-        healthConditions: [],
-        foodAtTheMoment: [],
-        foodScenario: [],
-        foodCuisines: [],
-        foodKinds: [],
-        foodAvoidProteins: [],
-        foodAvoidOthers: [],
-        foodBudget: '',
-        basicActivities: '',
-        pastPains: '',
-        foodCookTime: '',
-        foodCookSkills: '',
-        foodCookCarb: '',
-        foodCookProtein: '',
-        mealsCount: 3,
-        lunchLeftovers: '',
-    });
-    const [mealsByParametersResponse, setMealsByParametersResponse] = useState<MealsByParametersResponse>({
-        number: 0,
-        offset: 0,
-        results: [],
-        totalResults: 0
-    });
+    const localStorageUserData = localStorage.getItem('user-data');
+    const localStorageMeals = localStorage.getItem('meals-data');
+    const localStorageBMI = localStorage.getItem('bmi-data');
+    const localStorageCalories = localStorage.getItem('calories-data');
+    const localStorageMacros = localStorage.getItem('macros-data');
 
+    const isSavedToLocalStorage = localStorageUserData &&
+        localStorageMeals &&
+        localStorageBMI &&
+        localStorageCalories &&
+        localStorageMacros;
+
+    const [userData, setUserData] =
+        useState<UserData>(isSavedToLocalStorage ? JSON.parse(localStorageUserData) :
+            {
+                isEditedByUser: false,
+                currentAge: 0,
+                cmHeight: 170,
+                currentKgWeight: 90,
+                goalKgWeight: 70,
+                selectedSex: '',
+                currentGoals: [],
+                healthConditions: [],
+                foodAtTheMoment: [],
+                foodScenario: [],
+                foodCuisines: [],
+                foodKinds: [],
+                foodAvoidProteins: [],
+                foodAvoidOthers: [],
+                foodBudget: '',
+                basicActivities: '',
+                pastPains: '',
+                foodCookTime: '',
+                foodCookSkills: '',
+                foodCookCarb: '',
+                foodCookProtein: '',
+                mealsCount: 3,
+                lunchLeftovers: '',
+            });
+
+    const [mealsByParametersResponse, setMealsByParametersResponse] =
+        useState<MealsByParametersResponse>(isSavedToLocalStorage ? JSON.parse(localStorageMeals) : {
+            number: 0,
+            offset: 0,
+            results: [],
+            totalResults: 0
+        });
+
+    const [fitnessApiResponse, setFitnessApiResponse] =
+        useState<{ bmi: BMI, macros: Macros, calories: Calory }>(
+            isSavedToLocalStorage ?
+                {
+                    bmi: JSON.parse(localStorageBMI),
+                    calories: JSON.parse(localStorageCalories),
+                    macros: JSON.parse(localStorageMacros)
+                } : {
+                    bmi: {
+                        bmi: 0,
+                        health: '',
+                        healthy_bmi_range: ''
+                    },
+                    calories: {
+                        bmr: 0,
+                        goals: {
+                            maintaine: 0,
+                            mildLoss: {
+                                weigth: '',
+                                calory: 0
+                            },
+                            loss: {
+                                weigth: '',
+                                calory: 0
+                            },
+                            extremeLoss: {
+                                weigth: '',
+                                calory: 0
+                            },
+                            mildGain: {
+                                weigth: '',
+                                calory: 0
+                            },
+                            gain: {
+                                weigth: '',
+                                calory: 0
+                            },
+                            extremeGain: {
+                                weigth: '',
+                                calory: 0
+                            }
+                        }
+                    },
+                    macros: {
+                        calorie: 0,
+                        balanced: {
+                            protein: 0,
+                            fat: 0,
+                            carbs: 0,
+                        },
+                        lowfat: {
+                            protein: 0,
+                            fat: 0,
+                            carbs: 0,
+                        },
+                        lowcarbs: {
+                            protein: 0,
+                            fat: 0,
+                            carbs: 0,
+                        },
+                        highprotein: {
+                            protein: 0,
+                            fat: 0,
+                            carbs: 0,
+                        }
+                    }
+                });
 
     return (
         <>
             <React.StrictMode>
-                <UserContext.Provider value={{userData, setUserData, mealsByParametersResponse, setMealsByParametersResponse}}>
+                <UserContext.Provider value={{
+                    userData,
+                    setUserData,
+                    mealsByParametersResponse,
+                    setMealsByParametersResponse,
+                    fitnessApiResponse,
+                    setFitnessApiResponse
+                }}>
                     <RouterProvider router={router}/>
                 </UserContext.Provider>
             </React.StrictMode>

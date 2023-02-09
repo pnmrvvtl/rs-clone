@@ -4,6 +4,8 @@ import {UserContext} from '../../context/user-context';
 import {MealCardInfo} from "../../types/meal-card-info";
 import MealCard from "../../components/meal-card/meal-card";
 import Carousel from 'react-material-ui-carousel'
+import {Link} from "react-router-dom";
+import ErrorPage from "../error-page/error-page";
 
 
 export default function MealsPlanPage() {
@@ -228,6 +230,11 @@ export default function MealsPlanPage() {
         },
     ];
     const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    if(!userData.isEditedByUser) {
+        return <ErrorPage/>;
+    }
+
     return (
         <div className={styles.container}>
             <section className={styles['current-meals']}>
@@ -295,10 +302,20 @@ export default function MealsPlanPage() {
                 <h2>Dinner ideas</h2>
                 <div className={styles['ideas-cards']}>
                     {mealsByParametersResponse.results.map((item, i) => (
+                        <Link to={`/meal/${item.id}`}>
                             <MealCard key={i} mealCardInfo={
-                                {difficult: 'hard', duration: item.readyInMinutes, rating: 4.5, keto: 6, day: '', foodTime: '', imageUrl: item.image,
-                                title: item.title}
-                            } isColumnLayout={false}/>))
+                                {
+                                    difficult: 'hard',
+                                    duration: item.readyInMinutes,
+                                    rating: 4.5,
+                                    keto: 6,
+                                    day: '',
+                                    foodTime: '',
+                                    imageUrl: item.image,
+                                    title: item.title
+                                }
+                            } isColumnLayout={false}/>
+                        </Link>))
                     }
                 </div>
             </section>
