@@ -5,6 +5,7 @@ import {faClock} from '@fortawesome/free-solid-svg-icons';
 import {useParams} from "react-router";
 import {useContext, useEffect} from "react";
 import {UserContext} from "../../context/user-context";
+import ErrorPage from "../../pages/error-page/error-page";
 
 export default function Meal() {
     let {id} = useParams();
@@ -15,6 +16,10 @@ export default function Meal() {
 
     const {mealsByParametersResponse} = useContext(UserContext);
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
+
+    if (!meal) {
+        return <ErrorPage/>
+    }
 
     return (
         <div className={styles.container}>
