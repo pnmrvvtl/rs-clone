@@ -39,7 +39,6 @@ export const App = () => {
         localStorageCalories &&
         localStorageMacros &&
         localStorageWeight;
-
     const [userData, setUserData] =
         useState<UserData>(isSavedToLocalStorage ? JSON.parse(localStorageUserData) :
             {
@@ -59,13 +58,13 @@ export const App = () => {
                 foodAvoidOthers: [],
                 foodBudget: '',
                 basicActivities: '',
+                weightProgramm: [],
                 pastPains: '',
                 foodCookTime: '',
                 foodCookSkills: '',
                 foodCookCarb: '',
                 foodCookProtein: '',
                 mealsCount: 3,
-                lunchLeftovers: '',
             });
 
     const [mealsByParametersResponse, setMealsByParametersResponse] =
@@ -75,9 +74,9 @@ export const App = () => {
             results: [],
             totalResults: 0
         });
-
     const [fitnessApiResponse, setFitnessApiResponse] =
         useState<{ bmi: BMI, macros: Macros, calories: Calory, idealWeight: IdealWeight }>(
+
             isSavedToLocalStorage ?
                 {
                     bmi: JSON.parse(localStorageBMI),

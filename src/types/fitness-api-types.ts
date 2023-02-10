@@ -12,7 +12,7 @@ export interface BMIParams {
 
 export interface DailyCaloryParams extends BMIParams {
     gender: string,
-    activitylevel: string
+    activitylevel: number | string
 }
 export type IdealWeightParams = Pick<DailyCaloryParams, "gender" | "height">
 
@@ -20,35 +20,23 @@ export interface MacrosParams extends DailyCaloryParams {
     goal: string
 }
 
+export type CaloryWeight = {
+    calory: number
+}
+
+export type CaloryGoals = {
+    "maintain weight": number,
+    "Mild weight loss": CaloryWeight
+    "Weight loss": CaloryWeight
+    "Extreme weight loss": CaloryWeight
+    "Mild weight gain": CaloryWeight
+    "Weight gain": CaloryWeight
+    "Extreme weight gain": CaloryWeight
+}
+
 export type Calory = {
     bmr: number,
-    goals: {
-        maintaine: number,
-        mildLoss: {
-            weigth: string,
-            calory: number
-        },
-        loss: {
-            weigth: string,
-            calory: number
-        },
-        extremeLoss: {
-            weigth: string,
-            calory: number
-        },
-        mildGain: {
-            weigth: string,
-            calory: number
-        },
-        gain: {
-            weigth: string,
-            calory: number
-        },
-        extremeGain: {
-            weigth: string,
-            calory: number
-        }
-    }
+    goals: CaloryGoals
 }
 
 export type BMI = {
