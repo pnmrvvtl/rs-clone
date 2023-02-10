@@ -10,10 +10,10 @@ import ErrorPage from "../error-page/error-page";
 
 export default function ResultsPage() {
     const { userData,fitnessApiResponse } = useContext(UserContext);
-    const { bmi, calories, macros} = fitnessApiResponse;
+    const { bmi, calories, macros, idealWeight} = fitnessApiResponse;
     useEffect(() => {
         //api calls here
-
+ 
     }, [/*userData*/]);
 
     if(!userData.isEditedByUser) {
@@ -25,11 +25,8 @@ export default function ResultsPage() {
             <Article/>
             <h1 className={styles["result-title"]}>Your results</h1>
             <section className={styles.bmi}>
-                <BMI macros={macros} bmi={bmi}/>
-                <BmiChart />
-                {/* <section style={{width: '200px'}}>
-               {JSON.stringify(userData)}
-            </section> */}
+                <BMI macros={macros} bmi={bmi} idealWeight={idealWeight} calories={calories}/>
+                <BmiChart /> 
             </section>
             <MealPlan />
             <GymMap/>

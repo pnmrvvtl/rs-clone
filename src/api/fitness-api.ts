@@ -2,7 +2,7 @@ import {
     BMIParams,
     DailyCaloryParams,
     MacrosParams, BMI, Calory, Macros,
-    FitnessApiResponse
+    FitnessApiResponse, IdealWeight, IdealWeightParams
 } from '../types/fitness-api-types'
 import { fitnessApiKey } from '../api-key'
 
@@ -30,7 +30,7 @@ export default class FitnessApi {
         const response = await fetch(`${this.baseUrl}/${path}?${queryString.slice(1)}`, {
             headers: this.headers
         });
-        const apiRes: FitnessApiResponse<S> = await response.json();
+        const apiRes: FitnessApiResponse<S> = await response.json()
         return apiRes.data
     }
 
@@ -44,6 +44,10 @@ export default class FitnessApi {
 
     async getMacrosAmount(params: MacrosParams): Promise<Macros> {
         return await this.getData<MacrosParams, Macros>('macrocalculator', params);
+    }
+
+    async getIdealWeight(params: IdealWeightParams): Promise<IdealWeight> {
+        return await this.getData<IdealWeightParams, IdealWeight>('idealweight', params);
     }
 }
 
