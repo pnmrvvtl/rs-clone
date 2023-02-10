@@ -22,6 +22,12 @@ export default class MealsApi {
     }
 
     async getData<QueryParamsType, ResponseParamsType>(path: string, queryParams: QueryParamsType | undefined): Promise<ResponseParamsType> {
+        // const filteredParams = {};
+        // for (const key in queryParams) {
+        //     if (queryParams[key] !== '') {
+        //         Object.defineProperty(filteredParams, key, {value: queryParams[key]});
+        //     }
+        // }
         const options = {
                 method: 'GET',
                 url: `${this.baseUrl}/${path}`,
@@ -32,7 +38,8 @@ export default class MealsApi {
                 }
             };
         const response = await axios.request(options);
-        console.log(response);
+        console.log('meals response = ', response);
+        console.log('meals params = ', queryParams);
         if (response.status === 200) {
             console.log(response.data)
             return await response.data;
