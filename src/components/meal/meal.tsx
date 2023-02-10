@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
 // import { CommentBankSharp } from '@mui/icons-material';
-import { ExtendedIngredient } from "../../types/meals-api-types";
+import { ExtendedIngredient, Step } from "../../types/meals-api-types";
 
 export default function Meal() {
     const { id } = useParams();
@@ -18,7 +18,7 @@ export default function Meal() {
 
     const { mealsByParametersResponse } = useContext(UserContext);
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
-    console.log(meal.extendedIngredients);
+    console.log(meal);
 
     if (!meal) {
         return <ErrorPage />
@@ -44,7 +44,7 @@ export default function Meal() {
                     </div>
 
                     <div className={styles['main-content']}>
-                        <RecipeSection />
+                        <Instructions steps={meal.analyzedInstructions[0].steps}/>
                         <Tip />
                     </div>
                 </div>
@@ -77,8 +77,10 @@ const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) =
     return (
         <ul>
             {
-                props.extendedIngredients.map(el => (
-                    <li>{el.name}</li>
+                props.extendedIngredients.map((el, i) => (
+                    <li key={el.name} className={styles['ingredient']}>
+                        <span>{i + 1}</span>{el.original}
+                    </li>
                 ))
             }
         </ul>
@@ -86,15 +88,16 @@ const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) =
     )
 }
 
-const RecipeSection = () => {
+const Instructions = (props: { steps: Step[] }) => {
     return (
         <div className={styles['instructions']}>
             <h3 className={styles['instructions-title']}>Instructions</h3>
             <ul className={styles['instructions-list']}>
-                <li><span>1</span><Text /></li>
-                <li><span>2</span><Text /></li>
-                <li><span>3</span><Text /></li>
-                <li><span>4</span><Text /></li>
+                {
+                    props.steps.map(el => (
+                        <li><span>{el.number}</span>{el.step}</li>
+                    ))
+                }
             </ul>
         </div>
     )
