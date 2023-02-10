@@ -95,7 +95,7 @@ const Instructions = (props: { steps: Step[] }) => {
             <ul className={styles['instructions-list']}>
                 {
                     props.steps.map(el => (
-                        <li><span>{el.number}</span>{el.step}</li>
+                        <li key={el.number}><span>{el.number}</span>{el.step}</li>
                     ))
                 }
             </ul>
