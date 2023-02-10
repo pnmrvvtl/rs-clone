@@ -17,221 +17,9 @@ export default function MealsPlanPage() {
 
     }, [/*userData*/]);
 
-    const meals: MealCardInfo[] = [
-        {
-            difficult: 'easy',
-            day: 'Sun',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Sun',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Sun',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Mon',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Mon',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Mon',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Tue',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Tue',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Tue',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Wed',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Wed',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Wed',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Thu',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Thu',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Thu',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Fri',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Fri',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Fri',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Sat',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Sat',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-        {
-            difficult: 'easy',
-            day: 'Sat',
-            duration: 15,
-            foodTime: 'lunch',
-            keto: 7,
-            imageUrl: 'https://i.dietdoctor.com/wp-content/uploads/2017/08/DD-481-ketoturkey.jpg?auto=compress%2Cformat&w=500&h=275&fit=crop',
-            rating: 4.6,
-            title: 'Keto turkey plate'
-        },
-    ];
     const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    if(!userData.isEditedByUser) {
+    if (!userData.isEditedByUser) {
         return <ErrorPage/>;
     }
 
@@ -277,10 +65,27 @@ export default function MealsPlanPage() {
                     navButtonsAlwaysVisible={true}>
                     {
                         Array.from([1, 2, 3, 4, 5, 6, 7]).map((elem, idx) => {
-                            return (<div className={styles.meals}>
-                                {meals.slice((elem - 1) * 3, elem * 3)
-                                    .map((item, i) => (
-                                        <MealCard key={(i + 1) * elem} mealCardInfo={item} isColumnLayout={true}/>))
+                            return (<div key={idx} className={styles.meals}>
+                                {
+                                    mealsByParametersResponse.results.slice((elem - 1) * (userData.mealsCount || 3), elem * (userData.mealsCount || 3))
+                                        .map((item, i) => {
+                                            const meal = mealsByParametersResponse.results[(elem - 1) * (userData.mealsCount || 3) + i];
+                                            return (
+                                                <Link to={`/meal/${meal.id}`}>
+                                                    <MealCard key={(i + 1) * elem} mealCardInfo={{
+                                                        duration: meal.cookingMinutes + meal.readyInMinutes + meal.preparationMinutes,
+                                                        day: daysArray[idx],
+                                                        foodTime: i === 0 ? "Breakfast" : (i === 1 ? "Lunch" : "Dinner"),
+                                                        imageUrl: meal.image,
+                                                        title: meal.title,
+                                                        calories: meal.nutrition.nutrients[0].amount,
+                                                        protein: meal.nutrition.nutrients[1].amount,
+                                                        carbs: meal.nutrition.nutrients[2].amount,
+                                                        fats: meal.nutrition.nutrients[3].amount,
+                                                        likes: meal.likes + meal.aggregateLikes
+                                                    }} isColumnLayout={true}/>
+                                                </Link>)
+                                        })
                                 }
                             </div>)
                         })
@@ -302,17 +107,19 @@ export default function MealsPlanPage() {
                 <h2>Dinner ideas</h2>
                 <div className={styles['ideas-cards']}>
                     {mealsByParametersResponse.results.map((item, i) => (
-                        <Link to={`/meal/${item.id}`}>
+                        <Link key={i} to={`/meal/${item.id}`}>
                             <MealCard key={i} mealCardInfo={
                                 {
-                                    difficult: 'hard',
-                                    duration: item.readyInMinutes,
-                                    rating: 4.5,
-                                    keto: 6,
+                                    duration: item.cookingMinutes + item.readyInMinutes + item.preparationMinutes,
                                     day: '',
                                     foodTime: '',
                                     imageUrl: item.image,
-                                    title: item.title
+                                    title: item.title,
+                                    calories: item.nutrition.nutrients[0].amount,
+                                    protein: item.nutrition.nutrients[1].amount,
+                                    carbs: item.nutrition.nutrients[2].amount,
+                                    fats: item.nutrition.nutrients[3].amount,
+                                    likes: item.likes + item.aggregateLikes
                                 }
                             } isColumnLayout={false}/>
                         </Link>))

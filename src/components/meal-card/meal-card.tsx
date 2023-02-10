@@ -2,9 +2,9 @@ import styles from './meal-card.module.scss';
 import {MealCardInfo} from "../../types/meal-card-info";
 import React from "react";
 
-export default function MealCard(props: {mealCardInfo: MealCardInfo, isColumnLayout: boolean}) {
+export default function MealCard(props: { mealCardInfo: MealCardInfo, isColumnLayout: boolean }) {
 
-   const el = props.mealCardInfo;
+    const el = props.mealCardInfo;
 
     return (
         <div className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}>
@@ -14,11 +14,15 @@ export default function MealCard(props: {mealCardInfo: MealCardInfo, isColumnLay
                     <p>{el.day}</p>
                     <p>{el.foodTime}</p>
                 </div>
-                <span>{el.keto}g</span>
+                <div>
+                    <span title="protein">{el.protein} g</span>
+                    <span title="carbs">{el.carbs} g</span>
+                    <span title="fats">{el.fats} g</span>
+                </div>
             </div>
             <div className={styles['meal-title']}>
                 <h5>{el.title}</h5>
-                <span>★</span>{el.rating}{' '}|{' '}
+                <span>♥</span> {el.likes}{' '}|{' '}
                 <svg width="15" height="15" viewBox="0 0 17 17" className="m-0 mr-0.5 opacity-60"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g>
@@ -30,7 +34,7 @@ export default function MealCard(props: {mealCardInfo: MealCardInfo, isColumnLay
                             fill="#404040"></path>
                     </g>
                 </svg>
-                {el.duration} min.{' '}|{' '}{el.difficult}
+                {el.duration} min.{' '}|{' '}{el.calories}{' kcal'}
             </div>
         </div>
     );

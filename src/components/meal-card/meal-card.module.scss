@@ -3,9 +3,11 @@
 .meal {
   display: flex;
   flex-direction: column;
+  height: 280px;
 
   &.rowed {
     flex-direction: row;
+    height: 200px;
 
     .meal-title {
       margin-left: 20px;
@@ -17,36 +19,45 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 20px;
+    div:nth-child(2) {
+      display: flex;
+
+      span {
+        font-size: 0.8rem;
+        color: $font-color-inverted;
+        padding: 3px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        justify-content: center;
+        margin: 5px;
+        height: 30px;
+        background-color: $button-color;
+      }
+    }
+
     p {
       margin: 0;
       padding: 5px 0 0 20px;
+      color: $font-color-link;
+      text-shadow: 1px 1px 2px $font-color-inverted , 0 0 1em $font-color-inverted , 0 0 0.2em $font-color-inverted ;
     }
 
     p:nth-child(1) {
       font-size: 1.3rem;
     }
 
-    width: 250px;
+    width: 320px;
     height: 170px;
     background-size: cover;
     background-repeat: no-repeat;
-
-    span {
-      display: flex;
-      align-items: center;
-      border-radius: 50%;
-      justify-content: center;
-      margin: 20px 20px 10px;
-      width: 30px;
-      height: 30px;
-      background-color: $button-color;
-    }
   }
 
   .meal-title {
+    width: 250px;
     color: $font-color-sub;
     span {
-      color: $sun-color;
+      color: darkred;
     }
     h5 {
       color: $font-color-main;

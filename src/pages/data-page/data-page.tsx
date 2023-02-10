@@ -14,35 +14,38 @@ export default function DataPage() {
     const {setUserData, setMealsByParametersResponse, setFitnessApiResponse} = useContext(UserContext);
     const navigate = useNavigate();
 
-    const [selectedSex, setSelectedSex] = useState('');
+    const localDataUser = localStorage.getItem('user-data');
+    const initialUser: UserData = localDataUser && JSON.parse(localDataUser);
+
+    const [selectedSex, setSelectedSex] = useState(initialUser?.selectedSex || '');
     const [currentQuestion, setCurrentQuestion] = useState(28);
-    const [currentGoals, setCurrentGoals] = useState<string[]>([]);
-    const [healthConditions, setHealthConditions] = useState<string[]>([]);
-    const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>([]);
-    const [foodScenario, setFoodScenario] = useState<string[]>([]);
-    const [foodCuisines, setFoodCuisines] = useState<string[]>([]);
-    const [foodKinds, setFoodKinds] = useState<string[]>([]);
-    const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>([]);
-    const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>([]);
-    const [foodBudget, setFoodBudget] = useState<string>('');
-    const [currentCmHeight, setCmHeight] = useState('180');
-    const [currentAge, setAge] = useState('20');
+    const [currentGoals, setCurrentGoals] = useState<string[]>(initialUser?.currentGoals || []);
+    const [healthConditions, setHealthConditions] = useState<string[]>(initialUser?.healthConditions || []);
+    const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(initialUser?.foodAtTheMoment || []);
+    const [foodScenario, setFoodScenario] = useState<string[]>(initialUser?.foodScenario || []);
+    const [foodCuisines, setFoodCuisines] = useState<string[]>(initialUser?.foodCuisines || []);
+    const [foodKinds, setFoodKinds] = useState<string[]>(initialUser?.foodKinds || []);
+    const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>(initialUser?.foodAvoidProteins || []);
+    const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>(initialUser?.foodAvoidOthers || []);
+    const [foodBudget, setFoodBudget] = useState<string>(initialUser?.foodBudget || '');
+    const [currentCmHeight, setCmHeight] = useState(initialUser?.cmHeight || '180');
+    const [currentAge, setAge] = useState(initialUser?.currentAge || '20');
     const [currentFtHeight, setFtHeight] = useState('5');
     const [currentInHeight, setInHeight] = useState('5');
     const [currentLbsWeight, setCurrentLbsWeight] = useState('180');
     const [goalLbsWeight, setGoalLbsWeight] = useState('155');
-    const [currentKgWeight, setCurrentKgWeight] = useState('100');
-    const [goalKgWeight, setGoalKgWeight] = useState('70');
+    const [currentKgWeight, setCurrentKgWeight] = useState(initialUser?.currentKgWeight || '100');
+    const [goalKgWeight, setGoalKgWeight] = useState(initialUser?.goalKgWeight || '70');
     const [heightSystem, setHeightSystem] = useState('cm');
     const [weightSystem, setWeightSystem] = useState('kilos');
-    const [basicActivities, setBasicAct] = useState('');
-    const [pastPains, setPastPain] = useState('');
-    const [foodCookTime, setFoodCookTime] = useState('');
-    const [foodCookSkills, setFoodCookSkills] = useState('');
-    const [foodCookCarb, setFoodCookCarb] = useState('');
-    const [foodCookProtein, setFoodCookProtein] = useState('');
-    const [mealsCount, setMealsCount] = useState('');
-    const [lunchLeftovers, setLunchLeftovers] = useState('');
+    const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
+    const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
+    const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
+    const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
+    const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
+    const [foodCookProtein, setFoodCookProtein] = useState(initialUser?.foodCookProtein || '');
+    const [mealsCount, setMealsCount] = useState(String(initialUser?.mealsCount) || '');
+    const [lunchLeftovers, setLunchLeftovers] = useState(initialUser?.lunchLeftovers || '');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -79,18 +82,24 @@ export default function DataPage() {
         'Options were too limited', 'I haven\'t dieted/I\'m not here to lose weight'
     ];
     const foodCuisinesArr = [
-        'Indian', 'Asian', 'Mexican',
+        'Indian', 'Chinese', 'Mexican',
         'Italian', 'Middle Eastern', 'Mediterranean'
     ];
     const foodKindsArr = [
-        'Salads', 'Casseroles', 'Soups & stews',
-        'Grill', 'Pizza', 'Stir-fry', 'Omelette'
+        "Main course",
+        "Side dish",
+        "Dessert",
+        "Salad",
+        "Breakfast",
+        "Soup",
     ];
     const foodAvoidProteinsArr = [
         'Beef', 'Pork', 'Poultry', 'Lamb', 'Fish', 'Shellfish', 'Avoid all (vegetarian)'
     ];
     const foodAvoidOthersArr = [
-        'Dairy', 'Eggs', 'Nuts'
+        'Dairy', 'Egg', 'Gluten', 'Grain',
+        'Peanut', 'Seafood', 'Sesame', 'Soy', 'Sulfite',
+        'Tree Nut', 'Wheat',
     ];
     const foodBudgetArr = [
         ['Minimal', 'Show me budget-friendly options'],
@@ -118,14 +127,13 @@ export default function DataPage() {
         ['High', 'More than 120 grams per day'],
     ];
     const mealsCountArr = [
-        ['2', 'Breakfast, lunch, and dinner'],
-        ['3', 'Lunch and dinner (intermittent fasting)'],
+        ['2', 'Lunch and dinner (intermittent fasting)'],
+        ['3', 'Breakfast, lunch, and dinner'],
     ];
     const lunchLeftoversArr = [
         ['Yes', 'I want to save some time'],
         ['No', 'I really like variation'],
     ];
-
 
     const onNumberChange = (e: React.FormEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
@@ -520,6 +528,7 @@ export default function DataPage() {
                              lunchLeftovers,
                          }
                          setUserData(userData);
+                         console.log(`user data= `, userData)
                          setIsLoading(true);
                          window.scrollTo(0, 0);
 
@@ -547,111 +556,41 @@ export default function DataPage() {
                          console.log('bmi = ', bmi);
                          console.log('calories = ', calories);
                          console.log('macros = ', macros);
-                         setFitnessApiResponse({bmi,calories,macros});
 
                          const meals = await new MealsApi().getMealsByParameters({
                              query: 'a',
-                             cuisine: 'italian',
-                             excludeCuisine: 'greek',
-                             diet: 'vegetarian',
-                             intolerances: 'gluten',
-                             equipment: '',
-                             includeIngredients: '',
-                             excludeIngredients: '',
-                             type: '',
+                             cuisine: userData.foodCuisines.join(','),
+                             diet: '',
+                             sort: 'random',
+                             addRecipeNutrition: true,
+                             intolerances: userData.foodAvoidOthers.join(','),
+                             excludeIngredients: 'alcohol' + userData.foodAvoidProteins.join(','),
+                             type: userData.foodKinds.join(','),
                              instructionsRequired: true,
                              fillIngredients: true,
-                             addRecipeNutrition: true,
                              addRecipeInformation: true,
-                             titleMatch: '',
-                             maxReadyTime: 60,
+                             maxReadyTime:
+                                 userData.foodCookTime === 'Minimal' ? 15 :
+                                     (userData.foodCookTime === 'Average' ? 30 : 100),
                              ignorePantry: true,
-                             sort: '',
-                             sortDirection: '',
-                             minCarbs: 10,
-                             maxCarbs: 100,
-                             minProtein: 10,
-                             maxProtein: 100,
-                             minCalories: 50,
-                             maxCalories: 800,
-                             minFat: 10,
-                             maxFat: 100,
-                             minAlcohol: 0,
-                             maxAlcohol: 100,
-                             minCaffeine: 0,
-                             maxCaffeine: 100,
-                             minCopper: 0,
-                             maxCopper: 100,
-                             minCalcium: 0,
-                             maxCalcium: 100,
-                             minCholine: 0,
-                             maxCholine: 100,
-                             minCholesterol: 0,
-                             maxCholesterol: 100,
-                             minFluoride: 0,
-                             maxFluoride: 100,
-                             minSaturatedFat: 0,
-                             maxSaturatedFat: 100,
-                             minVitaminA: 0,
-                             maxVitaminA: 100,
-                             minVitaminC: 0,
-                             maxVitaminC: 100,
-                             minVitaminD: 0,
-                             maxVitaminD: 100,
-                             minVitaminE: 0,
-                             maxVitaminE: 100,
-                             minVitaminK: 0,
-                             maxVitaminK: 100,
-                             minVitaminB1: 0,
-                             maxVitaminB1: 100,
-                             minVitaminB2: 0,
-                             maxVitaminB2: 100,
-                             minVitaminB5: 0,
-                             maxVitaminB5: 100,
-                             minVitaminB3: 0,
-                             maxVitaminB3: 100,
-                             minVitaminB6: 0,
-                             maxVitaminB6: 100,
-                             minVitaminB12: 0,
-                             maxVitaminB12: 100,
-                             minFiber: 0,
-                             maxFiber: 100,
-                             minFolate: 0,
-                             maxFolate: 100,
-                             minFolicAcid: 0,
-                             maxFolicAcid: 100,
-                             minIodine: 0,
-                             maxIodine: 100,
-                             minIron: 0,
-                             maxIron: 100,
-                             minMagnesium: 0,
-                             maxMagnesium: 100,
-                             minManganese: 0,
-                             maxManganese: 100,
-                             minPhosphorus: 0,
-                             maxPhosphorus: 100,
-                             minPotassium: 0,
-                             maxPotassium: 100,
-                             minSelenium: 0,
-                             maxSelenium: 100,
-                             minSodium: 0,
-                             maxSodium: 100,
-                             minSugar: 0,
-                             maxSugar: 100,
-                             minZinc: 0,
-                             maxZinc: 100,
-                             offset: 0,
-                             number: 10,
-                             limitLicense: false,
-                             ranking: 2
+                             maxCarbs: userData.foodCookCarb === 'Keto' ? 8 :
+                                 (userData.foodCookCarb === 'Moderate' ? 35 :
+                                         (userData.foodCookCarb === 'Moderate' ? 50 : 100)
+                                 ),
+                             maxProtein: userData.foodCookCarb === 'Moderate' ? 50 : 500,
+                             // maxCalories: 800,
+                             number: 100,
                          });
+                         console.log('meals response = ', meals);
+                         if (userData && meals && bmi && calories && macros) {
+                             localStorage.setItem('user-data', JSON.stringify(userData));
+                             localStorage.setItem('meals-data', JSON.stringify(meals));
+                             localStorage.setItem('bmi-data', JSON.stringify(bmi));
+                             localStorage.setItem('calories-data', JSON.stringify(calories));
+                             localStorage.setItem('macros-data', JSON.stringify(macros));
+                         }
+                         setFitnessApiResponse({bmi, calories, macros});
                          setMealsByParametersResponse(meals);
-
-                         localStorage.setItem('user-data', JSON.stringify(userData));
-                         localStorage.setItem('meals-data', JSON.stringify(meals));
-                         localStorage.setItem('bmi-data', JSON.stringify(bmi));
-                         localStorage.setItem('calories-data', JSON.stringify(calories));
-                         localStorage.setItem('macros-data', JSON.stringify(macros));
                          setIsLoading(false);
                          setCurrentQuestion(1);
                          navigate('/research-results');
