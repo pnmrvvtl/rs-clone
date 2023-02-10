@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
 // import { CommentBankSharp } from '@mui/icons-material';
+import { ExtendedIngredient } from "../../types/meals-api-types";
 
 export default function Meal() {
     const { id } = useParams();
@@ -16,10 +17,8 @@ export default function Meal() {
     }, [id]);
 
     const { mealsByParametersResponse } = useContext(UserContext);
-    console.log(mealsByParametersResponse)
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
-
-    // console.log(meal.summary)
+    console.log(meal.extendedIngredients);
 
     if (!meal) {
         return <ErrorPage />
@@ -39,7 +38,11 @@ export default function Meal() {
 
             <div className={styles['content-wrapper']}>
                 <div className={styles.content}>
-                    <Ingredients />
+                    <div className={styles['ingredients']}>
+                        <h3>Ingredients</h3>
+                        <IngredientsList extendedIngredients={meal.extendedIngredients} />
+                    </div>
+
                     <div className={styles['main-content']}>
                         <RecipeSection />
                         <Tip />
@@ -57,7 +60,7 @@ const DescriptionBox = (props: { title: string, duration: number, summary: strin
         <div className={styles['summary-wrapper']}>
             <div className={styles['summary']}>
                 <h1 className={styles['summary__title']}>{props.title}</h1>
-                <p dangerouslySetInnerHTML={{__html:`${props.summary}`}}></p>
+                <p dangerouslySetInnerHTML={{ __html: `${props.summary}` }}></p>
                 <aside className={styles['summary__time-info']}>
                     <span className={styles['summary__time-icon']}>
                         <FontAwesomeIcon icon={faClock} />
@@ -70,12 +73,16 @@ const DescriptionBox = (props: { title: string, duration: number, summary: strin
     )
 }
 
-const Ingredients = () => {
+const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) => {
     return (
-        <div className={styles['ingredients']}>
-            <h3>Ingredients</h3>
-            <Text />
-        </div>
+        <ul>
+            {
+                props.extendedIngredients.map(el => (
+                    <li>{el.name}</li>
+                ))
+            }
+        </ul>
+
     )
 }
 

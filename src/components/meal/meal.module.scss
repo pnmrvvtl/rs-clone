@@ -19,7 +19,7 @@
         position: relative;
         min-width: 390px;
         width: 100%;
-        padding: 62px 35px;
+        padding: 62px 35px 35px;
         box-sizing: border-box;
         min-height: 250px;
         border-radius: 15px;
@@ -62,6 +62,8 @@
     .ingredients {
         padding: 50px 35px;
         background-color: #f6fdea;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
         h3 {
             margin-top: 14px;
             margin-bottom: 12px;
