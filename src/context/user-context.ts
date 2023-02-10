@@ -30,13 +30,13 @@ export const UserContext = createContext<IUserContext>({
         foodAvoidOthers: [],
         foodBudget: '',
         basicActivities: '',
+        weightProgramm: '',
         pastPains: '',
         foodCookTime: '',
         foodCookSkills: '',
         foodCookCarb: '',
         foodCookProtein: '',
         mealsCount: 3,
-        lunchLeftovers: '',
     },
     setUserData: () => false,
     setMealsByParametersResponse: () => false,
@@ -55,29 +55,23 @@ export const UserContext = createContext<IUserContext>({
         calories: {
             bmr: 0,
             goals: {
-                maintaine: 0,
-                mildLoss: {
-                    weigth: '',
+                "maintain weight": 0,
+                "Mild weight loss": {
                     calory: 0
                 },
-                loss: {
-                    weigth: '',
+                "Weight loss": {
                     calory: 0
                 },
-                extremeLoss: {
-                    weigth: '',
+                "Extreme weight loss": {
                     calory: 0
                 },
-                mildGain: {
-                    weigth: '',
+                "Mild weight gain": {
                     calory: 0
                 },
-                gain: {
-                    weigth: '',
+                "Weight gain": {
                     calory: 0
                 },
-                extremeGain: {
-                    weigth: '',
+                "Extreme weight gain": {
                     calory: 0
                 }
             }
