@@ -13,7 +13,7 @@ export default function ResultsPage() {
     const { bmi, calories, macros, idealWeight} = fitnessApiResponse;
     useEffect(() => {
         //api calls here
-
+ 
     }, [/*userData*/]);
 
     if(!userData.isEditedByUser) {
@@ -25,7 +25,7 @@ export default function ResultsPage() {
             <Article/>
             <h1 className={styles["result-title"]}>Your results</h1>
             <section className={styles.bmi}>
-                <BMI macros={macros} bmi={bmi} idealWeight={idealWeight}/>
+                <BMI macros={macros} bmi={bmi} idealWeight={idealWeight} calories={calories}/>
                 <BmiChart /> 
             </section>
             <MealPlan />
