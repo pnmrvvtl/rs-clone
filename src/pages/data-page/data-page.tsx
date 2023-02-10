@@ -540,7 +540,6 @@ export default function DataPage() {
                              foodCookCarb,
                              foodCookProtein,
                              mealsCount: +mealsCount,
-                             lunchLeftovers,
                          }
                          setUserData(userData);
                          console.log(`user data= `, userData)
@@ -559,7 +558,7 @@ export default function DataPage() {
                             height: userData.cmHeight,
                             weight: userData.currentKgWeight,
                             gender: userData.selectedSex.toLowerCase(),
-                            activitylevel: `level_${basicActLevel[userData.basicActivities]}`
+                            activitylevel: `level_${basicActLevel[userData.basicActivities] || 1}`
                         });
 
                         const macros = await new FitnessApi().getMacrosAmount({
@@ -567,8 +566,8 @@ export default function DataPage() {
                             height: userData.cmHeight,
                             weight: userData.currentKgWeight,
                             gender: userData.selectedSex.toLowerCase(),
-                            goal: `${goalData.program}${goalData.goal}`,
-                            activitylevel: basicActLevel[userData.basicActivities]
+                            goal: `${goalData.program || 'mild'}${goalData.goal || 'lose'}`,
+                            activitylevel: basicActLevel[userData.basicActivities] || 1
                         });
                         const idealWeight = await new FitnessApi().getIdealWeight({
                             height: userData.cmHeight,

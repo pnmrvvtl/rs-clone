@@ -24,8 +24,8 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
     'mildgain': 'Mild weight gain'
   }
 
-  const goal = goalProgrames[`${goalData.program}${goalData.goal}`]
-  const calory = goalResponse[goal as keyof CaloryGoals] as CaloryWeight
+  const goal = goalProgrames[`${goalData.program}${goalData.goal}`] || 'mildlose';
+  const calory = goalResponse[goal as keyof CaloryGoals] as CaloryWeight || {calory: 1500};
 
   return (
     <section className={styles["bmi-results"]}>
