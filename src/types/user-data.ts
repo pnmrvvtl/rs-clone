@@ -7,6 +7,7 @@ export type UserData = {
     selectedSex: string;
     currentGoals: string[];
     healthConditions: string[];
+    weightProgramm: string;
     foodAtTheMoment: string[];
     foodScenario: string[];
     foodCuisines: string[];
@@ -21,5 +22,4 @@ export type UserData = {
     foodCookCarb: string;
     foodCookProtein: string;
     mealsCount: number;
-    lunchLeftovers: string;
 };

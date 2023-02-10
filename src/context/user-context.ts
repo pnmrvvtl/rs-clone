@@ -1,15 +1,15 @@
-import React, {createContext} from "react";
-import {UserData} from "../types/user-data";
-import {MealsByParametersResponse} from "../types/meals-api-types";
-import {BMI, Calory, Macros} from "../types/fitness-api-types";
+import React, { createContext } from "react";
+import { UserData } from "../types/user-data";
+import { MealsByParametersResponse } from "../types/meals-api-types";
+import { BMI, Calory, Macros, IdealWeight } from "../types/fitness-api-types";
 
 interface IUserContext {
     userData: UserData,
     setUserData: React.Dispatch<UserData>,
     mealsByParametersResponse: MealsByParametersResponse,
     setMealsByParametersResponse: React.Dispatch<MealsByParametersResponse>,
-    fitnessApiResponse: { bmi: BMI, macros: Macros, calories: Calory },
-    setFitnessApiResponse: React.Dispatch<{ bmi: BMI, macros: Macros, calories: Calory }>
+    fitnessApiResponse: { bmi: BMI, macros: Macros, calories: Calory, idealWeight: IdealWeight },
+     setFitnessApiResponse: React.Dispatch<{ bmi: BMI, macros: Macros, calories: Calory, idealWeight: IdealWeight }>
 }
 
 export const UserContext = createContext<IUserContext>({
@@ -30,13 +30,13 @@ export const UserContext = createContext<IUserContext>({
         foodAvoidOthers: [],
         foodBudget: '',
         basicActivities: '',
+        weightProgramm: '',
         pastPains: '',
         foodCookTime: '',
         foodCookSkills: '',
         foodCookCarb: '',
         foodCookProtein: '',
         mealsCount: 3,
-        lunchLeftovers: '',
     },
     setUserData: () => false,
     setMealsByParametersResponse: () => false,
@@ -55,29 +55,23 @@ export const UserContext = createContext<IUserContext>({
         calories: {
             bmr: 0,
             goals: {
-                maintaine: 0,
-                mildLoss: {
-                    weigth: '',
+                "maintain weight": 0,
+                "Mild weight loss": {
                     calory: 0
                 },
-                loss: {
-                    weigth: '',
+                "Weight loss": {
                     calory: 0
                 },
-                extremeLoss: {
-                    weigth: '',
+                "Extreme weight loss": {
                     calory: 0
                 },
-                mildGain: {
-                    weigth: '',
+                "Mild weight gain": {
                     calory: 0
                 },
-                gain: {
-                    weigth: '',
+                "Weight gain": {
                     calory: 0
                 },
-                extremeGain: {
-                    weigth: '',
+                "Extreme weight gain": {
                     calory: 0
                 }
             }
@@ -104,7 +98,14 @@ export const UserContext = createContext<IUserContext>({
                 fat: 0,
                 carbs: 0,
             }
+        },
+        idealWeight: {
+            Hamwi: 0,
+            Devine: 0,
+            Miller: 0,
+            Robinson: 0,
         }
     },
+
     setFitnessApiResponse: () => false
-});
+})
