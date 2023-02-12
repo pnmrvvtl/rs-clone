@@ -497,14 +497,13 @@ export default function DataPage() {
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 28 && styles.hidden}`}>
-                <h2>Developed by leading nutrition experts</h2>
+                <h2>Here is 3 leading nutrition experts</h2>
                 <div className={styles.experts}>
                     <div>Andreas Eenfeldt, MD</div>
                     <div>Bret Scher, MD</div>
                     <div>Franziska Spritzler, RD</div>
                 </div>
-                <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes
-                    that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
+                <p>Read more information by this authors if you want to know more in nutrition.</p>
                 <div className={`${styles.button} ${styles.selected}`}
                      onClick={async () => {
                          if (isLoading) {
