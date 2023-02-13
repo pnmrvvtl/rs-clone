@@ -8,11 +8,11 @@ export default function MealCard(props: { mealCardInfo: MealCardInfo, isColumnLa
 
     return (
         <div className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}>
-            <div className={styles['meal-image']}
+            <div className={styles['meal-image']} title={'Meal image:' + el.title}
                  style={{backgroundImage: `url("${el.imageUrl}")`}}>
                 <div>
-                    <p>{el.day}</p>
-                    <p>{el.foodTime}</p>
+                    <p title={'Meal day'}>{el.day}</p>
+                    <p title={'Meal time'}>{el.foodTime}</p>
                 </div>
                 <div>
                     <span title="protein">{el.protein} g</span>
@@ -21,8 +21,8 @@ export default function MealCard(props: { mealCardInfo: MealCardInfo, isColumnLa
                 </div>
             </div>
             <div className={styles['meal-title']}>
-                <h5>{el.title}</h5>
-                <span>♥</span> {el.likes}{' '}|{' '}
+                <h5 title={'Meal title: ' + el.title}>{el.title}</h5>
+                <span title={'likes'}>♥</span><span title={'likes'}> {el.likes}{' '}</span>|{' '}
                 <svg width="15" height="15" viewBox="0 0 17 17" className="m-0 mr-0.5 opacity-60"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g>
@@ -34,7 +34,7 @@ export default function MealCard(props: { mealCardInfo: MealCardInfo, isColumnLa
                             fill="#404040"></path>
                     </g>
                 </svg>
-                {el.duration} min.{' '}|{' '}{el.calories}{' kcal'}
+                <span title={'duration'}>{el.duration} min.{' '}</span>|<span title={'calories'}>{' '}{el.calories}{' kcal'}</span>
             </div>
         </div>
     );

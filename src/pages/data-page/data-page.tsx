@@ -41,7 +41,7 @@ export default function DataPage() {
     const [weightSystem, setWeightSystem] = useState('kilos');
     const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
     const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-    const [weightProgramm, setWeightProgramm] = useState('');
+    const [weightProgramm, setWeightProgramm] = useState(initialUser.weightProgramm || '');
     const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
     const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
     const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
@@ -579,10 +579,11 @@ export default function DataPage() {
                          const meals = await new MealsApi().getMealsByParameters({
                              query: 'a',
                              cuisine: userData.foodCuisines.join(','),
-                             diet: '',
+                             diet: userData.foodAvoidProteins
+                                 .some((el) => el === 'Avoid all (vegetarian)') ? 'vegetarian' : '' ,
                              sort: 'random',
                              addRecipeNutrition: true,
-                             intolerances: userData.foodAvoidOthers.join(','),
+                             intolerances: userData.foodAvoidOthers.join(',') + ',' + userData.foodAvoidProteins.join(','),
                              excludeIngredients: 'alcohol' + userData.foodAvoidProteins.join(','),
                              type: userData.foodKinds.join(','),
                              instructionsRequired: true,
@@ -597,7 +598,7 @@ export default function DataPage() {
                                          (userData.foodCookCarb === 'Moderate' ? 50 : 100)
                                  ),
                              maxProtein: userData.foodCookCarb === 'Moderate' ? 50 : 500,
-                             // maxCalories: 800,
+                             maxCalories: Math.ceil(macros.calorie / userData.mealsCount) / 2,
                              number: 100,
                          });
                          console.log('meals response = ', meals);

@@ -101,6 +101,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: box-shadow 0.3s ease;
 
       &.disabled {
         &:hover {
@@ -122,6 +123,7 @@
           font-size: 1.2rem;
           font-weight: bold;
         }
+        box-shadow: 5px 5px 5px $font-color-main;
       }
 
       &.next, &.previous {
@@ -132,7 +134,6 @@
     }
 
     a, a:link, a:active, a:visited, a:hover {
-      transition: font-size 0.3s ease;
       color: $font-color-inverted;
       text-decoration: none;
     }
