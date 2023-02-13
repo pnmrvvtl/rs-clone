@@ -105,10 +105,11 @@ const MealPopup = () => {
                             <div className={styles['instructions']}>
                                 <h3 className={styles['instructions-title']}>Instructions</h3>
                                 <ul className={styles['instructions-list']}>
-                                    <li><span>1</span><Text /></li>
-                                    <li><span>2</span><Text /></li>
-                                    <li><span>3</span><Text /></li>
-                                    <li><span>4</span><Text /></li>
+                                    {
+                                        meal.analyzedInstructions[0].steps.map(el => (
+                                            <li key={el.number}><span>{el.number}</span>{el.step}</li>
+                                        ))
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -116,17 +117,6 @@ const MealPopup = () => {
                 </div>
             </div>
         </div>
-    )
-}
-
-const Text = () => {
-    return (
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        </p>
     )
 }
 

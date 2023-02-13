@@ -37,7 +37,7 @@
             .summary__time-icon {
                 margin-right: 5px;
             }
-            .summary__time-level {
+            .summary__skill-level {
                 border-left: solid 1px;
                 margin-left: 10px;
                 padding-left: 10px;
@@ -51,7 +51,6 @@
     background-repeat: no-repeat;
     height: 250px;
     border-radius: 15px;
-    // filter: blur(1px);
 }
 
 
@@ -59,60 +58,61 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px 60px;
-    .ingredients {
-        padding: 50px 35px;
-        background-color: #f6fdea;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        h3 {
-            margin-top: 14px;
-            margin-bottom: 12px;
-        }
+}
 
-        ul {
-            padding-left: 2.5em;
-        }
-
-        .ingredient {
-            margin-bottom: 15px;
-        }
-
-        span {
-            position: absolute;
-            margin-left: -2.5em;
-            width: 32px;
-            height: 32px;
-            line-height: 32px;
-            background-color: $font-color-main;
-            border-radius: 59%;
-            text-align: center;
-            color: $font-color-inverted;
-        }
+.ingredients {
+    padding: 32px 35px;
+    background-color: #f6fdea;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    h3 {
+        margin-top: 0px;
+        margin-bottom: 12px;
     }
 
-    .instructions {
-        width: auto;
-        .instructions-title {
-            margin-top: 64px;
-            margin-bottom: 12px;
-            color: $font-color-link;
-        }
-        .instructions-list {
-            padding-left: 2.5em;
-            li {
-                margin-top: 1.5em;
-                list-style: none;
-                span {
-                    position: absolute;
-                    margin-left: -2.5em;
-                    width: 32px;
-                    height: 32px;
-                    line-height: 32px;
-                    background-color: $font-color-link;
-                    border-radius: 59%;
-                    text-align: center;
-                    color: $font-color-inverted;
-                }
+    ul {
+        padding-left: 2.5em;
+    }
+
+    .ingredient {
+        margin-top: 1.5em;
+    }
+
+    span {
+        position: absolute;
+        margin-left: -2.5em;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        background-color: $font-color-main;
+        border-radius: 59%;
+        text-align: center;
+        color: $font-color-inverted;
+    }
+}
+
+.instructions {
+    width: auto;
+    .instructions-title {
+        margin-top: 32px;
+        margin-bottom: 12px;
+        color: $font-color-link;
+    }
+    .instructions-list {
+        padding-left: 2.5em;
+        li {
+            margin-top: 1.5em;
+            list-style: none;
+            span {
+                position: absolute;
+                margin-left: -2.5em;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                background-color: $font-color-link;
+                border-radius: 59%;
+                text-align: center;
+                color: $font-color-inverted;
             }
         }
     }
@@ -145,6 +145,13 @@
         margin: 0 auto;
         width: 320px;
     }
+
+    .instructions {
+        .instructions-list {
+            margin-bottom: 0;
+        }
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -172,14 +179,6 @@
             .instructions-title {
                 margin-top: 32px;
             }
-        }
-    }
-
-    .tip {
-        padding-left: 20px;
-        padding-right: 20px;
-        h3 {
-            margin-top: 32px;
         }
     }
 }

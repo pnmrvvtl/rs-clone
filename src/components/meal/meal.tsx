@@ -27,7 +27,7 @@ export default function Meal() {
 
     return (
         <div className={styles.container}>
-            <MealPopup />
+            {/* <MealPopup /> */}
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
                     <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />
@@ -47,7 +47,6 @@ export default function Meal() {
 
                     <div className={styles['main-content']}>
                         <Instructions steps={meal.analyzedInstructions[0].steps}/>
-                        <Tip />
                     </div>
                 </div>
             </div>
@@ -102,23 +101,5 @@ const Instructions = (props: { steps: Step[] }) => {
                 }
             </ul>
         </div>
-    )
-}
-
-const Tip = () => {
-    return (
-        <div className={styles.tip}>
-            <h3>Tip!</h3>
-            <Text />
-        </div>
-    )
-}
-
-const Text = () => {
-    return (
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        </p>
     )
 }

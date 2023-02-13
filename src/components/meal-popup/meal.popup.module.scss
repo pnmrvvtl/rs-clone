@@ -68,8 +68,8 @@
         padding: 24px;
         height: max-content;
         .composition__title{
-            font-size: 30px;
-            margin-bottom: 12px;
+            font-size: 36px;
+            margin-bottom: 24px;
         }
         .composition__list {
             list-style: none;
@@ -196,6 +196,7 @@
         li {
             margin-top: 1.5em;
             list-style: none;
+            font-weight: 400;
             span {
                 position: absolute;
                 margin-left: -2.5em;
@@ -206,6 +207,7 @@
                 border-radius: 59%;
                 text-align: center;
                 color: $font-color-main;
+                font-weight: 500;
             }
         }
     }
