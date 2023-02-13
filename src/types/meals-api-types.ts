@@ -238,7 +238,13 @@ export interface UsedIngredient {
 }
 
 export interface Nutrition {
-    nutrients: Nutrient[]
+    // nutrients: Nutrient[]
+    caloricBreakdown: any
+    flavonoids: any
+    ingredients: any
+    nutrients: any
+    properties: any
+    weightPerServing: any
 }
 
 export interface Nutrient {

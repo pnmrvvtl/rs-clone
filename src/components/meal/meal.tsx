@@ -8,6 +8,7 @@ import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
 // import { CommentBankSharp } from '@mui/icons-material';
 import { ExtendedIngredient, Step } from "../../types/meals-api-types";
+import { MealPopup } from '../meal-popup/meal-popup';
 
 export default function Meal() {
     const { id } = useParams();
@@ -18,7 +19,6 @@ export default function Meal() {
 
     const { mealsByParametersResponse } = useContext(UserContext);
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
-    console.log(meal);
 
     if (!meal) {
         return <ErrorPage />
@@ -26,6 +26,7 @@ export default function Meal() {
 
     return (
         <div className={styles.container}>
+            <MealPopup />
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
                     <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />
@@ -45,7 +46,6 @@ export default function Meal() {
 
                     <div className={styles['main-content']}>
                         <Instructions steps={meal.analyzedInstructions[0].steps}/>
-                        <Tip />
                     </div>
                 </div>
             </div>
@@ -60,13 +60,13 @@ const DescriptionBox = (props: { title: string, duration: number, summary: strin
         <div className={styles['summary-wrapper']}>
             <div className={styles['summary']}>
                 <h1 className={styles['summary__title']}>{props.title}</h1>
-                <p dangerouslySetInnerHTML={{ __html: `${props.summary}` }}></p>
+                <p dangerouslySetInnerHTML={{ __html: `${props.summary}`}}></p>
                 <aside className={styles['summary__time-info']}>
                     <span className={styles['summary__time-icon']}>
                         <FontAwesomeIcon icon={faClock} />
                     </span>
                     <span className={styles['summary__time-qty']}>{props.duration}m</span>
-                    <span className={styles['summary__time-level']}>Beginner</span>
+                    <span className={styles['summary__skill-level']}>Hard</span>
                 </aside>
             </div>
         </div>
@@ -100,23 +100,5 @@ const Instructions = (props: { steps: Step[] }) => {
                 }
             </ul>
         </div>
-    )
-}
-
-const Tip = () => {
-    return (
-        <div className={styles.tip}>
-            <h3>Tip!</h3>
-            <Text />
-        </div>
-    )
-}
-
-const Text = () => {
-    return (
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        </p>
     )
 }
