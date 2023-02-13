@@ -25,15 +25,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    align-items: center;
-    box-sizing: content-box;
+    height: max-content;
     .description__img {
         border-radius: 12px;
         width: 100%;
     }
     .description__text {
-        max-height: 408px;
-        overflow: hidden;
         .description__week-day-time {
             margin: 24px 0 8px;
             font-size: 18px;
@@ -72,10 +69,27 @@
         height: max-content;
         .composition__title{
             font-size: 30px;
+            margin-bottom: 12px;
         }
         .composition__list {
             list-style: none;
-            margin-left: -1.5em;
+            padding-left: 2.5em;
+
+            .ingredient {
+                margin-bottom: 15px;
+            }
+
+            span {
+                position: absolute;
+                margin-left: -2.5em;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                background-color: $font-color-main;
+                border-radius: 59%;
+                text-align: center;
+                color: $font-color-inverted;
+            }
         }
     }
     .composition__other {
@@ -219,6 +233,8 @@
         .description__img {
             height: 320px;
             min-width: 270px;
+            max-width: fit-content;
+            margin-bottom: 24px;
         }
     }
 

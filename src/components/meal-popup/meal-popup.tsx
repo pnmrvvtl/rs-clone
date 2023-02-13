@@ -44,7 +44,7 @@ const MealPopup = () => {
                         </div>
                         <p
                             className={styles['description__description-text']}
-                            dangerouslySetInnerHTML={{ __html: `${meal.summary}`}}>
+                            dangerouslySetInnerHTML={{ __html: `${meal.summary}` }}>
                         </p>
                     </div>
                 </div>
@@ -52,12 +52,13 @@ const MealPopup = () => {
                     <div className={styles['composition__ingredients']}>
                         <h1 className={styles['composition__title']}>Ingredients</h1>
                         <ul className={styles['composition__list']}>
-                            <li>75 ml mayonnaise</li>
-                            <li>75 ml mayonnaise</li>
-                            <li>75 ml mayonnaise</li>
-                            <li>75 ml mayonnaise</li>
-                            <li>75 ml mayonnaise</li>
-                            <li>75 ml mayonnaise</li>
+                            {
+                                meal.extendedIngredients.map((el, i) => (
+                                    <li key={el.name} className={styles['ingredient']}>
+                                        <span>{i + 1}</span>{el.original}
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <div className={styles['composition__other']}>
@@ -79,7 +80,7 @@ const MealPopup = () => {
                                     <span className={styles['composition__block-percent']}>20%</span>
                                 </div>
                                 <div className={styles['composition__block-fat']}>
-                                <div className={styles['composition__block-line']}></div>
+                                    <div className={styles['composition__block-line']}></div>
                                     <span className={styles['composition__block-name']}>FAT</span>
                                     <span className={styles['composition__block-weight']}>58g</span>
                                     <span className={styles['composition__block-percent']}>76%</span>
