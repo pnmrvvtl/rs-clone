@@ -1,8 +1,23 @@
 import styles from './meal.popup.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from "../../context/user-context";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router";
+
+
 
 const MealPopup = () => {
+    const { id } = useParams();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
+    const { mealsByParametersResponse } = useContext(UserContext);
+    const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
+    console.log(meal)
+
     return (
         <div className={styles.container}>
             <div className={styles.window}>
@@ -12,25 +27,24 @@ const MealPopup = () => {
                     <FontAwesomeIcon icon={faXmark} />
                 </div>
                 <div className={styles['description']}>
-                    <div className={styles['description__img']}></div>
+                    <img
+                        src={`${meal.image}`}
+                        className={styles['description__img']}>
+                    </img>
                     <div className={styles['description__text']}>
-                        <h3 className={styles['description__week-day-time']}>
+                        {/* <h3 className={styles['description__week-day-time']}>
                             MONDAY LUNCH
-                        </h3>
+                        </h3> */}
                         <h2 className={styles['description__title']}>
-                            Here will be long meal name
+                            {meal.title}
                         </h2>
                         <div className={styles['description__time-serving']}>
-                            <span className={styles['description__time']}>10m</span>
-                            <span className={styles['description__serving']}>1 serving</span>
+                            <span className={styles['summary__time-qty']}>{meal.readyInMinutes}m</span>
+                            <span className={styles['summary__skill-level']}>Hard</span>
                         </div>
-                        <p className={styles['description__description-text']}>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                            commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-                            magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                            quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                            arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo
+                        <p
+                            className={styles['description__description-text']}
+                            dangerouslySetInnerHTML={{ __html: `${meal.summary}`}}>
                         </p>
                     </div>
                 </div>

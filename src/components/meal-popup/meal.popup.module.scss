@@ -13,8 +13,8 @@
 }
 
 .window {
-    padding: 48px;
     position: relative;
+    padding: 48px;
     margin: 32px 60px;
     max-width: 960px;
     background-color: rgb(255, 255, 255);
@@ -28,12 +28,8 @@
     align-items: center;
     box-sizing: content-box;
     .description__img {
-        background-image: url('https://i.dietdoctor.com/wp-content/uploads/2017/11/DD-530-ketodeliroastbeefcoleslaw-2.jpg?auto=compress%2Cformat&w=1200&h=1200&fit=crop');
-        background-size: cover;
-        background-position: center;
         border-radius: 12px;
-        height: 100%;
-        min-width: 320px;
+        width: 100%;
     }
     .description__text {
         max-height: 408px;
@@ -46,10 +42,10 @@
         .description__time-serving {
             margin: 9px 0;
             font-size: 14px;
-            .description__time {
+            .summary__time-qty {
                 display: inline-block;
             }
-            .description__serving {
+            .summary__skill-level {
                 margin-left: 15px;
                 padding-left: 15px;
                 border-left: 1px solid black;
