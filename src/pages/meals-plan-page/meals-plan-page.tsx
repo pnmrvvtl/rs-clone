@@ -6,6 +6,7 @@ import MealCard from "../../components/meal-card/meal-card";
 import Carousel from 'react-material-ui-carousel'
 import {Link} from "react-router-dom";
 import ErrorPage from "../error-page/error-page";
+import ReactPaginate from 'react-paginate';
 
 
 export default function MealsPlanPage() {
@@ -22,6 +23,19 @@ export default function MealsPlanPage() {
     if (!userData.isEditedByUser) {
         return <ErrorPage/>;
     }
+
+    const itemsPerPage = 10;
+    const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    const dinnerIdeas = mealsByParametersResponse.results.slice(daysArray.length * ((userData.mealsCount || 3)), mealsByParametersResponse.results.length);
+    const currentItems = dinnerIdeas.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(dinnerIdeas.length / itemsPerPage);
+
+    const handlePageClick = (event: {selected: number}) => {
+        const newOffset = (event.selected * itemsPerPage) % mealsByParametersResponse.results.length;
+        setItemOffset(newOffset);
+    };
+
 
     return (
         <div className={styles.container}>
@@ -92,22 +106,21 @@ export default function MealsPlanPage() {
                     }
                 </Carousel>
             </section>
-            <section className={styles['recipe-collections']}>
-                <h2>Recipe collections</h2>
-                <div className={styles.collection}>
-                    <div className={styles['collection-item']}>On a budget</div>
-                    <div className={styles['collection-item']}>High protein</div>
-                    <div className={styles['collection-item']}>Top 30</div>
-                    <div className={styles['collection-item']}>Chicken</div>
-                    <div className={styles['collection-item']}>Family-friendly</div>
-                    <div className={styles['collection-item']}>No-cook</div>
-                </div>
-            </section>
+            {/*<section className={styles['recipe-collections']}>*/}
+            {/*    <h2>Recipe collections</h2>*/}
+            {/*    <div className={styles.collection}>*/}
+            {/*        <div className={styles['collection-item']}>On a budget</div>*/}
+            {/*        <div className={styles['collection-item']}>High protein</div>*/}
+            {/*        <div className={styles['collection-item']}>Top 30</div>*/}
+            {/*        <div className={styles['collection-item']}>Chicken</div>*/}
+            {/*        <div className={styles['collection-item']}>Family-friendly</div>*/}
+            {/*        <div className={styles['collection-item']}>No-cook</div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
             <section className={styles['dinner-ideas']}>
                 <h2>Dinner ideas</h2>
                 <div className={styles['ideas-cards']}>
-                    {mealsByParametersResponse.results.map((item, i) => (
-                        <Link key={i} to={`/meal/${item.id}`}>
+                    {currentItems.map((item, i) => (
                             <MealCard key={i} mealCardInfo={
                                 {
                                     duration: item.cookingMinutes + item.readyInMinutes + item.preparationMinutes,
@@ -122,13 +135,27 @@ export default function MealsPlanPage() {
                                     likes: item.likes + item.aggregateLikes
                                 }
                             } isColumnLayout={false}/>
-                        </Link>))
+                        ))
                     }
                 </div>
             </section>
             {/*<section style={{width: '200px'}}>*/}
             {/*    {JSON.stringify(userData)}*/}
             {/*</section>*/}
+            <ReactPaginate
+                className={styles.pagination}
+                activeClassName={styles.selected}
+                nextClassName={styles.next}
+                previousClassName={styles.previous}
+                containerClassName={styles.next}
+                disabledClassName={styles.disabled}
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+            />
         </div>
     )
 }

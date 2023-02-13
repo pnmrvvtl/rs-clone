@@ -41,7 +41,7 @@ export default function DataPage() {
     const [weightSystem, setWeightSystem] = useState('kilos');
     const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
     const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-    const [weightProgramm, setWeightProgramm] = useState('');
+    const [weightProgramm, setWeightProgramm] = useState(initialUser.weightProgramm || '');
     const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
     const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
     const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
@@ -497,14 +497,13 @@ export default function DataPage() {
             </div>
 
             <div className={`${styles.question} ${currentQuestion !== 28 && styles.hidden}`}>
-                <h2>Developed by leading nutrition experts</h2>
+                <h2>Here is 3 leading nutrition experts</h2>
                 <div className={styles.experts}>
                     <div>Andreas Eenfeldt, MD</div>
                     <div>Bret Scher, MD</div>
                     <div>Franziska Spritzler, RD</div>
                 </div>
-                <p>We provide unbiased guidance rooted in evidence-based information, nutritionally-reviewed recipes
-                    that satisfy, and inspiring tools to help you reach your goals in a sustainable way.</p>
+                <p>Read more information by this authors if you want to know more in nutrition.</p>
                 <div className={`${styles.button} ${styles.selected}`}
                      onClick={async () => {
                          if (isLoading) {
@@ -580,10 +579,11 @@ export default function DataPage() {
                          const meals = await new MealsApi().getMealsByParameters({
                              query: 'a',
                              cuisine: userData.foodCuisines.join(','),
-                             diet: '',
+                             diet: userData.foodAvoidProteins
+                                 .some((el) => el === 'Avoid all (vegetarian)') ? 'vegetarian' : '' ,
                              sort: 'random',
                              addRecipeNutrition: true,
-                             intolerances: userData.foodAvoidOthers.join(','),
+                             intolerances: userData.foodAvoidOthers.join(',') + ',' + userData.foodAvoidProteins.join(','),
                              excludeIngredients: 'alcohol' + userData.foodAvoidProteins.join(','),
                              type: userData.foodKinds.join(','),
                              instructionsRequired: true,
@@ -598,7 +598,7 @@ export default function DataPage() {
                                          (userData.foodCookCarb === 'Moderate' ? 50 : 100)
                                  ),
                              maxProtein: userData.foodCookCarb === 'Moderate' ? 50 : 500,
-                             // maxCalories: 800,
+                             maxCalories: Math.ceil(macros.calorie / userData.mealsCount) / 2,
                              number: 100,
                          });
                          console.log('meals response = ', meals);

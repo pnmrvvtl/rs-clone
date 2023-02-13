@@ -56,7 +56,7 @@
   .meal-title {
     width: 250px;
     color: $font-color-sub;
-    span {
+    span:nth-child(2) {
       color: darkred;
     }
     h5 {

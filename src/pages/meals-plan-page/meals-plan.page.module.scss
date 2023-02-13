@@ -55,7 +55,7 @@
 
   .dinner-ideas {
     padding: 0px 50px;
-    background-color: $background-light;
+    background-color: $background-strip;
     width: 100%;
 
     .ideas-cards {
@@ -65,7 +65,7 @@
       justify-content: space-around;
       flex-wrap: wrap;
 
-      & > a > div {
+      & > div {
 
           div:nth-child(1) {
             width: 250px;
@@ -76,5 +76,67 @@
           }
       }
     }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    background-color: $background-strip;
+
+    * {
+      padding: 10px;
+      margin: 5px;
+      list-style: none;
+    }
+
+    li {
+      background-color: $font-color-link;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: $font-color-inverted;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s ease;
+
+      &.disabled {
+        &:hover {
+          cursor: not-allowed;
+        }
+        background-color: lighten($font-color-link, 30%);
+        a {
+          text-decoration: line-through;
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      &.selected {
+        width: 45px;
+        height: 45px;
+        a {
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+        box-shadow: 5px 5px 5px $font-color-main;
+      }
+
+      &.next, &.previous {
+        width: unset;
+        border-radius: 10px;
+      }
+
+    }
+
+    a, a:link, a:active, a:visited, a:hover {
+      color: $font-color-inverted;
+      text-decoration: none;
+    }
+
   }
 }
