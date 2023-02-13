@@ -19,7 +19,6 @@ export default function Meal() {
 
     const { mealsByParametersResponse } = useContext(UserContext);
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
-    console.log(meal);
 
     if (!meal) {
         return <ErrorPage />
@@ -27,7 +26,7 @@ export default function Meal() {
 
     return (
         <div className={styles.container}>
-            {/* <MealPopup /> */}
+            <MealPopup />
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
                     <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />
