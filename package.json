@@ -1,5 +1,14 @@
 {
   "name": "rs-clone",
+  "prettier": {
+    "semi": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 110,
+    "tabWidth": 2,
+    "endOfLine": "auto"
+  },
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -30,6 +39,7 @@
     "postcss": "^8.4.18",
     "postcss-loader": "^7.0.1",
     "postcss-preset-env": "^7.8.2",
+    "prettier": "2.8.4",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
