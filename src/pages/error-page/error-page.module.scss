@@ -1,0 +1,30 @@
+@import "../../scss/constants";
+
+.error {
+  margin: 30px 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title {
+  font-size: 10rem;
+  color: $font-color-sub;
+}
+
+.subtitle {
+  font-size: 3rem;
+  color: $font-color-sub;
+}
+
+.text {
+  font-size: 2rem;
+  color: $font-color-sub;
+}
+
+.error-image {
+
+}
