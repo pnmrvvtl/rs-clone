@@ -16,6 +16,11 @@
   }
 }
 
+.header {
+  background-color: $selected-filter-color;
+  font-size: 2rem;
+}
+
 .about {
   display: flex;
   flex-direction: column;
