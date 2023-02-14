@@ -14,6 +14,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {Link, Outlet} from 'react-router-dom';
 import Footer from '../footer/footer';
 import {UserContext} from "../../context/user-context";
+import styles from '../../pages/main-page/main-page.module.scss'
 
 const pages = [['Data collection' , 'data-collection'], ['Research result', 'research-results'], ['Meals page', 'meals-page']];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -56,22 +57,24 @@ function Navigation({ children, ...props }: Props) {
 
     return (
         <>
-            <AppBar position="static">
-                <Container maxWidth="xl">
+            <AppBar position="sticky" sx={{backgroundColor: '#37664E', color: '#ffff'}}>
+                <Container maxWidth="xl" className={styles.header}>
                     <Toolbar disableGutters>
-                        <WbSunnyIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
+                        {/* <WbSunnyIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/> */}
                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
-                            href="/"
-                            sx={{
+                            href="/"  sx={{
                                 mr: 2,
                                 display: {xs: 'none', md: 'flex'},
-                                fontFamily: 'monospace',
+                                fontFamily: "Ubuntu",
                                 fontWeight: 700,
+                                fontSize: "3rem",
                                 letterSpacing: '.3rem',
-                                color: 'inherit',
+                                color: "white",
+                                "&:hover": { color: "#05AA58" },
+                          
                                 textDecoration: 'none',
                             }}
                         >
@@ -128,10 +131,10 @@ function Navigation({ children, ...props }: Props) {
                                 mr: 2,
                                 display: {xs: 'flex', md: 'none'},
                                 flexGrow: 1,
-                                fontFamily: 'monospace',
+                                fontFamily: "Ubuntu",
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
-                                color: 'inherit',
+                                color: '#ffff',
                                 textDecoration: 'none',
                             }}
                         >
@@ -144,7 +147,7 @@ function Navigation({ children, ...props }: Props) {
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
-                                    <Link key={idx} style={{textDecoration: "none", color: "white"}} to={`/${page[1]}`}>{page[0]}</Link>
+                                    <Link key={idx} style={{textDecoration: "none", color: "white", fontFamily: "Ubuntu", fontSize: "1.1rem"}} to={`/${page[1]}`}>{page[0]}</Link>
                                 </Button>
                             ))}
                         </Box>
