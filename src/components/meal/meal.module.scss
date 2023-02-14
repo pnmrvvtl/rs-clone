@@ -58,6 +58,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px 60px;
+    padding: 0px 35px 0px 0px;
 }
 
 .ingredients {
@@ -68,6 +69,7 @@
     h3 {
         margin-top: 0px;
         margin-bottom: 12px;
+        font-size: 36px;
     }
 
     ul {
@@ -93,10 +95,12 @@
 
 .instructions {
     width: auto;
+    padding-bottom: 35px;
     .instructions-title {
         margin-top: 32px;
         margin-bottom: 12px;
         color: $font-color-link;
+        font-size: 36px;
     }
     .instructions-list {
         padding-left: 2.5em;
@@ -118,18 +122,97 @@
     }
 }
 
-.tip {
-    padding-bottom: 12px;
-    h3 {
-        margin-top: 64px;
-    }
-}
-
 .content-wrapper {
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
 	height: 100%;
+}
+
+
+.composition__other {
+    border-radius: 1em;
+    .composition__nutrients {
+        .composition__title {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 500;
+        }
+
+    }
+}
+
+.composition__blocks {
+    margin-top: 36px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    .composition__block-carbs {
+        display: flex;
+        flex-direction: column;
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: $carbs-color;
+        }
+        .composition__block-percent {
+            font-size: 14px;
+            color: $carbs-color;
+        }
+    }
+    .composition__block-protein {
+        display: flex;
+        flex-direction: column;
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: $carbs-protein;
+        }
+        .composition__block-percent {
+            font-size: 14px;
+            color: $carbs-protein;
+        }
+    }
+    .composition__block-fat {
+        display: flex;
+        flex-direction: column;
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: $carbs-fat;
+        }
+        .composition__block-percent {
+            font-size: 14px;
+            color: $carbs-fat;
+        }
+    }
+
+    .composition__block-name {
+        font-size: 14px;
+    }
+    .composition__block-weight {
+        font-size: 18px;
+    }
+}
+
+.composition__line {
+    margin: 36px 0;
+    .composition__item {
+        display: flex;
+        border-top: solid 1px rgba(240,239,238);
+        padding: 12px 0;
+        .property-persens {
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+        }
+        .name {
+            display: inline-block;
+            width: 70%;
+        }
+    }
 }
 
 @media (max-width: 800px) {
@@ -152,6 +235,19 @@
         }
     }
 
+    .composition__line {
+        .composition__item {
+            .property-persens {
+                width: 50%;
+                .property {
+                    font-weight: 500;
+                }
+            }
+            .name {
+                width: 50%;
+            }
+        }
+    }
 }
 
 @media (max-width: 600px) {
