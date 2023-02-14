@@ -494,9 +494,9 @@
 
     .experts {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       flex-wrap: wrap;
-      width: 50%;
       background-color: $background-super-light;
       border-radius: 30px;
 
@@ -514,6 +514,7 @@
         background-size: contain;
         background-color: transparent;
         font-weight: bolder;
+        margin: 20px;
       }
 
       div:nth-child(1) {

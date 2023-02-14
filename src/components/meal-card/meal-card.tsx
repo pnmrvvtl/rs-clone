@@ -2,17 +2,17 @@ import styles from './meal-card.module.scss';
 import {MealCardInfo} from "../../types/meal-card-info";
 import React from "react";
 
-export default function MealCard(props: { mealCardInfo: MealCardInfo, isColumnLayout: boolean }) {
+export default function MealCard(props: {  onclick?: React.MouseEventHandler<HTMLDivElement>, mealCardInfo: MealCardInfo, isColumnLayout: boolean }) {
 
     const el = props.mealCardInfo;
 
     return (
-        <div className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}>
+        <div onClick={props.onclick} className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}>
             <div className={styles['meal-image']} title={'Meal image:' + el.title}
                  style={{backgroundImage: `url("${el.imageUrl}")`}}>
                 <div>
-                    <p title={'Meal day'}>{el.day}</p>
-                    <p title={'Meal time'}>{el.foodTime}</p>
+                    <span title={'Meal day'}>{el.day}</span>
+                    <span title={'Meal time'}>{el.foodTime}</span>
                 </div>
                 <div>
                     <span title="protein">{el.protein} g</span>

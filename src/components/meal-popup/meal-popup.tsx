@@ -1,34 +1,34 @@
 import styles from './meal.popup.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { UserContext } from "../../context/user-context";
-import { useContext, useEffect } from "react";
-import { useParams } from "react-router";
-import { Nutrient } from "../../types/meals-api-types";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faXmark} from '@fortawesome/free-solid-svg-icons';
+import {useEffect, useState} from "react";
+import {Result} from "../../types/meals-api-types";
 
 
+export default function MealPopup (props: {meal: Result, isVisible: boolean}) {
 
-const MealPopup = () => {
-    const { id } = useParams();
+    const meal = props.meal;
+    const [isVisible, setVisible] = useState(false);
 
     useEffect(() => {
+        setVisible(true);
         window.scrollTo(0, 0);
-    }, [id]);
+    }, [props.meal]);
 
-    const { mealsByParametersResponse } = useContext(UserContext);
-    const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
+    useEffect(() => {
+        setVisible(false);
+        window.scrollTo(0, 0);
+    }, []);
 
-    const { nutrients } = meal.nutrition;
-    console.log(meal);
-    console.log(nutrients);
+    const {nutrients} = meal.nutrition;
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={{display: isVisible ? 'flex' : 'none', height: `${document.body.scrollHeight}px`}}>
             <div className={styles.window}>
                 <div
-                    onClick={closeWindow}
+                    onClick={() => setVisible(false)}
                     className={styles.xmark}>
-                    <FontAwesomeIcon icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark}/>
                 </div>
                 <div className={styles['description']}>
                     <img
@@ -45,7 +45,7 @@ const MealPopup = () => {
                         </div>
                         <p
                             className={styles['description__description-text']}
-                            dangerouslySetInnerHTML={{ __html: `${meal.summary}` }}>
+                            dangerouslySetInnerHTML={{__html: `${meal.summary}`}}>
                         </p>
                     </div>
                 </div>
@@ -138,9 +138,3 @@ const MealPopup = () => {
         </div>
     )
 }
-
-const closeWindow = () => {
-    console.log(1);
-}
-
-export { MealPopup }

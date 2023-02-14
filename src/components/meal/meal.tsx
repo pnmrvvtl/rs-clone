@@ -8,7 +8,7 @@ import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
 // import { CommentBankSharp } from '@mui/icons-material';
 import { ExtendedIngredient, Step } from "../../types/meals-api-types";
-import { MealPopup } from '../meal-popup/meal-popup';
+// import { MealPopup } from '../meal-popup/meal-popup';
 
 export default function Meal() {
     const { id } = useParams();
@@ -26,7 +26,7 @@ export default function Meal() {
 
     return (
         <div className={styles.container}>
-            <MealPopup />
+            {/*<MealPopup />*/}
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
                     <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />

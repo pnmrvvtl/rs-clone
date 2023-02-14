@@ -620,7 +620,7 @@ export default function DataPage() {
             </div>
 
             {isLoading && <div className={styles.loading}>
-                <p>Please wait, we are calculating your fitness data...</p>
+                <p>Please wait, we are calculating your fitness data and meals plan...</p>
                 <span><i></i><i></i></span>
             </div>}
         </div>

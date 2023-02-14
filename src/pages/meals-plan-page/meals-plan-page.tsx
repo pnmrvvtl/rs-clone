@@ -1,16 +1,19 @@
 import styles from './meals-plan.page.module.scss';
 import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from '../../context/user-context';
-import {MealCardInfo} from "../../types/meal-card-info";
 import MealCard from "../../components/meal-card/meal-card";
 import Carousel from 'react-material-ui-carousel'
 import {Link} from "react-router-dom";
 import ErrorPage from "../error-page/error-page";
 import ReactPaginate from 'react-paginate';
+import MealPopup from "../../components/meal-popup/meal-popup";
+import {Result} from "../../types/meals-api-types";
 
 
 export default function MealsPlanPage() {
     const {userData, mealsByParametersResponse} = useContext(UserContext);
+    const [popupMeal, setPopupMeal] = useState<{meal: Result, isVisible: boolean}>({meal: mealsByParametersResponse.results[0], isVisible: false});
+
 
     useEffect(() => {
         //api calls here
@@ -24,7 +27,7 @@ export default function MealsPlanPage() {
         return <ErrorPage/>;
     }
 
-    const itemsPerPage = 10;
+    const itemsPerPage = 12;
     const [itemOffset, setItemOffset] = useState(0);
     const endOffset = itemOffset + itemsPerPage;
     const dinnerIdeas = mealsByParametersResponse.results.slice(daysArray.length * ((userData.mealsCount || 3)), mealsByParametersResponse.results.length);
@@ -38,9 +41,12 @@ export default function MealsPlanPage() {
 
 
     return (
+
         <div className={styles.container}>
+            <MealPopup meal={popupMeal.meal} isVisible={popupMeal.isVisible} />
             <section className={styles['current-meals']}>
                 <h2>Next meals</h2>
+
                 <Carousel
                     indicatorIconButtonProps={{
                         style: {
@@ -121,7 +127,7 @@ export default function MealsPlanPage() {
                 <h2>Dinner ideas</h2>
                 <div className={styles['ideas-cards']}>
                     {currentItems.map((item, i) => (
-                            <MealCard key={i} mealCardInfo={
+                            <MealCard onclick={(ev) => setPopupMeal({meal: item, isVisible: true})} key={i} mealCardInfo={
                                 {
                                     duration: item.cookingMinutes + item.readyInMinutes + item.preparationMinutes,
                                     day: '',
