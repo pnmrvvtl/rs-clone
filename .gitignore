@@ -115,3 +115,5 @@ src/constants/constants.ts
 ./src/api-key.ts
 api-key.ts
 src/api-key.tsx
+
+.env
