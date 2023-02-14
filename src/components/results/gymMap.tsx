@@ -61,7 +61,7 @@ export default function GymMap() {
       <h3 className={styles["map-title"]}>
         Get more active and burn more calories.
       </h3>
-      <h5>Find the nearest gym and just do it!</h5>
+      <h5 className={styles["map-subtitle"]}>Find the nearest gym and just do it!</h5>
       <Map center={center} coords={coords} />
     </div>
   );
