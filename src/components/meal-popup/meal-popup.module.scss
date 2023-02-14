@@ -3,8 +3,6 @@
 .container {
     position: absolute;
     display: flex;
-    width: 100%;
-    box-sizing: content-box;
     top: 0;
     background: rgba(0,0,0,.7);
     z-index: 100;
@@ -16,7 +14,7 @@
     position: relative;
     padding: 48px;
     margin: 32px 60px;
-    max-width: 960px;
+    max-width: 80%;
     background-color: rgb(255, 255, 255);
     border-radius: 12px;
 }
