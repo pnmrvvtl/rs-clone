@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
-import { ExtendedIngredient, Step } from "../../types/meals-api-types";
+import { ResultMeal, ExtendedIngredient, Step, Nutrient } from "../../types/meals-api-types";
 // import { CommentBankSharp } from '@mui/icons-material';
 
 export default function Meal() {
@@ -21,7 +21,6 @@ export default function Meal() {
     const meal = mealsByParametersResponse.results.filter((el) => el.id === +id!)[0];
 
     const { nutrients } = meal.nutrition;
-    console.log(meal);
     if (!meal) {
         return <ErrorPage />
     }
@@ -115,7 +114,7 @@ const Instructions = (props: { steps: Step[] }) => {
     )
 }
 
-const Nutritional = (props: { nutrients: any, meal: any }) => {
+const Nutritional = (props: { nutrients: Nutrient[], meal: ResultMeal }) => {
     return (
         <div className={styles['composition__nutrients']}>
             <h3 className={styles['composition__title']}>
@@ -126,7 +125,7 @@ const Nutritional = (props: { nutrients: any, meal: any }) => {
                     <div className={styles['composition__block-line']}></div>
                     <span className={styles['composition__block-name']}>NET CARBS</span>
                     <span className={styles['composition__block-weight']}>
-                        {props.nutrients.filter((el: any) => el.name === "Net Carbohydrates")[0].amount}g
+                        {props.nutrients.filter((el) => el.name === "Net Carbohydrates")[0].amount}g
                     </span>
                     <span className={styles['composition__block-percent']}>
                         {props.meal.nutrition.caloricBreakdown.percentCarbs}%
@@ -136,7 +135,7 @@ const Nutritional = (props: { nutrients: any, meal: any }) => {
                     <div className={styles['composition__block-line']}></div>
                     <span className={styles['composition__block-name']}>PROTEIN</span>
                     <span className={styles['composition__block-weight']}>
-                        {props.nutrients.filter((el: any) => el.name === "Protein")[0].amount}g
+                        {props.nutrients.filter((el) => el.name === "Protein")[0].amount}g
                     </span>
                     <span className={styles['composition__block-percent']}>
                         {props.meal.nutrition.caloricBreakdown.percentProtein}%
@@ -146,7 +145,7 @@ const Nutritional = (props: { nutrients: any, meal: any }) => {
                     <div className={styles['composition__block-line']}></div>
                     <span className={styles['composition__block-name']}>FAT</span>
                     <span className={styles['composition__block-weight']}>
-                        {props.nutrients.filter((el: any) => el.name === "Fat")[0].amount}g
+                        {props.nutrients.filter((el) => el.name === "Fat")[0].amount}g
                     </span>
                     <span className={styles['composition__block-percent']}>
                         {props.meal.nutrition.caloricBreakdown.percentFat}%
@@ -156,7 +155,7 @@ const Nutritional = (props: { nutrients: any, meal: any }) => {
 
             <div className={styles['composition__line']}>
                 {
-                    props.nutrients.map((el: any) =>
+                    props.nutrients.map((el) =>
                         <div className={styles['composition__item']}>
                             <span className={styles['name']}>{el.name}</span>
                             <div className={styles['property-persens']}>
