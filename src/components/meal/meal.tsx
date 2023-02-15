@@ -82,7 +82,7 @@ const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) =
     return (
         <ul className={styles['ingredients-list']}>
             {
-                props.extendedIngredients.map((el, i) => (
+                props.extendedIngredients.map((el) => (
                     <li key={el.name} className={styles['ingredient']}>
                         <span>{el.amount} {el.unit}</span>
                         <div className="image-wrapper">
