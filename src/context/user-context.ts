@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { UserData } from '../types/user-data';
-import { MealsByParametersResponse } from '../types/meals-api-types';
+import { MealsByParametersResponse, ResultMeal } from '../types/meals-api-types';
 import { BMI, Calory, Macros, IdealWeight } from '../types/fitness-api-types';
 
 interface IUserContext {
@@ -15,8 +15,8 @@ interface IUserContext {
     calories: Calory;
     idealWeight: IdealWeight;
   }>;
-  favouritesMeals: number[];
-  setFavouritesMeals: React.Dispatch<number[]>;
+  favouritesMeals: ResultMeal[];
+  setFavouritesMeals: React.Dispatch<ResultMeal[]>;
 }
 
 export const UserContext = createContext<IUserContext>({

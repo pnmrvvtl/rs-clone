@@ -216,7 +216,7 @@ export default function MealsPlanPage() {
                           likes: meal.likes + meal.aggregateLikes,
                         }}
                         isColumnLayout={true}
-                        isFavourite={favouritesMeals.some((favEl) => favEl === meal.id)}
+                        isFavourite={favouritesMeals.some((favEl) => favEl.id === meal.id)}
                       />
                     );
                   })}
@@ -270,7 +270,7 @@ export default function MealsPlanPage() {
                 likes: item.likes + item.aggregateLikes,
               }}
               isColumnLayout={false}
-              isFavourite={favouritesMeals.some((favEl) => favEl === item.id)}
+              isFavourite={favouritesMeals.some((favEl) => favEl.id === item.id)}
             />
           ))}
         </div>

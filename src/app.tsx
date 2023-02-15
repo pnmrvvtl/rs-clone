@@ -11,7 +11,7 @@ import MealsPlanPage from './pages/meals-plan-page/meals-plan-page';
 import FavoritesPage from './pages/favorites-page/favorites-page';
 
 import { UserData } from './types/user-data';
-import { MealsByParametersResponse } from './types/meals-api-types';
+import { MealsByParametersResponse, ResultMeal } from './types/meals-api-types';
 import { BMI, Calory, Macros, IdealWeight } from './types/fitness-api-types';
 
 import { UserContext } from './context/user-context';
@@ -86,7 +86,7 @@ export const App = () => {
           totalResults: 0,
         },
   );
-  const [favouritesMeals, setFavouritesMeals] = useState<number[]>(
+  const [favouritesMeals, setFavouritesMeals] = useState<ResultMeal[]>(
     localStorageFavourites ? JSON.parse(localStorageFavourites) : [],
   );
   const [fitnessApiResponse, setFitnessApiResponse] = useState<{

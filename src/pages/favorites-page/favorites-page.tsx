@@ -5,16 +5,13 @@ import { UserContext } from '../../context/user-context';
 import MealCard from '../../components/meal-card/meal-card';
 
 const FavoritesPage = () => {
-  const { favouritesMeals, mealsByParametersResponse } = useContext(UserContext);
-  const meals = favouritesMeals.map(
-    (favMeal) => mealsByParametersResponse.results.filter((el) => el.id === favMeal)[0],
-  );
+  const { favouritesMeals } = useContext(UserContext);
 
   return (
     <div className={styles.container}>
       <h1>Here is your favourite meals</h1>
       <div className={styles.meals}>
-        {meals.map((meal, idx) => {
+        {favouritesMeals.map((meal, idx) => {
           return (
             <MealCard
               key={idx}

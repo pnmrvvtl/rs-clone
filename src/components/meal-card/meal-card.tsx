@@ -19,18 +19,27 @@ export default function MealCard(props: MealCardProps) {
     props.mealCardInfo;
 
   const navigate = useNavigate();
-  const { favouritesMeals, setFavouritesMeals } = useContext(UserContext);
+  const { favouritesMeals, setFavouritesMeals, mealsByParametersResponse } = useContext(UserContext);
   const [isInFavourites, setIsInFavourites] = useState(props.isFavourite);
 
   const handleFavouriteClick = () => {
-    if (favouritesMeals.some((el) => el === id)) {
-      setFavouritesMeals([...favouritesMeals.filter((inEl) => inEl !== id)]);
+    if (favouritesMeals.some((el) => el.id === id)) {
+      setFavouritesMeals([...favouritesMeals.filter((inEl) => inEl.id !== id)]);
       setIsInFavourites(false);
-      localStorage.setItem('favourites', JSON.stringify(favouritesMeals.filter((inEl) => inEl !== id)));
+      localStorage.setItem('favourites', JSON.stringify(favouritesMeals.filter((inEl) => inEl.id !== id)));
     } else {
-      setFavouritesMeals([...favouritesMeals, id]);
+      setFavouritesMeals([
+        ...favouritesMeals,
+        mealsByParametersResponse.results.filter((el) => el.id === id)[0],
+      ]);
       setIsInFavourites(true);
-      localStorage.setItem('favourites', JSON.stringify([...favouritesMeals, id]));
+      localStorage.setItem(
+        'favourites',
+        JSON.stringify([
+          ...favouritesMeals,
+          mealsByParametersResponse.results.filter((el) => el.id === id)[0],
+        ]),
+      );
     }
   };
 
