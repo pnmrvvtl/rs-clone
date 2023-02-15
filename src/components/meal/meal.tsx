@@ -8,7 +8,6 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from "../../context/user-context";
 import ErrorPage from "../../pages/error-page/error-page";
 import { ResultMeal, ExtendedIngredient, Step, Nutrient } from "../../types/meals-api-types";
-// import { CommentBankSharp } from '@mui/icons-material';
 
 export default function Meal() {
     const { id } = useParams();
@@ -26,25 +25,26 @@ export default function Meal() {
     }
 
     return (
-        <div className={styles.container}>
+        <main className={styles.container}>
             <div className={styles['description-wrapper']}>
                 <div className={styles['description__content-wrapper']}>
                     <DescriptionBox title={meal.title} duration={meal.readyInMinutes} summary={meal.summary} />
                 </div>
                 <img
                     className={styles['description__meal-img']}
-                    src={`${meal.image}`}>
+                    src={`${meal.image}`}
+                    alt="dish">
                 </img>
             </div>
 
             <div className={styles['content-wrapper']}>
                 <div className={styles.content}>
-                    <div className={styles['ingredients']}>
+                    <section className={styles['ingredients']}>
                         <h3>Ingredients</h3>
                         <IngredientsList
                             extendedIngredients={meal.extendedIngredients}
                         />
-                    </div>
+                    </section>
 
                     <div className={styles['main-content']}>
                         <div className={styles['composition__other']}>
@@ -55,7 +55,7 @@ export default function Meal() {
                 </div>
             </div>
             <div className={styles['for-margin-bottom']}></div>
-        </div>
+        </main>
     )
 }
 
@@ -63,7 +63,7 @@ export default function Meal() {
 const DescriptionBox = (props: { title: string, duration: number, summary: string }) => {
     return (
         <div className={styles['summary-wrapper']}>
-            <div className={styles['summary']}>
+            <section className={styles['summary']}>
                 <h1 className={styles['summary__title']}>{props.title}</h1>
                 <p dangerouslySetInnerHTML={{ __html: `${props.summary}` }}></p>
                 <aside className={styles['summary__time-info']}>
@@ -73,7 +73,7 @@ const DescriptionBox = (props: { title: string, duration: number, summary: strin
                     <span className={styles['summary__time-qty']}>{props.duration}m</span>
                     <span className={styles['summary__skill-level']}>Hard</span>
                 </aside>
-            </div>
+            </section>
         </div>
     )
 }
@@ -101,7 +101,7 @@ const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) =
 
 const Instructions = (props: { steps: Step[] }) => {
     return (
-        <div className={styles['instructions']}>
+        <section className={styles['instructions']}>
             <h3 className={styles['instructions-title']}>Instructions</h3>
             <ul className={styles['instructions-list']}>
                 {
@@ -110,13 +110,13 @@ const Instructions = (props: { steps: Step[] }) => {
                     ))
                 }
             </ul>
-        </div>
+        </section>
     )
 }
 
 const Nutritional = (props: { nutrients: Nutrient[], meal: ResultMeal }) => {
     return (
-        <div className={styles['composition__nutrients']}>
+        <section className={styles['composition__nutrients']}>
             <h3 className={styles['composition__title']}>
                 Nutritional Information
             </h3>
@@ -168,6 +168,6 @@ const Nutritional = (props: { nutrients: Nutrient[], meal: ResultMeal }) => {
                     )
                 }
             </div>
-        </div>
+        </section>
     )
 }
