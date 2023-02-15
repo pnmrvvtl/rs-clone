@@ -62,7 +62,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px 60px;
-    padding: 0px 35px 0px 0px;
+    padding: 0px 35px;
 }
 
 .ingredients {
@@ -109,18 +109,6 @@
             }
         }
     }
-
-    // span {
-    //     position: absolute;
-    //     margin-left: -2.5em;
-    //     width: 32px;
-    //     height: 32px;
-    //     line-height: 32px;
-    //     background-color: $font-color-main;
-    //     border-radius: 59%;
-    //     text-align: center;
-    //     color: $font-color-inverted;
-    // }
 }
 
 .instructions {
@@ -274,7 +262,7 @@
 
     .description__meal-img {
         margin: 0 auto;
-        width: 320px;
+        width: 280px;
     }
 
     .instructions {
@@ -314,6 +302,7 @@
 
     .content {
         display: block;
+        padding: 0 20px;
 
         .ingredients {
             padding: 25px 20px;
