@@ -1,0 +1,13 @@
+enum Sorting {
+  DEFAULT = 0,
+  CALORIES_ASC,
+  CALORIES_DESC,
+  PROTEINS_ASC,
+  PROTEINS_DESC,
+  CARBS_ASC,
+  CARBS_DESC,
+  FATS_ASC,
+  FATS_DESC,
+}
+
+export default Sorting;

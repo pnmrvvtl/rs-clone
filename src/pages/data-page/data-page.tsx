@@ -1,19 +1,23 @@
-import styles from './data-page.module.scss';
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import MealsApi from '../../api/meals-api';
+import FitnessApi from '../../api/fitness-api';
+
+import { UserData } from '../../types/user-data';
+import { UserContext } from '../../context/user-context';
+
+import { calculateGoal } from '../../helpers/calculateGoal';
+
 import ContinueButton from '../../components/data/continue-button';
 import CheckableList from '../../components/data/checkable-list';
 import RadioList from '../../components/data/radio-list';
 import RadioSubList from '../../components/data/radio-sub-list';
-import { UserData } from '../../types/user-data';
-import { UserContext } from '../../context/user-context';
-import { useNavigate } from 'react-router-dom';
-import MealsApi from '../../api/meals-api';
-import FitnessApi from '../../api/fitness-api';
-import { calculateGoal } from '../../helpers/calculateGoal';
+
+import styles from './data-page.module.scss';
 
 export default function DataPage() {
-  const { setUserData, setMealsByParametersResponse, setFitnessApiResponse } =
-    useContext(UserContext);
+  const { setUserData, setMealsByParametersResponse, setFitnessApiResponse } = useContext(UserContext);
   const navigate = useNavigate();
 
   const localDataUser = localStorage.getItem('user-data');
@@ -22,21 +26,13 @@ export default function DataPage() {
   const [selectedSex, setSelectedSex] = useState(initialUser?.selectedSex || 'male');
   const [currentQuestion, setCurrentQuestion] = useState(28);
   const [currentGoals, setCurrentGoals] = useState<string[]>(initialUser?.currentGoals || []);
-  const [healthConditions, setHealthConditions] = useState<string[]>(
-    initialUser?.healthConditions || [],
-  );
-  const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(
-    initialUser?.foodAtTheMoment || [],
-  );
+  const [healthConditions, setHealthConditions] = useState<string[]>(initialUser?.healthConditions || []);
+  const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(initialUser?.foodAtTheMoment || []);
   const [foodScenario, setFoodScenario] = useState<string[]>(initialUser?.foodScenario || []);
   const [foodCuisines, setFoodCuisines] = useState<string[]>(initialUser?.foodCuisines || []);
   const [foodKinds, setFoodKinds] = useState<string[]>(initialUser?.foodKinds || []);
-  const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>(
-    initialUser?.foodAvoidProteins || [],
-  );
-  const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>(
-    initialUser?.foodAvoidOthers || [],
-  );
+  const [foodAvoidProteins, setFoodAvoidProteins] = useState<string[]>(initialUser?.foodAvoidProteins || []);
+  const [foodAvoidOthers, setFoodAvoidOthers] = useState<string[]>(initialUser?.foodAvoidOthers || []);
   const [foodBudget, setFoodBudget] = useState<string>(initialUser?.foodBudget || '');
   const [currentCmHeight, setCmHeight] = useState(initialUser?.cmHeight || '180');
   const [currentAge, setAge] = useState(initialUser?.currentAge || '20');
@@ -118,14 +114,7 @@ export default function DataPage() {
     'Options were too limited',
     "I haven't dieted/I'm not here to lose weight",
   ];
-  const foodCuisinesArr = [
-    'Indian',
-    'Chinese',
-    'Mexican',
-    'Italian',
-    'Middle Eastern',
-    'Mediterranean',
-  ];
+  const foodCuisinesArr = ['Indian', 'Chinese', 'Mexican', 'Italian', 'Middle Eastern', 'Mediterranean'];
   const foodKindsArr = ['Main course', 'Side dish', 'Dessert', 'Salad', 'Breakfast', 'Soup'];
   const foodAvoidProteinsArr = [
     'Beef',
@@ -212,8 +201,8 @@ export default function DataPage() {
           currentQuestion={currentQuestion}
         />
         <p>
-          Your sex hormone levels, both currently and what they were during your adolescence, affect
-          your protein and energy needs.
+          Your sex hormone levels, both currently and what they were during your adolescence, affect your
+          protein and energy needs.
         </p>
       </div>
 
@@ -377,17 +366,13 @@ export default function DataPage() {
 
         <div className={styles['height-system']}>
           <div
-            className={`${styles['height-system-ft']} ${
-              weightSystem === 'pounds' && styles.selected
-            }`}
+            className={`${styles['height-system-ft']} ${weightSystem === 'pounds' && styles.selected}`}
             onClick={() => setWeightSystem('pounds')}
           >
             pounds
           </div>
           <div
-            className={`${styles['height-system-cm']} ${
-              weightSystem === 'kilos' && styles.selected
-            }`}
+            className={`${styles['height-system-cm']} ${weightSystem === 'kilos' && styles.selected}`}
             onClick={() => setWeightSystem('kilos')}
           >
             kilos
@@ -401,8 +386,8 @@ export default function DataPage() {
 
       <div className={`${styles.question} ${currentQuestion !== 5 && styles.hidden}`}>
         <h2>
-          Diet Doctor creates sustainable results by helping you eat better, without restrictive
-          dieting or counting calories.
+          Diet Doctor creates sustainable results by helping you eat better, without restrictive dieting or
+          counting calories.
         </h2>
         <div className={styles['data-graph']}></div>
         <ContinueButton
@@ -434,8 +419,8 @@ export default function DataPage() {
             Jane <b>lost 278 lbs</b>
           </h4>
           <p>
-            “I no longer think of food as a comfort or an escape. I think of it as precious fuel for
-            my body and mind.”
+            “I no longer think of food as a comfort or an escape. I think of it as precious fuel for my body
+            and mind.”
           </p>
         </div>
         <ContinueButton
@@ -478,13 +463,12 @@ export default function DataPage() {
       <div className={`${styles.question} ${currentQuestion !== 10 && styles.hidden}`}>
         <h2>We help people with metabolic health issues</h2>
         <p>
-          We’re experts at helping people with type 1 or type 2 diabetes, or who need assistance
-          lowering blood pressure.
+          We’re experts at helping people with type 1 or type 2 diabetes, or who need assistance lowering
+          blood pressure.
         </p>
         <p>
-          Our approach involves reducing carbohydrates which can cause complications when taking
-          certain medications. Therefore, we recommended checking in with a healthcare provider
-          first.
+          Our approach involves reducing carbohydrates which can cause complications when taking certain
+          medications. Therefore, we recommended checking in with a healthcare provider first.
         </p>
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
@@ -630,8 +614,8 @@ export default function DataPage() {
         <h2>Our approach helps you feel fuller for longer</h2>
         <div className={styles['pizza-img']}></div>
         <p>
-          You’ll enjoy delicious and satisfying food — so it doesn’t feel like a diet and is easier
-          to stick to.
+          You’ll enjoy delicious and satisfying food — so it doesn’t feel like a diet and is easier to stick
+          to.
         </p>
         <p>Our programs and recipes are developed by our registered dietitians and medical team.</p>
         <p>Establish healthy habits and learn what foods are best for you.</p>
@@ -675,9 +659,7 @@ export default function DataPage() {
         <h2>There is no one-size-fits-all diet. That’s why 90% of diets fail.</h2>
         <div className={`${styles['data-graph']} ${styles['data-graph2']}`}></div>
         <p>Our unique algorithm recommends recipes tailored to your preferences — and goals.</p>
-        <p>
-          Discover healthier options and foods you’ll love, while creating a sustainable lifestyle.
-        </p>
+        <p>Discover healthier options and foods you’ll love, while creating a sustainable lifestyle.</p>
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => setCurrentQuestion(currentQuestion + 1)}
@@ -770,8 +752,7 @@ export default function DataPage() {
                 heightSystem === 'cm'
                   ? +currentCmHeight
                   : +currentFtHeight * CM_IN_FOOT + +currentInHeight * CM_IN_INCH,
-              currentKgWeight:
-                weightSystem === 'kilos' ? +currentKgWeight : +currentLbsWeight * KG_IN_LBS,
+              currentKgWeight: weightSystem === 'kilos' ? +currentKgWeight : +currentLbsWeight * KG_IN_LBS,
               goalKgWeight: weightSystem === 'kilos' ? +goalKgWeight : +goalLbsWeight * KG_IN_LBS,
               selectedSex,
               currentGoals,
@@ -840,19 +821,14 @@ export default function DataPage() {
                 : '',
               sort: 'random',
               addRecipeNutrition: true,
-              intolerances:
-                userData.foodAvoidOthers.join(',') + ',' + userData.foodAvoidProteins.join(','),
+              intolerances: userData.foodAvoidOthers.join(',') + ',' + userData.foodAvoidProteins.join(','),
               excludeIngredients: 'alcohol' + userData.foodAvoidProteins.join(','),
               type: userData.foodKinds.join(','),
               instructionsRequired: true,
               fillIngredients: true,
               addRecipeInformation: true,
               maxReadyTime:
-                userData.foodCookTime === 'Minimal'
-                  ? 15
-                  : userData.foodCookTime === 'Average'
-                  ? 30
-                  : 100,
+                userData.foodCookTime === 'Minimal' ? 15 : userData.foodCookTime === 'Average' ? 30 : 100,
               ignorePantry: true,
               maxCarbs:
                 userData.foodCookCarb === 'Keto'
@@ -873,6 +849,7 @@ export default function DataPage() {
               localStorage.setItem('bmi-data', JSON.stringify(bmi));
               localStorage.setItem('calories-data', JSON.stringify(calories));
               localStorage.setItem('macros-data', JSON.stringify(macros));
+              localStorage.setItem('favourites', '');
             }
             setFitnessApiResponse({ bmi, calories, macros, idealWeight });
             setMealsByParametersResponse(meals);
