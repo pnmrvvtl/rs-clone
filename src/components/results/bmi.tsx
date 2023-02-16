@@ -15,7 +15,7 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
   const averageWeight = Math.ceil(sumValues / weightResponseValues.length)
 
   const goalResponse = calories.goals
-  const goalProgrames: Record<string, string> = {
+  const goalPrograms: Record<string, string> = {
     'extremelose': 'Extreme weight loss',
     'extremegain': 'Extreme weight gain',
     'weightlose': 'Weight loss',
@@ -24,8 +24,8 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
     'mildgain': 'Mild weight gain'
   }
 
-  const goal = goalProgrames[`${goalData.program}${goalData.goal}`] || 'mildlose';
-  const calory = goalResponse[goal as keyof CaloryGoals] as CaloryWeight || {calory: 1500};
+  const goal = goalPrograms[`${goalData.program}${goalData.goal}`] || 'weightlose';
+  const calory = goalResponse[goal as keyof CaloryGoals || 'Weight loss'] as CaloryWeight || {calory: 1800};
 
   return (
     <section className={styles["bmi-results"]}>
@@ -38,12 +38,12 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
       <div className={styles.title}>Your goal:
         <span className={styles.value}> {userData.goalKgWeight} kg</span>
       </div>
-      <div className={styles.title}>Food  program:
-        <span className={styles.value}> {`${goalData.program} ${goalData.goal}`}</span>
+      <div className={styles.title}>Food program:
+        <span className={styles.value}> {`${goalData.program || ''} ${goalData.goal || 'maintain weight'}`}</span>
       </div>
-      <p className={styles.text}>{`You will achieve your goal for ${goalData.duration} weeks`}</p>
+      <p className={styles.text}>{`You will achieve your goal for ${goalData.duration || 12 } weeks`}</p>
       <div className={styles.title}>Daily caloric:
-        <span className={styles.value}> {Math.ceil(calory.calory)}</span>
+        <span className={styles.value}> {Math.ceil(calory.calory || macros.calorie)}</span>
       </div>
       <div className={styles.title}>Ideal weight:
         <span className={styles.value}> {averageWeight} kg <span className={styles.recommended}>(recommended)</span></span>
