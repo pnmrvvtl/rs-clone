@@ -21,9 +21,9 @@ import {
   setDoc,
   writeBatch,
 } from 'firebase/firestore';
-import { useContext } from 'react';
-import { UserContext } from '../context/user-context';
 import { ResultMeal } from '../types/meals-api-types';
+import { UserData } from '../types/user-data';
+import { FitnessApiCollection } from '../types/fitness-api-types';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -151,47 +151,106 @@ export const getCurrentUser = (): Promise<User | null> => {
   });
 };
 
-export async function setMealToFireStore() {
-  const { mealsByParametersResponse, userId } = useContext(UserContext);
-
+async function setDataToFireStore(
+  dataTitle: string,
+  userId: string,
+  mealsByParametersResponse: ResultMeal[],
+  favouritesMeals: ResultMeal[],
+) {
   try {
-    const str = JSON.stringify(mealsByParametersResponse);
+    const str =
+      dataTitle === 'meals' ? JSON.stringify(mealsByParametersResponse) : JSON.stringify(favouritesMeals);
     const strArray = str.match(/.{1,500000}/g) as Array<string>;
     await addCollectionAndDocument(userId, [
       {
-        title: `mealsarrlen`,
+        title: `${dataTitle}arrlen`,
         value: strArray.length.toString(),
       },
     ]);
     for (let i = 0; i < strArray.length; i++) {
       await addCollectionAndDocument(userId, [
         {
-          title: `meals${i}`,
+          title: `${dataTitle}${i}`,
           value: strArray[i],
         },
       ]);
     }
   } catch (e) {
-    alert((e as Error).message);
+    console.log((e as Error).message);
   }
 }
 
-export async function getMealFromFireStore() {
-  const { mealsByParametersResponse, userId } = useContext(UserContext);
-
+async function getDataFromFireStore(dataTitle: string, userId: string) {
   try {
-    console.log('mealByParamerResponse = ', mealsByParametersResponse);
     const results = await getCollectionAndDocuments(userId);
-    const len = +results.filter((el) => el.title === 'mealsarrlen')[0].value;
+    const len = +results.filter((el) => el.title === `${dataTitle}arrlen`)[0].value;
     let str = '';
     for (let i = 0; i < len; i++) {
-      const part = results.filter((el) => el.title === `meals${i}`)[0].value;
+      const part = results.filter((el) => el.title === `${dataTitle}${i}`)[0].value;
       str += part;
     }
-    console.log(str);
     const resultObject = JSON.parse(str) as ResultMeal[];
-    console.log(resultObject);
+    return resultObject;
   } catch (e) {
-    alert((e as Error).message);
+    console.log((e as Error).message);
   }
 }
+
+const getSmallDataFromFirestore = async (dataTitle: string, userId: string) => {
+  try {
+    const results = await getCollectionAndDocuments(userId);
+    const userDataString = results.filter((el) => el.title === `${dataTitle}`)[0].value;
+    const resultObject = JSON.parse(userDataString);
+    if (dataTitle === 'user-data') {
+      return resultObject as UserData;
+    } else {
+      return resultObject as FitnessApiCollection;
+    }
+  } catch (e) {
+    console.log((e as Error).message);
+  }
+};
+const setSmallDataToFirestore = async (
+  dataTitle: string,
+  userId: string,
+  userData: UserData,
+  fitnessApiResponse: FitnessApiCollection,
+) => {
+  try {
+    await addCollectionAndDocument(userId, [
+      {
+        title: `${dataTitle}`,
+        value: dataTitle === 'user-data' ? JSON.stringify(userData) : JSON.stringify(fitnessApiResponse),
+      },
+    ]);
+  } catch (e) {
+    console.log((e as Error).message);
+  }
+};
+
+export const getFavouritesFromFirestore = async (userId: string) =>
+  await getDataFromFireStore('favourite', userId);
+export const getMealsFromFirestore = async (userId: string) => await getDataFromFireStore('meals', userId);
+export const setMealsToFirestore = async (userId: string, allMeals: ResultMeal[], favMeals: ResultMeal[]) =>
+  await setDataToFireStore('meals', userId, allMeals, favMeals);
+export const setFavouriteToFirestore = async (
+  userId: string,
+  allMeals: ResultMeal[],
+  favMeals: ResultMeal[],
+) => await setDataToFireStore('favourite', userId, allMeals, favMeals);
+
+export const setFitnessDataToFirestore = async (
+  userId: string,
+  userData: UserData,
+  fitnessData: FitnessApiCollection,
+) => await setSmallDataToFirestore('fitness-data', userId, userData, fitnessData);
+export const setUserDataToFirestore = async (
+  userId: string,
+  userData: UserData,
+  fitnessData: FitnessApiCollection,
+) => await setSmallDataToFirestore('user-data', userId, userData, fitnessData);
+export const getUserDataFromFirestore = async (userId: string) =>
+  await getSmallDataFromFirestore('user-data', userId);
+export const getFitnessDataFromFirestore = async (userId: string) => await getSmallDataFromFirestore('fitness-data', userId);
+
+

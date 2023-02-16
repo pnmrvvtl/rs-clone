@@ -10,16 +10,19 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import styles from './sign-in-up.module.scss';
 import {
-  addCollectionAndDocument,
   createUserAuthWithEmailAndPassword,
-  getCollectionAndDocuments,
+  getFavouritesFromFirestore,
+  getFitnessDataFromFirestore,
+  getMealsFromFirestore,
+  getUserDataFromFirestore,
+  setFavouriteToFirestore,
+  setFitnessDataToFirestore,
+  setMealsToFirestore,
+  setUserDataToFirestore,
   signInUserAuthWithEmailAndPassword,
   signInWithGooglePopup,
 } from '../../helpers/firebase';
 import { UserContext } from '../../context/user-context';
-import firebase from 'firebase/compat';
-import onLog = firebase.onLog;
-import { ResultMeal } from '../../types/meals-api-types';
 
 export default function SignInUpPage() {
   const [signInEmail, setSignInEmail] = useState('');
@@ -29,19 +32,32 @@ export default function SignInUpPage() {
   const [registrationPassword, setRegistrationPassword] = useState('');
   const [repeatRegistrationPassword, setRepeatRegistrationPassword] = useState('');
 
-  const { mealsByParametersResponse, favouritesMeals, userData, fitnessApiResponse } =
+  const { setUserId, userId, userData, mealsByParametersResponse, favouritesMeals, fitnessApiResponse } =
     useContext(UserContext);
 
   const handleSignInClick = async () => {
     try {
       const userCredentials = await signInUserAuthWithEmailAndPassword(signInEmail, signInPassword);
+      console.log(userCredentials);
+      if (userCredentials) {
+        setUserId(userCredentials.user.uid);
+        await setMealsToFirestore(userCredentials.user.uid, mealsByParametersResponse, favouritesMeals);
+        await setFavouriteToFirestore(userCredentials.user.uid, mealsByParametersResponse, favouritesMeals);
+        await setFitnessDataToFirestore(userCredentials.user.uid, userData, fitnessApiResponse);
+        await setUserDataToFirestore(userCredentials.user.uid, userData, fitnessApiResponse);
+      }
     } catch (e) {
       alert((e as Error).message);
     }
   };
   const handleSignInWithGoogleClick = async () => {
     try {
-      const userCredentials = await signInWithGooglePopup();
+      console.log(userId);
+      console.log(await getFavouritesFromFirestore(userId));
+      console.log(await getMealsFromFirestore(userId));
+      console.log(await getFitnessDataFromFirestore(userId));
+      console.log(await getUserDataFromFirestore(userId));
+      //const userCredentials = await signInWithGooglePopup();
     } catch (e) {
       alert((e as Error).message);
     }
