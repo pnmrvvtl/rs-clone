@@ -46,7 +46,7 @@ export default function DataPage() {
   const [weightSystem, setWeightSystem] = useState('kilos');
   const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
   const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-  const [weightProgramm, setWeightProgramm] = useState(initialUser.weightProgramm || '');
+  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '');
   const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
   const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
   const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
@@ -845,14 +845,14 @@ export default function DataPage() {
             console.log('meals response = ', meals);
             if (userData && meals && bmi && calories && macros) {
               localStorage.setItem('user-data', JSON.stringify(userData));
-              localStorage.setItem('meals-data', JSON.stringify(meals));
+              localStorage.setItem('meals-data', JSON.stringify(meals.results));
               localStorage.setItem('bmi-data', JSON.stringify(bmi));
               localStorage.setItem('calories-data', JSON.stringify(calories));
               localStorage.setItem('macros-data', JSON.stringify(macros));
               localStorage.setItem('favourites', '');
             }
             setFitnessApiResponse({ bmi, calories, macros, idealWeight });
-            setMealsByParametersResponse(meals);
+            setMealsByParametersResponse(meals.results);
             setIsLoading(false);
             setCurrentQuestion(1);
             navigate('/research-results');

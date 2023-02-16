@@ -11,10 +11,11 @@ import MealsPlanPage from './pages/meals-plan-page/meals-plan-page';
 import FavoritesPage from './pages/favorites-page/favorites-page';
 
 import { UserData } from './types/user-data';
-import { MealsByParametersResponse, ResultMeal } from './types/meals-api-types';
+import { ResultMeal } from './types/meals-api-types';
 import { BMI, Calory, Macros, IdealWeight } from './types/fitness-api-types';
 
 import { UserContext } from './context/user-context';
+import SignInUpPage from './pages/sign-in-up-page/sign-in-up-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="research-results" element={<ResultsPage />} />
       <Route path="meals-page" element={<MealsPlanPage />} />
       <Route path="favorites" element={<FavoritesPage />} />
+      <Route path="auth" element={<SignInUpPage />} />
     </Route>,
   ),
 );
@@ -45,6 +47,7 @@ export const App = () => {
   const localStorageMacros = localStorage.getItem('macros-data');
   const localStorageWeight = localStorage.getItem('weight-data');
   const localStorageFavourites = localStorage.getItem('favourites');
+  const localStorageUserId = localStorage.getItem('user-id');
 
   const [userData, setUserData] = useState<UserData>(
     localStorageUserData
@@ -76,16 +79,10 @@ export const App = () => {
         },
   );
 
-  const [mealsByParametersResponse, setMealsByParametersResponse] = useState<MealsByParametersResponse>(
-    localStorageMeals
-      ? JSON.parse(localStorageMeals)
-      : {
-          number: 0,
-          offset: 0,
-          results: [],
-          totalResults: 0,
-        },
+  const [mealsByParametersResponse, setMealsByParametersResponse] = useState<ResultMeal[]>(
+    localStorageMeals ? JSON.parse(localStorageMeals) : [],
   );
+  const [userId, setUserId] = useState(localStorageUserId || '');
   const [favouritesMeals, setFavouritesMeals] = useState<ResultMeal[]>(
     localStorageFavourites ? JSON.parse(localStorageFavourites) : [],
   );
@@ -183,6 +180,8 @@ export const App = () => {
             setFitnessApiResponse,
             favouritesMeals,
             setFavouritesMeals,
+            userId,
+            setUserId,
           }}
         >
           <RouterProvider router={router} />

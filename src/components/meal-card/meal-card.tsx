@@ -28,17 +28,11 @@ export default function MealCard(props: MealCardProps) {
       setIsInFavourites(false);
       localStorage.setItem('favourites', JSON.stringify(favouritesMeals.filter((inEl) => inEl.id !== id)));
     } else {
-      setFavouritesMeals([
-        ...favouritesMeals,
-        mealsByParametersResponse.results.filter((el) => el.id === id)[0],
-      ]);
+      setFavouritesMeals([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]);
       setIsInFavourites(true);
       localStorage.setItem(
         'favourites',
-        JSON.stringify([
-          ...favouritesMeals,
-          mealsByParametersResponse.results.filter((el) => el.id === id)[0],
-        ]),
+        JSON.stringify([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]),
       );
     }
   };

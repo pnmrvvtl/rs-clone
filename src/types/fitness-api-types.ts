@@ -4,6 +4,13 @@ export type FitnessApiResponse<T> = {
   result: string;
 };
 
+export type FitnessApiCollection = {
+  bmi: BMI;
+  macros: Macros;
+  calories: Calory;
+  idealWeight: IdealWeight;
+};
+
 export interface BMIParams {
   age: number;
   weight: number;
