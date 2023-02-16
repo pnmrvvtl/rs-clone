@@ -15,6 +15,7 @@ import { Link, Outlet } from 'react-router-dom';
 import Footer from '../footer/footer';
 import { UserContext } from '../../context/user-context';
 import styles from '../../pages/main-page/main-page.module.scss';
+import { Avatar, Tooltip } from '@mui/material';
 
 const pages = [
   ['Data collection', 'data-collection'],
@@ -170,11 +171,11 @@ function Navigation({ children, ...props }: Props) {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              {/*<Tooltip title="Open settings">*/}
-              {/*    /!*<IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>*!/*/}
-              {/*    /!*    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>*!/*/}
-              {/*    /!*</IconButton>*!/*/}
-              {/*</Tooltip>*/}
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
               <Menu
                 sx={{ mt: '45px' }}
                 id="menu-appbar"

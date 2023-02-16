@@ -9,7 +9,11 @@ const FavoritesPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Here is your favourite meals</h1>
+      <h1>
+        {favouritesMeals.length
+          ? 'Here is your favourite meals'
+          : 'Sorry, you dont have favourite meals now. Click on star on meal card to add this meal to favourite.'}
+      </h1>
       <div className={styles.meals}>
         {favouritesMeals.map((meal, idx) => {
           return (
