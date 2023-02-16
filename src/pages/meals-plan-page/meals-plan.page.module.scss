@@ -11,7 +11,7 @@
   color: $font-color-main;
 
   .current-meals {
-    padding: 0px 50px;
+    padding: 20px 50px;
     background-color: $background-light;
 
     .meals {
@@ -23,40 +23,29 @@
     }
   }
 
-  .recipe-collections {
-    padding: 0px 50px;
-    background-color: $background-strip;
-
-    .collection {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    h2 {
-      margin: 0;
-      padding: 0;
-    }
-
-    .collection-item {
-      background-color: $background-dark;
-      color: white;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
-      transition: background-color 0.5s ease, color 0.5s ease;
-
-      &:hover {
-        color: $font-color-main;
-        background-color: lighten($background-dark, 50%);
-        cursor: pointer;
-      }
-    }
-  }
-
   .dinner-ideas {
-    padding: 0px 50px;
+    padding: 20px 50px;
     background-color: $background-strip;
     width: 100%;
+    min-height: 400px;
+
+    .filters {
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      & > div {
+        margin: 10px;
+
+        span {
+          color: $font-color-main;
+        }
+
+        width: 300px;
+      }
+    }
 
     .ideas-cards {
       width: 100%;
@@ -67,13 +56,13 @@
 
       & > div {
 
-          div:nth-child(1) {
-            width: 250px;
-          }
+        & > div:nth-child(1) {
+          max-width: 250px;
+        }
 
-          div:nth-child(2) {
-            width: 200px;
-          }
+        & > div:nth-child(2) {
+          max-width: 200px;
+        }
       }
     }
   }
@@ -107,9 +96,12 @@
         &:hover {
           cursor: not-allowed;
         }
+
         background-color: lighten($font-color-link, 30%);
+
         a {
           text-decoration: line-through;
+
           &:hover {
             cursor: not-allowed;
           }
@@ -119,10 +111,12 @@
       &.selected {
         width: 45px;
         height: 45px;
+
         a {
           font-size: 1.2rem;
           font-weight: bold;
         }
+
         box-shadow: 5px 5px 5px $font-color-main;
       }
 

@@ -241,7 +241,7 @@ export interface Nutrition {
   // nutrients: Nutrient[]
   caloricBreakdown: any;
   flavonoids: any;
-  ingredients: any;
+  ingredients: { name: string }[];
   nutrients: Nutrient[];
   properties: any;
   weightPerServing: any;
