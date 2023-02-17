@@ -11,16 +11,16 @@ import TopGalery from '../../components/results/top-galery';
 import styles from '../../pages/results-page/results-page.module.scss'
 
 export default function ResultsPage() {
-    const { userData,fitnessApiResponse } = useContext(UserContext);
-    const { bmi, calories, macros, idealWeight} = fitnessApiResponse;
-    useEffect(() => {
-        //api calls here
- 
-    }, [/*userData*/]);
+  const { userData, fitnessApiResponse } = useContext(UserContext);
+  const { bmi, calories, macros, idealWeight } = fitnessApiResponse;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    if(!userData.isEditedByUser) {
-        return <ErrorPage/>;
-    }
+  if (!userData.isEditedByUser) {
+    return <ErrorPage />;
+  }
+
 
     return (
         <main className={styles.content}>
@@ -35,4 +35,3 @@ export default function ResultsPage() {
         </main>
 
     )
-}

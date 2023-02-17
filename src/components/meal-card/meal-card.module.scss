@@ -21,24 +21,49 @@
     justify-content: space-between;
     border-radius: 20px;
 
-    div:nth-child(2) {
+    & > div:nth-child(2) {
+      width: 100%;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      span {
-        font-size: 0.8rem;
-        color: $font-color-inverted;
-        padding: 3px;
+      .star {
+        background-color: $font-color-link;
+        height: 30px;
+        width: 30px;
+        border-radius: 8px;
+        margin-right: 10px;
         display: flex;
         align-items: center;
-        border-radius: 8px;
         justify-content: center;
-        margin: 5px;
-        height: 30px;
-        background-color: $button-color;
+        font-size: 1.5rem;
+        color: $font-color-inverted;
+
+        &.favourite {
+          color: $sun-color;
+        }
+      }
+
+      & > div {
+        display: flex;
+        flex-direction: row;
+
+        span {
+          font-size: 0.8rem;
+          color: $font-color-inverted;
+          padding: 3px;
+          display: flex;
+          align-items: center;
+          border-radius: 8px;
+          justify-content: center;
+          margin: 5px;
+          height: 30px;
+          background-color: $button-color;
+        }
       }
     }
 
-    div:nth-child(1) {
+    > div:nth-child(1) {
       display: flex;
       flex-direction: column;
       align-items: flex-start;

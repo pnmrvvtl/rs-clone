@@ -29,7 +29,7 @@ export default function MealPopup(props: MealPopupProps) {
   }, []);
 
   return (
-    <div
+    <main
       className={styles.container}
       style={{ display: isVisible ? 'flex' : 'none', height: `${document.body.scrollHeight}px` }}
       onClick={(event) => {
@@ -42,8 +42,8 @@ export default function MealPopup(props: MealPopupProps) {
         <div onClick={() => setVisible(false)} className={styles.xmark}>
           <FontAwesomeIcon icon={faXmark} />
         </div>
-        <div className={styles['description']}>
-          <img src={`${image}`} className={styles['description__img']}></img>
+        <section className={styles['description']}>
+          <img src={`${image}`} className={styles['description__img']} alt="dish"></img>
           <div className={styles['description__text']}>
             <h2 className={styles['description__title']}>{title}</h2>
             <div className={styles['description__time-serving']}>
@@ -55,9 +55,9 @@ export default function MealPopup(props: MealPopupProps) {
               dangerouslySetInnerHTML={{ __html: `${summary}` }}
             ></p>
           </div>
-        </div>
+        </section>
         <div className={styles['composition']}>
-          <div className={styles['composition__ingredients']}>
+          <section className={styles['composition__ingredients']}>
             <h1 className={styles['composition__title']}>Ingredients</h1>
             <ul className={styles['composition__list']}>
               {extendedIngredients.map((el, i) => (
@@ -67,9 +67,9 @@ export default function MealPopup(props: MealPopupProps) {
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
           <div className={styles['composition__other']}>
-            <div className={styles['composition__nutrients']}>
+            <section className={styles['composition__nutrients']}>
               <h3 className={styles['composition__title']}>Nutritional Information</h3>
               <div className={styles['composition__blocks']}>
                 <div className={styles['composition__block-protein']}>
@@ -136,10 +136,10 @@ export default function MealPopup(props: MealPopupProps) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

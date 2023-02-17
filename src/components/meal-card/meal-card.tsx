@@ -1,20 +1,64 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 import { MealCardInfo } from '../../types/meal-card-info';
 
 import styles from './meal-card.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/user-context';
+import { setFavouriteToFirestore } from '../../helpers/firebase';
 
 type MealCardProps = {
   clickOnCardHandler?: React.MouseEventHandler<HTMLDivElement>;
   mealCardInfo: MealCardInfo;
   isColumnLayout: boolean;
+  isFavourite: boolean;
+  fromFavourite?: boolean;
 };
 
 export default function MealCard(props: MealCardProps) {
-  const { title, calories, imageUrl, fats, day, foodTime, protein, duration, carbs, likes } = props.mealCardInfo;
+  const { title, calories, imageUrl, fats, day, foodTime, protein, duration, carbs, likes, id } =
+    props.mealCardInfo;
+
+  const navigate = useNavigate();
+  const { favouritesMeals, setFavouritesMeals, mealsByParametersResponse, user } = useContext(UserContext);
+  const [isInFavourites, setIsInFavourites] = useState(props.isFavourite);
+
+  const handleFavouriteClick = async () => {
+    if (favouritesMeals.some((el) => el.id === id)) {
+      setFavouritesMeals([...favouritesMeals.filter((inEl) => inEl.id !== id)]);
+      setIsInFavourites(false);
+      localStorage.setItem('favourites', JSON.stringify(favouritesMeals.filter((inEl) => inEl.id !== id)));
+      await setFavouriteToFirestore(
+        user.uid,
+        mealsByParametersResponse,
+        favouritesMeals.filter((inEl) => inEl.id !== id),
+      );
+    } else {
+      setFavouritesMeals([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]);
+      setIsInFavourites(true);
+      localStorage.setItem(
+        'favourites',
+        JSON.stringify([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]),
+      );
+      await setFavouriteToFirestore(user.uid, mealsByParametersResponse, [
+        ...favouritesMeals,
+        mealsByParametersResponse.filter((el) => el.id === id)[0],
+      ]);
+    }
+  };
 
   return (
-    <div onClick={props.clickOnCardHandler} className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}>
+    <div
+      onClick={(event) => {
+        if (props.isColumnLayout && !(event.target as HTMLElement).classList.contains(styles.star)) {
+          navigate(`/meal/${id}`);
+        }
+        if (props.clickOnCardHandler && !(event.target as HTMLElement).classList.contains(styles.star)) {
+          props.clickOnCardHandler(event);
+        }
+      }}
+      className={`${styles.meal} ${!props.isColumnLayout && styles.rowed}`}
+    >
       <div
         className={styles['meal-image']}
         title={'Meal image:' + title}
@@ -23,13 +67,23 @@ export default function MealCard(props: MealCardProps) {
         }}
       >
         <div>
-          <span title={'Meal day'}>{day}</span>
-          <span title={'Meal time'}>{foodTime}</span>
+          {day && <span title={'Meal day'}>{day}</span>}
+          {foodTime && <span title={'Meal time'}>{foodTime}</span>}
         </div>
         <div>
-          <span title="protein">{protein} g</span>
-          <span title="carbs">{carbs} g</span>
-          <span title="fats">{fats} g</span>
+          <div>
+            <span title="protein">{protein} g</span>
+            <span title="carbs">{carbs} g</span>
+            <span title="fats">{fats} g</span>
+          </div>
+          <span
+            className={`${styles.star} ${isInFavourites && styles.favourite} ${
+              props.fromFavourite && styles.favourite
+            }`}
+            onClick={handleFavouriteClick}
+          >
+            ★
+          </span>
         </div>
       </div>
       <div className={styles['meal-title']}>
