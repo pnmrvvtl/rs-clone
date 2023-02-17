@@ -42,7 +42,7 @@ export default function Meal() {
 
           <div className={styles['main-content']}>
             <div className={styles['composition__other']}>
-              <Instructions steps={meal.analyzedInstructions[0].steps} />
+              <Instructions steps={meal.analyzedInstructions[0]?.steps} />
               <Nutritional nutrients={nutrients} meal={meal} />
             </div>
           </div>
@@ -114,7 +114,7 @@ const Nutritional = (props: { nutrients: Nutrient[]; meal: ResultMeal }) => {
           <div className={styles['composition__block-line']}></div>
           <span className={styles['composition__block-name']}>NET CARBS</span>
           <span className={styles['composition__block-weight']}>
-            {props.nutrients.filter((el) => el.name === 'Net Carbohydrates')[0].amount}g
+            {props.nutrients.filter((el) => el.name.toLowerCase() === 'net carbohydrates')[0]?.amount}g
           </span>
           <span className={styles['composition__block-percent']}>
             {props.meal.nutrition.caloricBreakdown.percentCarbs}%
@@ -124,7 +124,7 @@ const Nutritional = (props: { nutrients: Nutrient[]; meal: ResultMeal }) => {
           <div className={styles['composition__block-line']}></div>
           <span className={styles['composition__block-name']}>PROTEIN</span>
           <span className={styles['composition__block-weight']}>
-            {props.nutrients.filter((el) => el.name === 'Protein')[0].amount}g
+            {props.nutrients.filter((el) => el.name.toLowerCase() === 'protein')[0]?.amount}g
           </span>
           <span className={styles['composition__block-percent']}>
             {props.meal.nutrition.caloricBreakdown.percentProtein}%
@@ -134,7 +134,7 @@ const Nutritional = (props: { nutrients: Nutrient[]; meal: ResultMeal }) => {
           <div className={styles['composition__block-line']}></div>
           <span className={styles['composition__block-name']}>FAT</span>
           <span className={styles['composition__block-weight']}>
-            {props.nutrients.filter((el) => el.name === 'Fat')[0].amount}g
+            {props.nutrients.filter((el) => el.name.toLowerCase() === 'fat')[0]?.amount}g
           </span>
           <span className={styles['composition__block-percent']}>
             {props.meal.nutrition.caloricBreakdown.percentFat}%

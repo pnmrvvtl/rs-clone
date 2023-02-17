@@ -80,6 +80,7 @@ export default function SignInUpPage() {
             setFitnessApiResponse(fitnessData as FitnessApiCollection);
             localStorage.setItem('user-data', JSON.stringify(userData));
             localStorage.setItem('meals-data', JSON.stringify(meals));
+            localStorage.setItem('favourites', JSON.stringify(favouriteMeals));
             localStorage.setItem('bmi-data', JSON.stringify((fitnessData as FitnessApiCollection).bmi));
             localStorage.setItem(
               'calories-data',
@@ -90,7 +91,7 @@ export default function SignInUpPage() {
               JSON.stringify((fitnessData as FitnessApiCollection).idealWeight),
             );
             localStorage.setItem('macros-data', JSON.stringify((fitnessData as FitnessApiCollection).macros));
-            localStorage.setItem('favourites', '');
+            localStorage.setItem('favourites', JSON.stringify(favouriteMeals));
             localStorage.setItem('user', JSON.stringify(user));
             setTimeout(() => navigation(`/${Routes.RESULTS}`), 500);
             setIsLoading(false);
@@ -146,7 +147,7 @@ export default function SignInUpPage() {
               JSON.stringify((fitnessData as FitnessApiCollection).idealWeight),
             );
             localStorage.setItem('macros-data', JSON.stringify((fitnessData as FitnessApiCollection).macros));
-            localStorage.setItem('favourites', '');
+            localStorage.setItem('favourites', JSON.stringify(favouriteMeals));
             localStorage.setItem('user', JSON.stringify(user));
             setTimeout(() => navigation(`/${Routes.RESULTS}`), 500);
             setIsLoading(false);
