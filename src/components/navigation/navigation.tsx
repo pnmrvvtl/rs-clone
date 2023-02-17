@@ -32,8 +32,8 @@ function Navigation({ children, ...props }: Props) {
       ? [
           ['Data collection', 'data-collection'],
           ['Research result', 'research-results'],
-          ['Meals page', 'meals-page'],
-          ['Favourites meals', 'favorites'],
+          ['Meals plan', 'meals-page'],
+          ['Favourite meals', 'favorites'],
         ]
       : [['Data collection', 'data-collection']]
     : [];
@@ -141,27 +141,26 @@ function Navigation({ children, ...props }: Props) {
               RS-Healthy
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {userData.isEditedByUser &&
-                pages.map((page, idx) => (
-                  <Button
-                    key={page[1]}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+              {pages.map((page, idx) => (
+                <Button
+                  key={page[1]}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  <Link
+                    key={idx}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'white',
+                      fontFamily: 'Ubuntu',
+                      fontSize: '1.1rem',
+                    }}
+                    to={`/${page[1]}`}
                   >
-                    <Link
-                      key={idx}
-                      style={{
-                        textDecoration: 'none',
-                        color: 'white',
-                        fontFamily: 'Ubuntu',
-                        fontSize: '1.1rem',
-                      }}
-                      to={`/${page[1]}`}
-                    >
-                      {page[0]}
-                    </Link>
-                  </Button>
-                ))}
+                    {page[0]}
+                  </Link>
+                </Button>
+              ))}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>

@@ -1,5 +1,18 @@
+//libs
 import * as React from 'react';
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  createUserAuthWithEmailAndPassword,
+  getFavouritesFromFirestore,
+  getFitnessDataFromFirestore,
+  getMealsFromFirestore,
+  getUserDataFromFirestore,
+  getUserStatusFromFirestore,
+  signInUserAuthWithEmailAndPassword,
+  signInWithGooglePopup,
+} from '../../helpers/firebase';
+//components
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,25 +21,13 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import GoogleIcon from '@mui/icons-material/Google';
+//styles module
 import styles from './sign-in-up.module.scss';
-import {
-  createUserAuthWithEmailAndPassword,
-  getFavouritesFromFirestore,
-  getFitnessDataFromFirestore,
-  getMealsFromFirestore,
-  getUserDataFromFirestore,
-  getUserStatusFromFirestore,
-  setFavouriteToFirestore,
-  setFitnessDataToFirestore,
-  setMealsToFirestore,
-  setUserDataToFirestore,
-  signInUserAuthWithEmailAndPassword,
-  signInWithGooglePopup,
-} from '../../helpers/firebase';
+//types
 import { UserContext } from '../../context/user-context';
 import { UserData, UserStatus } from '../../types/user-data';
 import { FitnessApiCollection } from '../../types/fitness-api-types';
-import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../types/routes';
 
 export default function SignInUpPage() {
@@ -45,6 +46,15 @@ export default function SignInUpPage() {
 
   const handleSignInClick = async () => {
     try {
+      if (!signInEmail) {
+        alert('Email field must not be empty');
+        return;
+      }
+      if (!signInPassword) {
+        alert('Password field must not be empty');
+        return;
+      }
+      if (isLoading) return;
       setIsLoading(true);
       const userCredentials = await signInUserAuthWithEmailAndPassword(signInEmail, signInPassword);
       console.log(`user cred= ${userCredentials}`);
@@ -55,6 +65,7 @@ export default function SignInUpPage() {
           email: userCredentials.user.email ? userCredentials.user.email : '',
         };
         setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
         const userStatus = await getUserStatusFromFirestore(userCredentials.user.uid);
         console.log(userStatus);
         if (userStatus === UserStatus.OLD) {
@@ -99,6 +110,7 @@ export default function SignInUpPage() {
   };
   const handleSignInWithGoogleClick = async () => {
     try {
+      if (isLoading) return;
       setIsLoading(true);
       const userCredentials = await signInWithGooglePopup();
       console.log(`user cred= ${userCredentials}`);
@@ -109,6 +121,7 @@ export default function SignInUpPage() {
           email: userCredentials.user.email ? userCredentials.user.email : '',
         };
         setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
         const userStatus = await getUserStatusFromFirestore(userCredentials.user.uid);
         console.log(userStatus);
         if (userStatus === UserStatus.OLD) {
@@ -152,6 +165,16 @@ export default function SignInUpPage() {
   };
   const handleRegistrationClick = async () => {
     try {
+      if (registrationEmail !== repeatRegistrationEmail) {
+        alert('Email and repeated email must be the same.');
+        return;
+      }
+      if (registrationPassword !== repeatRegistrationPassword) {
+        alert('Password and repeated password must be the same.');
+        return;
+      }
+      if (isLoading) return;
+      setIsLoading(true);
       const userCredentials = await createUserAuthWithEmailAndPassword(
         registrationEmail,
         registrationPassword,
@@ -164,19 +187,22 @@ export default function SignInUpPage() {
           email: userCredentials.user.email ? userCredentials.user.email : '',
         };
         setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
         console.log('go to data collection');
         navigation(`/${Routes.DATA_COLLECTION}`);
+        setIsLoading(false);
       } else {
         alert('Registration failed. Try again please');
       }
     } catch (e) {
+      setIsLoading(false);
       alert((e as Error).message);
     }
   };
 
   return (
     <div className={styles.container}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -189,44 +215,44 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
-          <Box component="form" sx={{ mt: 1 }}>
+          <Box component='form' sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label='Email Address'
+              name='email'
+              autoComplete='email'
               autoFocus
               value={signInEmail}
               onChange={(event) => setSignInEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              autoComplete='current-password'
               value={signInPassword}
               onChange={(event) => setSignInPassword(event.target.value)}
             />
-            <Button onClick={handleSignInClick} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button className={styles.button} onClick={handleSignInClick} fullWidth variant='contained'
+                    sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
-            <Button onClick={handleSignInWithGoogleClick} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In with Google
+            <Button className={styles.button} onClick={handleSignInWithGoogleClick} fullWidth variant='contained'
+                    sx={{ mt: 3, mb: 2 }}>
+              <GoogleIcon />Sign In with Google
             </Button>
           </Box>
         </Box>
       </Container>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -239,59 +265,54 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Registration
           </Typography>
-          <Box component="form" sx={{ mt: 1 }}>
+          <Box component='form' sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              id="repeat-email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              label='Email Address'
+              name='email'
+              autoComplete='email'
               value={registrationEmail}
               onChange={(event) => setRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              id="email"
-              label="Repeat Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              label='Repeat Email Address'
+              name='email'
+              autoComplete='email'
               value={repeatRegistrationEmail}
               onChange={(event) => setRepeatRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              autoComplete='current-password'
               value={registrationPassword}
               onChange={(event) => setRegistrationPassword(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="repeat-password"
-              label="Repeat password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='repeat-password'
+              label='Repeat password'
+              type='password'
+              autoComplete='current-password'
               value={repeatRegistrationPassword}
               onChange={(event) => setRepeatRegistrationPassword(event.target.value)}
             />
-            <Button onClick={handleRegistrationClick} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button className={styles.button} onClick={handleRegistrationClick} fullWidth variant='contained'
+                    sx={{ mt: 3, mb: 2 }}>
               Registration
             </Button>
           </Box>

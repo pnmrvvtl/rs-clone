@@ -7,6 +7,15 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: flex-start;
+  padding-bottom: 100px;
+
+  .button {
+    background-color: $button-color;
+
+    &:hover {
+      background-color: $button-color-hover;
+    }
+  }
 
   .loading {
     background-color: rgba($background-dark, 50%);
