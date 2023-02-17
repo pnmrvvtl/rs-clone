@@ -33,7 +33,7 @@ export default function BmiChart() {
     <section className={styles['bmi-chart']}>
       {chartDataWeight.map((obj, index) => {
         return (
-          <span className={styles['chart-title']} style={{ top: 118 + index * 80, left: 202 + index * 30 }}>
+          <span className={styles[`chart-title${index}`]}>
             BMI {obj.bmi}
           </span>
         );
