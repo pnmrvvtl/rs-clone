@@ -32,7 +32,7 @@ export default function DataPage() {
   const initialUser: UserData = localDataUser && JSON.parse(localDataUser);
 
   const [selectedSex, setSelectedSex] = useState(initialUser?.selectedSex || 'male');
-  const [currentQuestion, setCurrentQuestion] = useState(28);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [currentGoals, setCurrentGoals] = useState<string[]>(initialUser?.currentGoals || []);
   const [healthConditions, setHealthConditions] = useState<string[]>(initialUser?.healthConditions || []);
   const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(initialUser?.foodAtTheMoment || []);

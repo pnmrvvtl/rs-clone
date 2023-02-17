@@ -301,11 +301,14 @@
     }
 
     .content {
-        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: 1fr;
         padding: 0 20px;
 
         .ingredients {
             padding: 25px 20px;
+            border-radius: 15px;
         }
 
         .instructions {
