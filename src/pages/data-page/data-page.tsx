@@ -24,7 +24,7 @@ export default function DataPage() {
   const initialUser: UserData = localDataUser && JSON.parse(localDataUser);
 
   const [selectedSex, setSelectedSex] = useState(initialUser?.selectedSex || 'male');
-  const [currentQuestion, setCurrentQuestion] = useState(28);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [currentGoals, setCurrentGoals] = useState<string[]>(initialUser?.currentGoals || []);
   const [healthConditions, setHealthConditions] = useState<string[]>(initialUser?.healthConditions || []);
   const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(initialUser?.foodAtTheMoment || []);
@@ -46,7 +46,7 @@ export default function DataPage() {
   const [weightSystem, setWeightSystem] = useState('kilos');
   const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
   const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-  const [weightProgramm, setWeightProgramm] = useState(initialUser.weightProgramm || '');
+  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '');
   const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
   const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
   const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
