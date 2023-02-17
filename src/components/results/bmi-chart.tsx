@@ -1,25 +1,49 @@
-import React from 'react'
-import styles from '../../pages/results-page/results-page.module.scss'
+import React, { useState } from 'react';
+import { Switch } from '@mui/material';
+import styles from '../../pages/results-page/results-page.module.scss';
+import { chartDataWeight, options, data, dataFt, optionsFt } from '../../data/chart-weigth';
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 export default function BmiChart() {
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
+
+  const [chartData, setChartData] = useState(data);
+  const [chartOptions, setChartOptions] = useState(options);
+  const [isUnitsFeet, setUnitsFeet] = useState(true);
+
+  const changeUnits = () => {
+    setChartData(isUnitsFeet ? dataFt : data);
+    setChartOptions(isUnitsFeet ? optionsFt : options);
+    setUnitsFeet(!isUnitsFeet);
+  };
 
   return (
-    <section className={styles["bmi-chart"]}>
-       <section className={styles["bmi-results"]}>
-      <div className={styles.title}>Daily caloric:
-        <span className={styles.value}> 1705</span>
-      </div>
-      <div className={styles.title}>Your goal:
-        <span className={styles.value}> mild weight loss</span>
-      </div>
-      <div className={styles.title}>BMI:
-        <span className={styles.value}> 20.06</span>
-      </div>
-      <div className={styles.title}>Ideal weight:
-        <span className={styles.value}> 75 kg</span>
-      </div>
+    <section className={styles['bmi-chart']}>
+      {chartDataWeight.map((obj, index) => {
+        return (
+          <span className={styles[`chart-title${index}`]}>
+            BMI {obj.bmi}
+          </span>
+        );
+      })}
+      {isUnitsFeet ? (
+        <Line options={optionsFt} data={dataFt} width={'100%'} height={'85%'} />
+      ) : (
+        <Line options={options} data={data} width={'100%'} height={'85%'} />
+      )}
+      <Switch onChange={() => changeUnits()} defaultChecked color="success" />
     </section>
-    </section>
-  )
-
+  );
 }
