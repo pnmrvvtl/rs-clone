@@ -113,11 +113,15 @@ function Navigation({ children, ...props }: Props) {
               >
                 {userData.isEditedByUser &&
                   pages.map((page, idx) => (
-                    <Link key={idx} style={{ textDecoration: 'none', color: 'black' }} to={`/${page[1]}`}>
-                      <MenuItem key={page[1]} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page[0]}</Typography>
-                      </MenuItem>
-                    </Link>
+                    <MenuItem
+                      key={page[1]}
+                      onClick={() => {
+                        navigate(`/${page[1]}`);
+                        handleCloseNavMenu();
+                      }}
+                    >
+                      <Typography textAlign="center">{page[0]}</Typography>
+                    </MenuItem>
                   ))}
               </Menu>
             </Box>

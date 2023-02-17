@@ -76,7 +76,7 @@ export default function MealPopup(props: MealPopupProps) {
                   <div className={styles['composition__block-line']}></div>
                   <span className={styles['composition__block-name']}>PROTEIN</span>
                   <span className={styles['composition__block-weight']}>
-                    {nutrients.filter((el) => el.name === 'Protein')[0].amount}g
+                    {nutrients.filter((el) => el.name === 'Protein')[0]?.amount}g
                   </span>
                   <span className={styles['composition__block-percent']}>
                     {nutrition.caloricBreakdown.percentProtein}%
@@ -86,7 +86,7 @@ export default function MealPopup(props: MealPopupProps) {
                   <div className={styles['composition__block-line']}></div>
                   <span className={styles['composition__block-name']}>NET CARBS</span>
                   <span className={styles['composition__block-weight']}>
-                    {nutrients.filter((el) => el.name.toLowerCase() === 'carbohydrates')[0].amount}g
+                    {nutrients.filter((el) => el.name.toLowerCase() === 'carbohydrates')[0]?.amount}g
                   </span>
                   <span className={styles['composition__block-percent']}>
                     {nutrition.caloricBreakdown.percentCarbs}%
@@ -96,7 +96,7 @@ export default function MealPopup(props: MealPopupProps) {
                   <div className={styles['composition__block-line']}></div>
                   <span className={styles['composition__block-name']}>FAT</span>
                   <span className={styles['composition__block-weight']}>
-                    {nutrients.filter((el) => el.name === 'Fat')[0].amount}g
+                    {nutrients.filter((el) => el.name.toLowerCase() === 'fat')[0]?.amount}g
                   </span>
                   <span className={styles['composition__block-percent']}>
                     {nutrition.caloricBreakdown.percentFat}%
@@ -108,19 +108,19 @@ export default function MealPopup(props: MealPopupProps) {
                 <div className={styles['composition__satiety-score']}>
                   <span className={styles['name']}>SATIETY SCORE</span>
                   <span className={styles['property']}>
-                    {nutrients.filter((el) => el.name === 'Calories')[0].amount}g
+                    {nutrients.filter((el) => el.name.toLowerCase() === 'calories')[0]?.amount}g
                   </span>
                 </div>
                 <div className={styles['composition__total-carbs']}>
                   <span className={styles['name']}>TOTAL CARBS</span>
                   <span className={styles['property']}>
-                    {nutrients.filter((el) => el.name === 'Carbohydrates')[0].amount}g
+                    {nutrients.filter((el) => el.name.toLowerCase() === 'carbohydrates')[0]?.amount}g
                   </span>
                 </div>
                 <div className={styles['composition__fiber']}>
                   <span className={styles['name']}>FIBER</span>
                   <span className={styles['property']}>
-                    {nutrients.filter((el) => el.name === 'Fiber')[0].amount}g
+                    {nutrients.filter((el) => el.name.toLowerCase() === 'fiber')[0]?.amount}g
                   </span>
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default function MealPopup(props: MealPopupProps) {
               <div className={styles['instructions']}>
                 <h3 className={styles['instructions-title']}>Instructions</h3>
                 <ul className={styles['instructions-list']}>
-                  {analyzedInstructions[0].steps.map((el) => (
+                  {analyzedInstructions[0]?.steps.map((el) => (
                     <li key={el.number}>
                       <span>{el.number}</span>
                       {el.step}
