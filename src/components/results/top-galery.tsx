@@ -5,13 +5,13 @@ import measure from '../../assets/image/results/measure.jpeg'
 import avocado from '../../assets/image/results/avocado.jpeg'
 import shrimp from '../../assets/image/results/shrimp.jpeg'
 
-export default function article() {
+export default function TopGalery() {
   return (
     <div className={styles["result-aticle"]}>
-      <img src={measure} className={styles["result-img"]}></img>
-      <img src={avocado} className={styles["result-img"]}></img>
-      <img src={bowl} className={styles["result-img"]}></img>
-      <img src={shrimp} className={styles["result-img"]}></img>
+      <img src={measure} className={styles["result-img"]} alt="measure"></img>
+      <img src={avocado} className={styles["result-img"]} alt="avocado"></img>
+      <img src={bowl} className={styles["result-img"]} alt="bowl"></img>
+      <img src={shrimp} className={styles["result-img"]} alt="shrimp"></img>
     </div>
   )
 }
