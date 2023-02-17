@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MealsApi from '../../api/meals-api';
 import FitnessApi from '../../api/fitness-api';
 
-import { UserData } from '../../types/user-data';
+import { UserData, UserStatus } from '../../types/user-data';
 import { UserContext } from '../../context/user-context';
 
 import { calculateGoal } from '../../helpers/calculateGoal';
@@ -15,9 +15,17 @@ import RadioList from '../../components/data/radio-list';
 import RadioSubList from '../../components/data/radio-sub-list';
 
 import styles from './data-page.module.scss';
+import {
+  setFavouriteToFirestore,
+  setFitnessDataToFirestore,
+  setMealsToFirestore,
+  setUserDataToFirestore,
+  setUserStatusToFirestore,
+} from '../../helpers/firebase';
 
 export default function DataPage() {
-  const { setUserData, setMealsByParametersResponse, setFitnessApiResponse } = useContext(UserContext);
+  const { setUserData, setMealsByParametersResponse, setFitnessApiResponse, user, favouritesMeals } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const localDataUser = localStorage.getItem('user-data');
@@ -773,7 +781,6 @@ export default function DataPage() {
               foodCookProtein,
               mealsCount: +mealsCount,
             };
-            setUserData(userData);
             console.log(`user data= `, userData);
             setIsLoading(true);
             window.scrollTo(0, 0);
@@ -844,18 +851,30 @@ export default function DataPage() {
             });
             console.log('meals response = ', meals);
             if (userData && meals && bmi && calories && macros) {
+              await setMealsToFirestore(user.uid, meals.results, favouritesMeals);
+              await setFavouriteToFirestore(user.uid, meals.results, favouritesMeals);
+              await setUserDataToFirestore(user.uid, userData, { bmi, calories, macros, idealWeight });
+              await setFitnessDataToFirestore(user.uid, userData, { bmi, calories, macros, idealWeight });
+              await setUserStatusToFirestore(user.uid, UserStatus.OLD);
+
               localStorage.setItem('user-data', JSON.stringify(userData));
               localStorage.setItem('meals-data', JSON.stringify(meals.results));
               localStorage.setItem('bmi-data', JSON.stringify(bmi));
               localStorage.setItem('calories-data', JSON.stringify(calories));
               localStorage.setItem('macros-data', JSON.stringify(macros));
+              localStorage.setItem('ideal-data', JSON.stringify(idealWeight));
               localStorage.setItem('favourites', '');
+              localStorage.setItem('user', JSON.stringify(user));
+
+              setFitnessApiResponse({ bmi, calories, macros, idealWeight });
+              setMealsByParametersResponse(meals.results);
+              setUserData(userData);
             }
-            setFitnessApiResponse({ bmi, calories, macros, idealWeight });
-            setMealsByParametersResponse(meals.results);
-            setIsLoading(false);
-            setCurrentQuestion(1);
-            navigate('/research-results');
+            setTimeout(() => {
+              navigate('/research-results');
+              setCurrentQuestion(1);
+              setIsLoading(false);
+            }, 500);
           }}
         >
           Generate my meal plan

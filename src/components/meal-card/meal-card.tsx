@@ -5,6 +5,7 @@ import { MealCardInfo } from '../../types/meal-card-info';
 import styles from './meal-card.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
+import { setFavouriteToFirestore } from '../../helpers/firebase';
 
 type MealCardProps = {
   clickOnCardHandler?: React.MouseEventHandler<HTMLDivElement>;
@@ -19,14 +20,19 @@ export default function MealCard(props: MealCardProps) {
     props.mealCardInfo;
 
   const navigate = useNavigate();
-  const { favouritesMeals, setFavouritesMeals, mealsByParametersResponse } = useContext(UserContext);
+  const { favouritesMeals, setFavouritesMeals, mealsByParametersResponse, user } = useContext(UserContext);
   const [isInFavourites, setIsInFavourites] = useState(props.isFavourite);
 
-  const handleFavouriteClick = () => {
+  const handleFavouriteClick = async () => {
     if (favouritesMeals.some((el) => el.id === id)) {
       setFavouritesMeals([...favouritesMeals.filter((inEl) => inEl.id !== id)]);
       setIsInFavourites(false);
       localStorage.setItem('favourites', JSON.stringify(favouritesMeals.filter((inEl) => inEl.id !== id)));
+      await setFavouriteToFirestore(
+        user.uid,
+        mealsByParametersResponse,
+        favouritesMeals.filter((inEl) => inEl.id !== id),
+      );
     } else {
       setFavouritesMeals([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]);
       setIsInFavourites(true);
@@ -34,6 +40,10 @@ export default function MealCard(props: MealCardProps) {
         'favourites',
         JSON.stringify([...favouritesMeals, mealsByParametersResponse.filter((el) => el.id === id)[0]]),
       );
+      await setFavouriteToFirestore(user.uid, mealsByParametersResponse, [
+        ...favouritesMeals,
+        mealsByParametersResponse.filter((el) => el.id === id)[0],
+      ]);
     }
   };
 

@@ -22,7 +22,7 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import { ResultMeal } from '../types/meals-api-types';
-import { UserData } from '../types/user-data';
+import { UserData, UserStatus } from '../types/user-data';
 import { FitnessApiCollection } from '../types/fitness-api-types';
 
 const firebaseConfig = {
@@ -251,6 +251,31 @@ export const setUserDataToFirestore = async (
 ) => await setSmallDataToFirestore('user-data', userId, userData, fitnessData);
 export const getUserDataFromFirestore = async (userId: string) =>
   await getSmallDataFromFirestore('user-data', userId);
-export const getFitnessDataFromFirestore = async (userId: string) => await getSmallDataFromFirestore('fitness-data', userId);
+export const getFitnessDataFromFirestore = async (userId: string) =>
+  await getSmallDataFromFirestore('fitness-data', userId);
 
-
+export const getUserStatusFromFirestore = async (userId: string) => {
+  try {
+    const results = await getCollectionAndDocuments(userId);
+    const userStatus = results.filter((el) => el.title === `user-status`);
+    if (userStatus.length) {
+      return userStatus[0].value;
+    } else {
+      return UserStatus.UNSET;
+    }
+  } catch (e) {
+    console.log((e as Error).message);
+  }
+};
+export const setUserStatusToFirestore = async (userId: string, status: UserStatus) => {
+  try {
+    await addCollectionAndDocument(userId, [
+      {
+        title: `user-status`,
+        value: status,
+      },
+    ]);
+  } catch (e) {
+    console.log((e as Error).message);
+  }
+};

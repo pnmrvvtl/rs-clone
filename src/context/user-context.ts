@@ -1,12 +1,12 @@
 import React, { createContext } from 'react';
-import { UserData } from '../types/user-data';
+import { User, UserData } from '../types/user-data';
 import { ResultMeal } from '../types/meals-api-types';
 import { BMI, Calory, Macros, IdealWeight, FitnessApiCollection } from '../types/fitness-api-types';
 
 interface IUserContext {
   userData: UserData;
-  userId: string;
-  setUserId: React.Dispatch<string>;
+  user: User;
+  setUser: React.Dispatch<User>;
   setUserData: React.Dispatch<UserData>;
   mealsByParametersResponse: ResultMeal[];
   setMealsByParametersResponse: React.Dispatch<ResultMeal[]>;
@@ -113,6 +113,6 @@ export const UserContext = createContext<IUserContext>({
   favouritesMeals: [],
   setFavouritesMeals: () => false,
   setFitnessApiResponse: () => false,
-  userId: '',
-  setUserId: () => false,
+  user: { uid: '', email: '' },
+  setUser: () => false,
 });

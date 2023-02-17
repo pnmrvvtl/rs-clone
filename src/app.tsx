@@ -10,12 +10,13 @@ import Meal from './components/meal/meal';
 import MealsPlanPage from './pages/meals-plan-page/meals-plan-page';
 import FavoritesPage from './pages/favorites-page/favorites-page';
 
-import { UserData } from './types/user-data';
+import { User, UserData } from './types/user-data';
 import { ResultMeal } from './types/meals-api-types';
 import { BMI, Calory, Macros, IdealWeight } from './types/fitness-api-types';
 
 import { UserContext } from './context/user-context';
 import SignInUpPage from './pages/sign-in-up-page/sign-in-up-page';
+import { Routes } from './types/routes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,11 +31,11 @@ const router = createBrowserRouter(
     >
       <Route index element={<MainPage />} />
       <Route path="meal/:id" element={<Meal />} />
-      <Route path="data-collection" element={<DataPage />} />
-      <Route path="research-results" element={<ResultsPage />} />
-      <Route path="meals-page" element={<MealsPlanPage />} />
-      <Route path="favorites" element={<FavoritesPage />} />
-      <Route path="auth" element={<SignInUpPage />} />
+      <Route path={Routes.DATA_COLLECTION} element={<DataPage />} />
+      <Route path={Routes.RESULTS} element={<ResultsPage />} />
+      <Route path={Routes.MEALS_PLAN} element={<MealsPlanPage />} />
+      <Route path={Routes.FAV_MEALS} element={<FavoritesPage />} />
+      <Route path={Routes.AUTH} element={<SignInUpPage />} />
     </Route>,
   ),
 );
@@ -45,9 +46,9 @@ export const App = () => {
   const localStorageBMI = localStorage.getItem('bmi-data');
   const localStorageCalories = localStorage.getItem('calories-data');
   const localStorageMacros = localStorage.getItem('macros-data');
-  const localStorageWeight = localStorage.getItem('weight-data');
+  const localStorageWeight = localStorage.getItem('ideal-data');
   const localStorageFavourites = localStorage.getItem('favourites');
-  const localStorageUserId = localStorage.getItem('user-id');
+  const localStorageUser = localStorage.getItem('user');
 
   const [userData, setUserData] = useState<UserData>(
     localStorageUserData
@@ -82,7 +83,9 @@ export const App = () => {
   const [mealsByParametersResponse, setMealsByParametersResponse] = useState<ResultMeal[]>(
     localStorageMeals ? JSON.parse(localStorageMeals) : [],
   );
-  const [userId, setUserId] = useState(localStorageUserId || '');
+  const [user, setUser] = useState<User>(
+    localStorageUser ? JSON.parse(localStorageUser) : { email: '', uid: '' },
+  );
   const [favouritesMeals, setFavouritesMeals] = useState<ResultMeal[]>(
     localStorageFavourites ? JSON.parse(localStorageFavourites) : [],
   );
@@ -180,8 +183,8 @@ export const App = () => {
             setFitnessApiResponse,
             favouritesMeals,
             setFavouritesMeals,
-            userId,
-            setUserId,
+            user,
+            setUser,
           }}
         >
           <RouterProvider router={router} />

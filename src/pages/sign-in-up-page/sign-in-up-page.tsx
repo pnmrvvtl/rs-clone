@@ -15,6 +15,7 @@ import {
   getFitnessDataFromFirestore,
   getMealsFromFirestore,
   getUserDataFromFirestore,
+  getUserStatusFromFirestore,
   setFavouriteToFirestore,
   setFitnessDataToFirestore,
   setMealsToFirestore,
@@ -23,41 +24,128 @@ import {
   signInWithGooglePopup,
 } from '../../helpers/firebase';
 import { UserContext } from '../../context/user-context';
+import { UserData, UserStatus } from '../../types/user-data';
+import { FitnessApiCollection } from '../../types/fitness-api-types';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../types/routes';
 
 export default function SignInUpPage() {
   const [signInEmail, setSignInEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [signInPassword, setSignInPassword] = useState('');
   const [registrationEmail, setRegistrationEmail] = useState('');
   const [repeatRegistrationEmail, setRepeatRegistrationEmail] = useState('');
   const [registrationPassword, setRegistrationPassword] = useState('');
   const [repeatRegistrationPassword, setRepeatRegistrationPassword] = useState('');
 
-  const { setUserId, userId, userData, mealsByParametersResponse, favouritesMeals, fitnessApiResponse } =
+  const navigation = useNavigate();
+
+  const { setUser, setUserData, setFavouritesMeals, setMealsByParametersResponse, setFitnessApiResponse } =
     useContext(UserContext);
 
   const handleSignInClick = async () => {
     try {
+      setIsLoading(true);
       const userCredentials = await signInUserAuthWithEmailAndPassword(signInEmail, signInPassword);
-      console.log(userCredentials);
+      console.log(`user cred= ${userCredentials}`);
       if (userCredentials) {
-        setUserId(userCredentials.user.uid);
-        await setMealsToFirestore(userCredentials.user.uid, mealsByParametersResponse, favouritesMeals);
-        await setFavouriteToFirestore(userCredentials.user.uid, mealsByParametersResponse, favouritesMeals);
-        await setFitnessDataToFirestore(userCredentials.user.uid, userData, fitnessApiResponse);
-        await setUserDataToFirestore(userCredentials.user.uid, userData, fitnessApiResponse);
+        console.log('login OK');
+        const user = {
+          uid: userCredentials.user.uid,
+          email: userCredentials.user.email ? userCredentials.user.email : '',
+        };
+        setUser(user);
+        const userStatus = await getUserStatusFromFirestore(userCredentials.user.uid);
+        console.log(userStatus);
+        if (userStatus === UserStatus.OLD) {
+          const favouriteMeals = await getFavouritesFromFirestore(user.uid);
+          const meals = await getMealsFromFirestore(user.uid);
+          const userData = await getUserDataFromFirestore(user.uid);
+          const fitnessData = await getFitnessDataFromFirestore(user.uid);
+          if (favouriteMeals && meals && userData && fitnessData) {
+            setFavouritesMeals(favouriteMeals);
+            setUserData(userData as UserData);
+            setMealsByParametersResponse(meals);
+            setFitnessApiResponse(fitnessData as FitnessApiCollection);
+            localStorage.setItem('user-data', JSON.stringify(userData));
+            localStorage.setItem('meals-data', JSON.stringify(meals));
+            localStorage.setItem('bmi-data', JSON.stringify((fitnessData as FitnessApiCollection).bmi));
+            localStorage.setItem(
+              'calories-data',
+              JSON.stringify((fitnessData as FitnessApiCollection).calories),
+            );
+            localStorage.setItem(
+              'ideal-data',
+              JSON.stringify((fitnessData as FitnessApiCollection).idealWeight),
+            );
+            localStorage.setItem('macros-data', JSON.stringify((fitnessData as FitnessApiCollection).macros));
+            localStorage.setItem('favourites', '');
+            localStorage.setItem('user', JSON.stringify(user));
+            setTimeout(() => navigation(`/${Routes.RESULTS}`), 500);
+            setIsLoading(false);
+          } else {
+            console.log('go to data collection');
+            navigation(`/${Routes.DATA_COLLECTION}`);
+          }
+        } else {
+          console.log('go to data collection');
+          navigation(`/${Routes.DATA_COLLECTION}`);
+        }
       }
     } catch (e) {
+      setIsLoading(false);
       alert((e as Error).message);
     }
   };
   const handleSignInWithGoogleClick = async () => {
     try {
-      console.log(userId);
-      console.log(await getFavouritesFromFirestore(userId));
-      console.log(await getMealsFromFirestore(userId));
-      console.log(await getFitnessDataFromFirestore(userId));
-      console.log(await getUserDataFromFirestore(userId));
-      //const userCredentials = await signInWithGooglePopup();
+      setIsLoading(true);
+      const userCredentials = await signInWithGooglePopup();
+      console.log(`user cred= ${userCredentials}`);
+      if (userCredentials) {
+        console.log('login OK');
+        const user = {
+          uid: userCredentials.user.uid,
+          email: userCredentials.user.email ? userCredentials.user.email : '',
+        };
+        setUser(user);
+        const userStatus = await getUserStatusFromFirestore(userCredentials.user.uid);
+        console.log(userStatus);
+        if (userStatus === UserStatus.OLD) {
+          const favouriteMeals = await getFavouritesFromFirestore(user.uid);
+          const meals = await getMealsFromFirestore(user.uid);
+          const userData = await getUserDataFromFirestore(user.uid);
+          const fitnessData = await getFitnessDataFromFirestore(user.uid);
+          if (favouriteMeals && meals && userData && fitnessData) {
+            setFavouritesMeals(favouriteMeals);
+            setUserData(userData as UserData);
+            setMealsByParametersResponse(meals);
+            setFitnessApiResponse(fitnessData as FitnessApiCollection);
+            localStorage.setItem('user-data', JSON.stringify(userData));
+            localStorage.setItem('meals-data', JSON.stringify(meals));
+            localStorage.setItem('bmi-data', JSON.stringify((fitnessData as FitnessApiCollection).bmi));
+            localStorage.setItem(
+              'calories-data',
+              JSON.stringify((fitnessData as FitnessApiCollection).calories),
+            );
+            localStorage.setItem(
+              'ideal-data',
+              JSON.stringify((fitnessData as FitnessApiCollection).idealWeight),
+            );
+            localStorage.setItem('macros-data', JSON.stringify((fitnessData as FitnessApiCollection).macros));
+            localStorage.setItem('favourites', '');
+            localStorage.setItem('user', JSON.stringify(user));
+            setTimeout(() => navigation(`/${Routes.RESULTS}`), 500);
+            setIsLoading(false);
+          } else {
+            console.log('go to data collection');
+            navigation(`/${Routes.DATA_COLLECTION}`);
+          }
+        } else {
+          console.log('go to data collection');
+          navigation(`/${Routes.DATA_COLLECTION}`);
+        }
+      }
     } catch (e) {
       alert((e as Error).message);
     }
@@ -68,6 +156,19 @@ export default function SignInUpPage() {
         registrationEmail,
         registrationPassword,
       );
+      console.log(`user cred= ${userCredentials}`);
+      if (userCredentials) {
+        console.log('login OK');
+        const user = {
+          uid: userCredentials.user.uid,
+          email: userCredentials.user.email ? userCredentials.user.email : '',
+        };
+        setUser(user);
+        console.log('go to data collection');
+        navigation(`/${Routes.DATA_COLLECTION}`);
+      } else {
+        alert('Registration failed. Try again please');
+      }
     } catch (e) {
       alert((e as Error).message);
     }
@@ -196,6 +297,15 @@ export default function SignInUpPage() {
           </Box>
         </Box>
       </Container>
+      {isLoading && (
+        <div className={styles.loading}>
+          <p>Please wait, loading your data...</p>
+          <span>
+            <i></i>
+            <i></i>
+          </span>
+        </div>
+      )}
     </div>
   );
 }
