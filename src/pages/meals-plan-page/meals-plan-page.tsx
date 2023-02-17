@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import ReactPaginate from 'react-paginate';
 import Carousel from 'react-material-ui-carousel';
@@ -29,7 +28,7 @@ export default function MealsPlanPage() {
     CALORIES_DESC,
   } = Sorting;
   const { userData, mealsByParametersResponse, favouritesMeals } = useContext(UserContext);
-  const [popupMeal, setPopupMeal] = useState<ResultMeal>(mealsByParametersResponse.results[0]);
+  const [popupMeal, setPopupMeal] = useState<ResultMeal>(mealsByParametersResponse[0]);
   const [sorting, setSorting] = useState(Sorting.DEFAULT);
   const [search, setSearch] = useState('');
 
@@ -42,9 +41,9 @@ export default function MealsPlanPage() {
   const ITEMS_PER_PAGE = 12;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + ITEMS_PER_PAGE;
-  let dinnerIdeas = mealsByParametersResponse.results.slice(
+  let dinnerIdeas = mealsByParametersResponse.slice(
     daysArray.length * (userData.mealsCount || 3),
-    mealsByParametersResponse.results.length,
+    mealsByParametersResponse.length,
   );
   if (search !== '') {
     dinnerIdeas = dinnerIdeas.filter((meal) => {
@@ -133,7 +132,7 @@ export default function MealsPlanPage() {
   const pageCount = Math.ceil(dinnerIdeas.length / ITEMS_PER_PAGE);
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * ITEMS_PER_PAGE) % mealsByParametersResponse.results.length;
+    const newOffset = (event.selected * ITEMS_PER_PAGE) % mealsByParametersResponse.length;
     setItemOffset(newOffset);
   };
   const handleSearch = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -187,11 +186,10 @@ export default function MealsPlanPage() {
           {Array.from([1, 2, 3, 4, 5, 6, 7]).map((elem, idx) => {
             return (
               <div key={idx} className={styles.meals}>
-                {mealsByParametersResponse.results
+                {mealsByParametersResponse
                   .slice((elem - 1) * (userData.mealsCount || 3), elem * (userData.mealsCount || 3))
                   .map((item, i) => {
-                    const meal =
-                      mealsByParametersResponse.results[(elem - 1) * (userData.mealsCount || 3) + i];
+                    const meal = mealsByParametersResponse[(elem - 1) * (userData.mealsCount || 3) + i];
                     return (
                       <MealCard
                         key={(i + 1) * elem}

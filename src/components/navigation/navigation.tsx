@@ -11,31 +11,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../footer/footer';
 import { UserContext } from '../../context/user-context';
 import styles from '../../pages/main-page/main-page.module.scss';
 import { Avatar, Tooltip } from '@mui/material';
-
-const pages = [
-  ['Data collection', 'data-collection'],
-  ['Research result', 'research-results'],
-  ['Meals page', 'meals-page'],
-  ['Favourites meals', 'favorites'],
-];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-function RestoreIcon() {
-  return null;
-}
-
-function FavoriteIcon() {
-  return null;
-}
-
-function LocationOnIcon() {
-  return null;
-}
+import { Routes } from '../../types/routes';
 
 interface Props {
   children?: ReactNode;
@@ -44,7 +25,20 @@ interface Props {
 function Navigation({ children, ...props }: Props) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const { userData } = useContext(UserContext);
+  const { userData, user, setUser, setUserData } = useContext(UserContext);
+
+  let pages = user.uid
+    ? userData.isEditedByUser
+      ? [
+          ['Data collection', 'data-collection'],
+          ['Research result', 'research-results'],
+          ['Meals plan', 'meals-page'],
+          ['Favourite meals', 'favorites'],
+        ]
+      : [['Data collection', 'data-collection']]
+    : [];
+
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -147,33 +141,32 @@ function Navigation({ children, ...props }: Props) {
               RS-Healthy
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {userData.isEditedByUser &&
-                pages.map((page, idx) => (
-                  <Button
-                    key={page[1]}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+              {pages.map((page, idx) => (
+                <Button
+                  key={page[1]}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  <Link
+                    key={idx}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'white',
+                      fontFamily: 'Ubuntu',
+                      fontSize: '1.1rem',
+                    }}
+                    to={`/${page[1]}`}
                   >
-                    <Link
-                      key={idx}
-                      style={{
-                        textDecoration: 'none',
-                        color: 'white',
-                        fontFamily: 'Ubuntu',
-                        fontSize: '1.1rem',
-                      }}
-                      to={`/${page[1]}`}
-                    >
-                      {page[0]}
-                    </Link>
-                  </Button>
-                ))}
+                    {page[0]}
+                  </Link>
+                </Button>
+              ))}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={`${user.email[0]}`} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -192,11 +185,39 @@ function Navigation({ children, ...props }: Props) {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                {user.uid && (
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography style={{ color: 'lightgrey' }} textAlign="center">
+                      {user.email}
+                    </Typography>
                   </MenuItem>
-                ))}
+                )}
+                {!user.uid && (
+                  <MenuItem
+                    onClick={() => {
+                      navigate(`/${Routes.AUTH}`);
+                      handleCloseUserMenu();
+                    }}
+                  >
+                    <Typography textAlign="center">Log In</Typography>
+                  </MenuItem>
+                )}
+                {user.uid && (
+                  <MenuItem
+                    onClick={() => {
+                      localStorage.clear();
+                      setUser({
+                        uid: '',
+                        email: '',
+                      });
+                      setUserData({ ...userData, isEditedByUser: false });
+                      navigate('/');
+                      handleCloseUserMenu();
+                    }}
+                  >
+                    <Typography textAlign="center">Log Out</Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
           </Toolbar>
