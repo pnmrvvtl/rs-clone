@@ -737,13 +737,14 @@ export default function DataPage() {
       </div>
 
       <div className={`${styles.question} ${currentQuestion !== 28 && styles.hidden}`}>
-        <h2>Here is 3 leading nutrition experts</h2>
-        <div className={styles.experts}>
-          <div>Andreas Eenfeldt, MD</div>
-          <div>Bret Scher, MD</div>
-          <div>Franziska Spritzler, RD</div>
+        <h2>Congratulations! We complete data collection!</h2>
+        <div className={styles.midway}>
+          <p>🎉</p>
+          <p>
+            On the next page we'll try to get access to your location for suggesting you nearest sport areas.
+            Give access if you want this information.
+          </p>
         </div>
-        <p>Read more information by this authors if you want to know more in nutrition.</p>
         <div
           className={`${styles.button} ${styles.selected}`}
           onClick={async () => {
