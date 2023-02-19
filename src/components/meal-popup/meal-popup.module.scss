@@ -7,7 +7,7 @@
   top: 0;
   background: rgba(0, 0, 0, .7);
   z-index: 100;
-  color: $font-color-main;
+  color: var(--font-color-main);
   justify-content: center;
 }
 
@@ -16,7 +16,7 @@
   padding: 48px;
   margin: 32px 60px;
   max-width: 80%;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
   border-radius: 12px;
   height: fit-content;
 }
@@ -88,10 +88,10 @@
         width: 32px;
         height: 32px;
         line-height: 32px;
-        background-color: $font-color-main;
+        background-color: var(--font-color-link);
         border-radius: 59%;
         text-align: center;
-        color: $font-color-inverted;
+        color: var(--font-color-inverted);
       }
     }
   }
@@ -124,12 +124,12 @@
     .composition__block-line {
       height: 6px;
       border-radius: 3px;
-      background-color: $carbs-color;
+      background-color: var(--carbs-color);
     }
 
     .composition__block-percent {
       font-size: 14px;
-      color: $carbs-color;
+      color: var(--carbs-color);
     }
   }
 
@@ -140,12 +140,12 @@
     .composition__block-line {
       height: 6px;
       border-radius: 3px;
-      background-color: $carbs-protein;
+      background-color: var(--carbs-protein);
     }
 
     .composition__block-percent {
       font-size: 14px;
-      color: $carbs-protein;
+      color: var(--carbs-protein);
     }
   }
 
@@ -156,12 +156,12 @@
     .composition__block-line {
       height: 6px;
       border-radius: 3px;
-      background-color: $carbs-fat;
+      background-color: var(--carbs-fat);
     }
 
     .composition__block-percent {
       font-size: 14px;
-      color: $carbs-fat;
+      color: var(--carbs-fat);
     }
   }
 
@@ -228,10 +228,10 @@
         width: 32px;
         height: 32px;
         line-height: 32px;
-        background-color: #f3f3f3;
+        background-color: var(--font-color-link);
         border-radius: 59%;
         text-align: center;
-        color: $font-color-main;
+        color: var(--font-color-main);
         font-weight: 500;
       }
     }

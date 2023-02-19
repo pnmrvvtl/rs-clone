@@ -28,7 +28,7 @@
       align-items: center;
 
       .star {
-        background-color: $font-color-link;
+        background-color: var(--font-color-link);
         height: 30px;
         width: 30px;
         border-radius: 8px;
@@ -37,10 +37,10 @@
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        color: $font-color-inverted;
+        color: var(--font-color-inverted);
 
         &.favourite {
-          color: $sun-color;
+          color: var(--sun-color);
         }
       }
 
@@ -50,7 +50,7 @@
 
         span {
           font-size: 0.8rem;
-          color: $font-color-inverted;
+          color: var(--font-color-inverted);
           padding: 3px;
           display: flex;
           align-items: center;
@@ -58,7 +58,7 @@
           justify-content: center;
           margin: 5px;
           height: 30px;
-          background-color: $button-color;
+          background-color: var(--button-color);
         }
       }
     }
@@ -75,8 +75,8 @@
         margin: 5px;
         padding: 5px;
         border-radius: 5px;
-        color: $font-color-link;
-        background-color: rgba($background-super-light, 85%);
+        color: var(--font-color-link);
+        background-color: rgba(var(--background-super-light), 85%);
         font-weight: bolder;
       }
 
@@ -93,14 +93,14 @@
 
   .meal-title {
     width: 250px;
-    color: $font-color-sub;
+    color: var(--font-color-sub);
 
     span:nth-child(2) {
       color: darkred;
     }
 
     h5 {
-      color: $font-color-main;
+      color: var(--font-color-main);
     }
   }
 }

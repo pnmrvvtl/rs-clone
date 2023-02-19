@@ -1,7 +1,8 @@
 @import "../../scss/constants";
 
 .container {
-    background-color: $background-light;
+    background-color: var(--background-light);
+    color: var(--font-color-main);
 
     .description-wrapper {
         padding: 30px 0;
@@ -24,7 +25,7 @@
         box-sizing: border-box;
         min-height: 250px;
         border-radius: 15px;
-        background-color: rgba(255, 255, 255, .85);
+        background-color: var(--background-strip);
 
         .summary__title {
             font-size: 38px;
@@ -67,7 +68,7 @@
 
 .ingredients {
     padding: 32px 35px;
-    background-color: $background-super-light;
+    background-color: var(--background-super-light);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 
@@ -75,6 +76,7 @@
         margin-top: 0px;
         margin-bottom: 12px;
         font-size: 36px;
+        color: var(--font-color-head);
     }
 
     ul {
@@ -83,6 +85,7 @@
 
     span {
         margin: 5px 0;
+        color: var(--font-color-head);
     }
 
     .ingredients-list {
@@ -118,7 +121,7 @@
     .instructions-title {
         margin-top: 32px;
         margin-bottom: 12px;
-        color: $font-color-link;
+        color: var(--font-color-main);
         font-size: 36px;
     }
 
@@ -135,10 +138,10 @@
                 width: 32px;
                 height: 32px;
                 line-height: 32px;
-                background-color: $font-color-link;
+                background-color: var(--font-color-link);
                 border-radius: 59%;
                 text-align: center;
-                color: $font-color-inverted;
+                color: var(--font-color-inverted);
             }
         }
     }
@@ -160,6 +163,7 @@
             margin: 0;
             font-size: 36px;
             font-weight: 500;
+            color: var(--font-color-main)
         }
 
     }
@@ -179,12 +183,12 @@
         .composition__block-line {
             height: 6px;
             border-radius: 3px;
-            background-color: $carbs-color;
+            background-color: var(--carbs-color);
         }
 
         .composition__block-percent {
             font-size: 14px;
-            color: $carbs-color;
+            color: var(--carbs-color);
         }
     }
 
@@ -195,12 +199,12 @@
         .composition__block-line {
             height: 6px;
             border-radius: 3px;
-            background-color: $carbs-protein;
+            background-color: var(--carbs-protein);
         }
 
         .composition__block-percent {
             font-size: 14px;
-            color: $carbs-protein;
+            color: var(--carbs-protein);
         }
     }
 
@@ -211,12 +215,12 @@
         .composition__block-line {
             height: 6px;
             border-radius: 3px;
-            background-color: $carbs-fat;
+            background-color: var(--carbs-fat);
         }
 
         .composition__block-percent {
             font-size: 14px;
-            color: $carbs-fat;
+            color: var(--carbs-fat);
         }
     }
 
