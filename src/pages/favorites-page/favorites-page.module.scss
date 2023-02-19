@@ -2,11 +2,13 @@
 
 .container {
   min-height: 600px;
-  padding: 20px 50px;
-  background-color: $background-strip;
+  padding: 40px 50px;
+  background-color: var(--background-main);
+  color: var(--font-color-main);
 
   .meals {
     display: flex;
+    margin-top: 40px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;

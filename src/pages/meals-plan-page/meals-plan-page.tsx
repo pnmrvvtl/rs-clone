@@ -14,6 +14,7 @@ import styles from './meals-plan.page.module.scss';
 import { TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Sorting from '../../types/sorting';
+import { ThemeContext } from '../../context/theme-context';
 
 export default function MealsPlanPage() {
   const {
@@ -28,6 +29,7 @@ export default function MealsPlanPage() {
     CALORIES_DESC,
   } = Sorting;
   const { userData, mealsByParametersResponse, favouritesMeals } = useContext(UserContext);
+  const {theme} = useContext(ThemeContext);
   const [popupMeal, setPopupMeal] = useState<ResultMeal>(mealsByParametersResponse[0]);
   const [sorting, setSorting] = useState(Sorting.DEFAULT);
   const [search, setSearch] = useState('');
@@ -173,7 +175,7 @@ export default function MealsPlanPage() {
             style: {
               // display: 'none',
               backgroundColor: 'rgb(200,200,200)',
-              color: 'rgba(5, 170, 88)',
+              color: theme === 'dark' ? 'rgba(63, 66, 73, 1)' : 'rgba(5, 170, 88)',
             },
           }}
           navButtonsWrapperProps={{
@@ -233,8 +235,9 @@ export default function MealsPlanPage() {
             variant="outlined"
             value={search}
             onChange={handleSearch}
+            className={styles.input}
           />
-          <TextField id="sorting" value={String(sorting)} label="Sorting" select onChange={handleSorting}>
+          <TextField id="sorting" value={String(sorting)} className={styles.input} label="Sorting" select onChange={handleSorting}>
             <MenuItem value={DEFAULT}>Default sorting</MenuItem>
             <MenuItem value={CALORIES_ASC}>Sorting by calories ASC</MenuItem>
             <MenuItem value={CALORIES_DESC}>Sorting by calories DESC</MenuItem>

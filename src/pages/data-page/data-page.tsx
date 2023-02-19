@@ -22,10 +22,12 @@ import {
   setUserDataToFirestore,
   setUserStatusToFirestore,
 } from '../../helpers/firebase';
+import { ThemeContext } from '../../context/theme-context';
 
 export default function DataPage() {
   const { setUserData, setMealsByParametersResponse, setFitnessApiResponse, user, favouritesMeals } =
     useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const localDataUser = localStorage.getItem('user-data');
@@ -189,7 +191,9 @@ export default function DataPage() {
     <div className={styles.container}>
       <div className={styles.progress}>
         <div
-          className={`${styles.arrow} ${currentQuestion === 1 && styles.hidden}`}
+          className={`${theme === 'dark' ? styles.white : styles.arrow} ${
+            currentQuestion === 1 && styles.hidden
+          }`}
           onClick={() => currentQuestion > 1 && setCurrentQuestion(currentQuestion - 1)}
         ></div>
         <div className={styles.bar}>

@@ -12,17 +12,17 @@
 
 .title {
   font-size: 10rem;
-  color: $font-color-sub;
+  color: var(--font-color-sub);
 }
 
 .subtitle {
   font-size: 3rem;
-  color: $font-color-sub;
+  color: var(--font-color-sub);
 }
 
 .text {
   font-size: 2rem;
-  color: $font-color-sub;
+  color: var(--font-color-sub);
 }
 
 .error-image {

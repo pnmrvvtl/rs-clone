@@ -8,17 +8,26 @@
   flex-wrap: wrap;
   align-items: flex-start;
   padding-bottom: 100px;
+  color: var(--font-color-main);
+
+  input {
+    background-color: var(--background-super-light);
+  }
 
   .button {
-    background-color: $button-color;
+    background-color: var(--button-color);
 
     &:hover {
-      background-color: $button-color-hover;
+      background-color: var(--button-color-hover);
     }
   }
 
+  .css-ag7rrr-MuiTypography-root {
+    color: #FFF;
+  }
+
   .loading {
-    background-color: rgba($background-dark, 50%);
+    background-color: rgba(var(--background-dark, 50%));
     text-align: center;
     position: absolute;
     font-size: 2rem;

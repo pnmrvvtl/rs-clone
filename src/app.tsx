@@ -17,6 +17,7 @@ import { BMI, Calory, Macros, IdealWeight } from './types/fitness-api-types';
 import { UserContext } from './context/user-context';
 import SignInUpPage from './pages/sign-in-up-page/sign-in-up-page';
 import { Routes } from './types/routes';
+import { ThemeContext } from './context/theme-context';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,7 +50,10 @@ export const App = () => {
   const localStorageWeight = localStorage.getItem('ideal-data');
   const localStorageFavourites = localStorage.getItem('favourites');
   const localStorageUser = localStorage.getItem('user');
+  const localStorageTheme = localStorage.getItem('theme');
 
+
+  const [theme, setTheme] = useState<string>(localStorageTheme ? JSON.parse(localStorageTheme) : 'light');
   const [userData, setUserData] = useState<UserData>(
     localStorageUserData
       ? JSON.parse(localStorageUserData)
@@ -172,24 +176,26 @@ export const App = () => {
 
   return (
     <>
-      <React.StrictMode>
+    <React.StrictMode>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
         <UserContext.Provider
           value={{
             userData,
             setUserData,
+            user,
+            setUser,
             mealsByParametersResponse,
             setMealsByParametersResponse,
             fitnessApiResponse,
             setFitnessApiResponse,
             favouritesMeals,
             setFavouritesMeals,
-            user,
-            setUser,
           }}
         >
           <RouterProvider router={router} />
         </UserContext.Provider>
-      </React.StrictMode>
-    </>
+      </ThemeContext.Provider>
+    </React.StrictMode>
+  </>
   );
 };

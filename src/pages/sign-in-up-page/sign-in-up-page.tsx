@@ -203,7 +203,7 @@ export default function SignInUpPage() {
 
   return (
     <div className={styles.container}>
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -216,44 +216,55 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component='form' sx={{ mt: 1 }}>
+          <Box component="form" sx={{ mt: 1 }}>
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               autoFocus
               value={signInEmail}
               onChange={(event) => setSignInEmail(event.target.value)}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              autoComplete='current-password'
+              name="password"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
               value={signInPassword}
               onChange={(event) => setSignInPassword(event.target.value)}
             />
-            <Button className={styles.button} onClick={handleSignInClick} fullWidth variant='contained'
-                    sx={{ mt: 3, mb: 2 }}>
+            <Button
+              className={styles.button}
+              onClick={handleSignInClick}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign In
             </Button>
-            <Button className={styles.button} onClick={handleSignInWithGoogleClick} fullWidth variant='contained'
-                    sx={{ mt: 3, mb: 2 }}>
-              <GoogleIcon />Sign In with Google
+            <Button
+              className={styles.button}
+              onClick={handleSignInWithGoogleClick}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              <GoogleIcon />
+              Sign In with Google
             </Button>
           </Box>
         </Box>
       </Container>
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -266,54 +277,59 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography component="h1" variant="h5">
             Registration
           </Typography>
-          <Box component='form' sx={{ mt: 1 }}>
+          <Box component="form" sx={{ mt: 1 }}>
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               value={registrationEmail}
               onChange={(event) => setRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              label='Repeat Email Address'
-              name='email'
-              autoComplete='email'
+              label="Repeat Email Address"
+              name="email"
+              autoComplete="email"
               value={repeatRegistrationEmail}
               onChange={(event) => setRepeatRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              autoComplete='current-password'
+              name="password"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
               value={registrationPassword}
               onChange={(event) => setRegistrationPassword(event.target.value)}
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              name='repeat-password'
-              label='Repeat password'
-              type='password'
-              autoComplete='current-password'
+              name="repeat-password"
+              label="Repeat password"
+              type="password"
+              autoComplete="current-password"
               value={repeatRegistrationPassword}
               onChange={(event) => setRepeatRegistrationPassword(event.target.value)}
             />
-            <Button className={styles.button} onClick={handleRegistrationClick} fullWidth variant='contained'
-                    sx={{ mt: 3, mb: 2 }}>
+            <Button
+              className={styles.button}
+              onClick={handleRegistrationClick}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Registration
             </Button>
           </Box>

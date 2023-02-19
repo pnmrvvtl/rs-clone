@@ -10,10 +10,9 @@
   justify-content: flex-start;
   box-sizing: border-box;
   flex-direction: column;
-  background-color: $background-light;
+  background-color: var(--background-light);
   width: 100%;
   min-height: calc(100vh - 130px);
-  color: $font-color-main;
 
   .progress {
     width: 300px;
@@ -25,7 +24,8 @@
     padding-top: 30px;
 
     .arrow {
-      background-image: url("../../assets/icons/arrow.svg");
+      background-image: url("../../assets/icons/arrowBlack.svg");
+      
       width: 20px;
       margin-right: 20px;
       height: 15px;
@@ -40,8 +40,25 @@
       }
     }
 
+    .white {
+      background-image: url("../../assets/icons/arrowWhite.svg");
+      width: 20px;
+  
+      margin-right: 20px;
+      height: 15px;
+      background-repeat: no-repeat;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      // &.hidden {
+      //   background-image: none;
+      // }
+    }
+
     .bar {
-      background-color: $background-super-light;
+      background-color: var(--background-super-light);
       width: 100%;
       height: 10px;
       display: flex;
@@ -53,7 +70,7 @@
         width: 3%;
         height: 100%;
         border-radius: 5px;
-        background-color: $button-color;
+        background-color: var(--button-color);
         transition: width 0.5s ease;
 
         &.mult2 {
@@ -185,6 +202,7 @@
       margin-bottom: 20px;
       text-align: center;
       max-width: 40vw;
+      color: var(--font-color-main);
     }
 
     .button {
@@ -198,33 +216,34 @@
       justify-content: center;
       border-radius: 7px;
       font-weight: bolder;
-      background-color: $background-super-light;
-      color: $font-color-main;
+      background-color: var(--background-super-light);
+      color: var(--font-color-head);
 
       p {
         padding: 0;
         margin: 10px;
         width: 100%;
+        color: var(--font-color-main);
       }
 
       p.button-p-one {
-        color: $font-color-main;
+        color: var(--font-color-head);
         font-size: 1.2rem;
         margin: 5px;
       }
 
       p.button-p-two {
         margin: 5px;
-        color: $font-color-sub;
+        color: var(--font-color-head);
         font-weight: lighter;
       }
 
       &.selected {
-        background-color: $button-color;
-        color: $font-color-inverted;
+        background-color: var(--button-color);
+        color: var(--font-color-inverted);
 
         p {
-          color: $font-color-inverted;
+          color: var(--font-color-main);
         }
       }
 
@@ -240,14 +259,15 @@
       line-height: 150%;
       width: 65%;
       text-align: center;
+      color: var(--font-color-main);
     }
 
     .goal {
 
       width: 300px;
       min-height: 70px;
-      background-color: $background-super-light;
-      color: $font-color-main;
+      background-color: var(--background-super-light);
+      color: var(--font-color-head);
       border-radius: 7px;
       margin: 7px;
       display: flex;
@@ -267,7 +287,7 @@
         min-height: 30px;
         margin: 10px;
         border-radius: 7px;
-        background-color: $background-super-light;
+        background-color: var(--background-super-light);
         border: 3px solid $background-strip;
         box-sizing: border-box;
         transition: background-color 0.3s ease;
@@ -277,10 +297,10 @@
             content: '\2713';
             position: relative;
             left: 6px;
-            color: $font-color-main;
+            color: var(--font-color-head);
           }
 
-          background-color: $button-color;
+          background-color: var(--button-color);
         }
       }
     }
@@ -334,7 +354,7 @@
       display: flex;
       align-items: center;
       height: 30px;
-      background-color: $background-super-light;
+      background-color: var(--background-super-light);
       border-radius: 30px;
       width: 200px;
       margin-top: 20px;
@@ -351,11 +371,11 @@
         border-radius: 30px;
         height: 100%;
         width: 50%;
-        background-color: $background-super-light;
+        background-color: var(--background-super-light);
         transition: background-color 0.5s ease;
 
         &.selected {
-          background-color: $background-strip;
+          background-color: var(--background-strip);
         }
       }
 
@@ -366,11 +386,11 @@
         border-radius: 30px;
         height: 100%;
         width: 50%;
-        background-color: $background-super-light;
+        background-color: var(--background-super-light);
         transition: background-color 0.5s ease;
 
         &.selected {
-          background-color: $background-strip;
+          background-color: var(--background-strip);
         }
       }
     }
@@ -424,7 +444,7 @@
       width: 30vw;
       height: 500px;
       border-radius: 20px;
-      background-color: $background-super-light;
+      background-color: var(--background-super-light);
       background-image: url("../../assets/images/data-before-after.webp");
       background-position: top;
       background-size: contain;
@@ -440,12 +460,14 @@
         font-size: 1.3rem;
         font-weight: lighter;
         margin-bottom: 50px;
+        color: var(--font-color-head);
       }
 
       p {
         width: 80%;
         font-weight: bolder;
         font-size: 1.2rem;
+        color: var(--font-color-head);
       }
     }
 
@@ -458,10 +480,12 @@
       h4 {
         font-size: 2rem;
         margin-bottom: 30px;
+        color: var(--font-color-head);
       }
 
       p:nth-child(1) {
         font-size: 9rem;
+        color: var(--font-color-head);
       }
 
 
@@ -497,7 +521,7 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      background-color: $background-super-light;
+      background-color: var(--background-super-light);
       border-radius: 30px;
 
       div {
@@ -533,7 +557,7 @@
   }
 
   .loading {
-    background-color: rgba($background-dark, 50%);
+    background-color: var(--background-dark);
     text-align: center;
     position: absolute;
     font-size: 2rem;

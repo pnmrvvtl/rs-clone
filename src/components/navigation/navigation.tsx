@@ -17,6 +17,8 @@ import { UserContext } from '../../context/user-context';
 import styles from '../../pages/main-page/main-page.module.scss';
 import { Avatar, Tooltip } from '@mui/material';
 import { Routes } from '../../types/routes';
+import ThemeSwither from '../theme-swither/theme-swither';
+import { ThemeContext } from '../../context/theme-context';
 
 interface Props {
   children?: ReactNode;
@@ -26,8 +28,11 @@ function Navigation({ children, ...props }: Props) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const { userData, user, setUser, setUserData } = useContext(UserContext);
+  const { theme} = useContext(ThemeContext);
+  const colorHeader = theme === 'dark' ? 'rgba(35, 35, 35, 1)': '#37664E';
+  const hoverHeader = theme === 'dark' ?  'rgba(87, 52, 166, 1)' : '#05AA58';
 
-  let pages = user.uid
+  const pages = user.uid
     ? userData.isEditedByUser
       ? [
           ['Data collection', 'data-collection'],
@@ -57,7 +62,7 @@ function Navigation({ children, ...props }: Props) {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: '#37664E', color: '#ffff' }}>
+      <AppBar position="sticky" sx={{ backgroundColor: `${colorHeader}`, color: '#ffff' }}>
         <Container maxWidth="xl" className={styles.header}>
           <Toolbar disableGutters>
             {/* <WbSunnyIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/> */}
@@ -74,8 +79,7 @@ function Navigation({ children, ...props }: Props) {
                 fontSize: '3rem',
                 letterSpacing: '.3rem',
                 color: 'white',
-                '&:hover': { color: '#05AA58' },
-
+                '&:hover': { color: `${hoverHeader}`},
                 textDecoration: 'none',
               }}
             >
@@ -222,6 +226,7 @@ function Navigation({ children, ...props }: Props) {
                     <Typography textAlign="center">Log Out</Typography>
                   </MenuItem>
                 )}
+                <ThemeSwither/>
               </Menu>
             </Box>
           </Toolbar>

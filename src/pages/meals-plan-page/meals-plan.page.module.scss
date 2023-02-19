@@ -2,17 +2,17 @@
 
 .container {
 
+  width: 100%;
+  color: var(--font-color-main);
+
   a:link, a:active, a:hover, a:visited {
-    color: $font-color-main;
+    color: var(--font-color-link);
     text-decoration: none;
   }
 
-  width: 100%;
-  color: $font-color-main;
-
   .current-meals {
     padding: 20px 50px;
-    background-color: $background-light;
+    background-color: var(--background-light);
 
     .meals {
       width: 100%;
@@ -25,9 +25,13 @@
 
   .dinner-ideas {
     padding: 20px 50px;
-    background-color: $background-strip;
+    background-color: var(--background-strip);
     width: 100%;
     min-height: 400px;
+
+    input, select, textarea {
+      color: var(--font-color-main);
+  }
 
     .filters {
       padding-bottom: 10px;
@@ -35,12 +39,13 @@
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
+      color: var(--font-color-main);
 
       & > div {
         margin: 10px;
-
+       
         span {
-          color: $font-color-main;
+          color: var(--font-color-main);
         }
 
         width: 300px;
@@ -58,6 +63,7 @@
 
         & > div:nth-child(1) {
           max-width: 250px;
+          
         }
 
         & > div:nth-child(2) {
@@ -73,7 +79,7 @@
     align-items: center;
     padding: 10px;
     margin: 0;
-    background-color: $background-strip;
+    background-color: var(--background-light);
 
     * {
       padding: 10px;
@@ -82,11 +88,11 @@
     }
 
     li {
-      background-color: $font-color-link;
+      background-color: var(--font-color-link);
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      color: $font-color-inverted;
+      color: var(--font-color-inverted);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -97,7 +103,7 @@
           cursor: not-allowed;
         }
 
-        background-color: lighten($font-color-link, 30%);
+        background-color: var(--font-color-link);
 
         a {
           text-decoration: line-through;
@@ -123,12 +129,15 @@
       &.next, &.previous {
         width: unset;
         border-radius: 10px;
+        &:hover {
+          background-color: var(--button-color-hover);
+        }
       }
 
     }
 
     a, a:link, a:active, a:visited, a:hover {
-      color: $font-color-inverted;
+      color: var(--font-color-inverted);
       text-decoration: none;
     }
 
