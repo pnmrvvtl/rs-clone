@@ -1,10 +1,10 @@
-@import "../../scss/constants";
+@import '../../scss/constants';
 
 @mixin btn-link {
   color: #fff;
-  background-color: $button-color;
-  width: 200px;
-  height: 55px;
+  background-color: var(--button-color);
+  width: 270px;
+  height: 60px;
   border: none;
   font-size: 1.5rem;
   font-weight: 600;
@@ -12,12 +12,12 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $button-color-hover;
+    background-color: var(--button-color-hover);
   }
 }
 
 .header {
-  background-color: $selected-filter-color;
+  background-color: var(--selected-filter-color);
   font-size: 2rem;
 }
 
@@ -27,25 +27,24 @@
   align-items: center;
   justify-content: center;
   margin: 2px auto;
-  background-image: url("../../assets/image/main/main-img.jpg");
+  background-image: url('../../assets/image/main/main-img.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
   width: 100%;
   height: 900px;
   border-radius: 0 0 60% 60%;
-
 }
 
 .about-title {
   font-size: 4.5rem;
   font-weight: 500;
   align-items: center;
-  color: $font-color-main;
+  color: var(--font-color-head);
 }
 
 .about-subtitle {
-  color: $font-color-sub;
+  color: var(--font-color-head);
   font-size: 1.5rem;
   margin: 30px 0;
   text-align: center;
@@ -61,13 +60,13 @@
   flex-direction: column;
   align-items: center;
   margin-top: 5px;
-  background-color: $background-light;
+  background-color: var(--background-light);
   padding: 60px 0 40px;
   border-radius: 5%;
 }
 
 .benefits-title {
-  color: $font-color-main;
+  color: var(--font-color-main);
   font-size: 3rem;
   text-align: center;
   margin: 0 8px 40px;
@@ -95,7 +94,7 @@
 .benefit-title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: $font-color-main;
+  color: var(--font-color-main);
   margin-bottom: 10px;
   text-align: center;
 }
@@ -103,12 +102,12 @@
 .benefits-subtitle {
   font-size: 1.8rem;
   font-weight: 500;
-  color: $font-color-main;
+  color: var(--font-color-main);
   margin: 10px 0;
 }
 
 .benefit-text {
-  color: $font-color-main;
+  color: var(--font-color-main);
   font-size: 1.2rem;
   text-align: center;
   line-height: 2rem;
@@ -125,13 +124,14 @@
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  margin: 100px 0
+  margin: 100px 0;
 }
 
 .instruction-img {
   width: 250px;
   height: 250px;
   margin-bottom: 20px;
+  border-radius: 50%;
 }
 
 .instruction {
@@ -153,15 +153,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px 30px;
+  margin: 80px 30px 0;
+  padding-bottom: 80px;
 }
 
 .members-title {
   font-size: 2.5rem;
-  color: $font-color-main;
+  color: var(--font-color-main);
   text-align: center;
   margin: 40px 8px 20px;
-
 }
 
 .members-slider {
@@ -185,7 +185,7 @@
   font-size: 1.8rem;
   text-align: center;
   color: #fff;
-  background-color: $background-dark;
+  background-color: var(--background-dark);
   height: 15%;
 }
 
@@ -248,7 +248,6 @@
 }
 
 @media (max-width: 900px) {
-
   .members-slider {
     width: 80%;
     margin: 0 20px;
@@ -315,7 +314,6 @@
     justify-content: center;
     column-gap: 15px;
   }
-
 }
 
 @media (max-width: 650px) {
@@ -340,7 +338,6 @@
   .member-info {
     font-size: 1rem;
   }
-
 }
 
 @media (max-width: 520px) {
@@ -365,7 +362,6 @@
   .members-title {
     font-size: 2rem;
   }
-
 }
 
 @media (max-width: 450px) {
@@ -385,7 +381,7 @@
     width: 150px;
     font-size: 1.2rem;
   }
-  .benefits-subtitle{
+  .benefits-subtitle {
     margin: 10px 0;
     font-size: 1.5rem;
   }
