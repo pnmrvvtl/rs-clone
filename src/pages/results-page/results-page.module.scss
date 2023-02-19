@@ -14,7 +14,7 @@
 
 .result-title {
   font-size: 3rem;
-  color: $font-color-main;
+  color: var(--font-color-main);
   text-align: center;
 }
 
@@ -33,7 +33,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  background-color: $background-result;
+  background-color: var(--background-result);
   height: 100%;
   row-gap: 20px;
   border-radius: 0.75rem;
@@ -42,7 +42,7 @@
 
 .bmi-chart {
   flex: 0 1 52%;
-  background-color: $background-result;
+  background-color: var(--background-result);
   height: 100%;
   width: 100%;
   border-radius: 0.75rem;
@@ -77,20 +77,20 @@
 
 .title {
   font-size: 2rem;
-  color: $font-color-sub;
+  color: var(--font-color-sub);
   font-weight: 500;
 }
 
 .value {
-  color: $font-color-main;
+  color: var(--font-color-main);
 }
 .recommended {
-  color: $sun-color;
+  color: var(--sun-color);
   font-size: 1.2rem;
   font-style: italic;
 }
 .text {
-  color: $button-color;
+  color: var(--button-color);
   font-size: 1.4rem;
   font-style: italic;
   margin: 0;
@@ -107,20 +107,20 @@
 }
 
 .plan-title {
-  color: $footer-color;
+  color: var(--font-color-head);
   font-size: 2.8rem;
   margin: 30px 0 20px;
 }
 
 .plan-text {
   font-size: 1.5rem;
-  color: $font-color-sub;
+  color: var(--font-color-sub);
   margin: 10px 0;
 }
 
 .plan-button {
   color: #fff;
-  background-color: $button-color;
+  background-color: var(--button-color);
   width: 240px;
   height: 60px;
   border: none;
@@ -131,26 +131,27 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $button-color-hover;
+    background-color: var(--button-color-hover);
   }
 }
 
 .gym-map {
   height: 500px;
-  background-color: $background-light;
+  background-color: var(--background-light);
   border-radius: 20px;
   margin: 30px 0 100px;
 }
 
 .map-title {
   font-size: 2.5rem;
-  color: $font-color-main;
+  color: var(--font-color-main);
   text-align: center;
   margin-top: 90px;
 }
 .map-subtitle {
   text-align: center;
   font-size: 1.5rem;
+  color: var(--font-color-main);
 }
 
 .map {
