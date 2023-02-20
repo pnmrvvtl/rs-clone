@@ -6,7 +6,7 @@ export default function MealPlan() {
     const navigate = useNavigate();
 
     return (
-        <section className={styles["meal-plan"]}>
+        <section className={styles["meal-plan"]} title='personal meal plan'>
             <h2 className={styles["plan-title"]}>Meal plans designed for your results</h2>
             <p className={styles["plan-text"]}>We do the planning so you can focus on cooking and <br/> enjoying
                 healthy, delicious food.</p>

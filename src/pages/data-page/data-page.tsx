@@ -56,7 +56,7 @@ export default function DataPage() {
   const [weightSystem, setWeightSystem] = useState('kilos');
   const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
   const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '');
+  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '12 weeks');
   const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
   const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
   const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');

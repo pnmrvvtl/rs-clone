@@ -10,6 +10,7 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
   const { bmi, macros, idealWeight, calories } = props;
 
   const goalData = calculateGoal(userData.currentKgWeight, userData.goalKgWeight, userData.weightProgramm)
+  console.log(goalData)
   const weightResponseValues = Object.values(idealWeight)
   const sumValues = weightResponseValues.reduce((sum, value) => sum + value, 0)
   const averageWeight = Math.ceil(sumValues / weightResponseValues.length)
@@ -26,7 +27,7 @@ export default function BMI(props: { calories: Calory, macros: Macros, bmi: BMI,
 
   const goal = goalPrograms[`${goalData.program}${goalData.goal}`] || 'weightlose';
   const calory = goalResponse[goal as keyof CaloryGoals || 'Weight loss'] as CaloryWeight || {calory: 1800};
-
+console.log(goalData.program , goalData.goal)
   return (
     <section className={styles["bmi-results"]}>
       <div className={styles.title}>Current weight:
