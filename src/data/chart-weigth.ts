@@ -112,7 +112,7 @@ export const options = {
       position: 'bottom' as const,
       labels: {
         font: {
-          size: 16,
+          size: 14,
         },
       },
     },
