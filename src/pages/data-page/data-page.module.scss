@@ -329,10 +329,10 @@
       box-sizing: border-box;
     }
 
-    .ft-div>div,
-    .cm-div>div,
-    .pounds-div>div,
-    .kilos-div>div {
+    .ft-div > div,
+    .cm-div > div,
+    .pounds-div > div,
+    .kilos-div > div {
       position: relative;
     }
 
@@ -344,7 +344,7 @@
       }
     }
 
-    input[type=number]+span {
+    input[type=number] + span {
       position: absolute;
       top: 20px;
       right: 15px;
@@ -441,7 +441,7 @@
 
 
     .before-after {
-      width: 30vw;
+      width: 50%;
       height: 500px;
       border-radius: 20px;
       background-color: var(--background-super-light);
@@ -505,7 +505,7 @@
       background-repeat: no-repeat;
     }
 
-    .pizza-img+p {
+    .pizza-img + p {
       font-size: 1.4rem;
       width: 55%;
       margin-top: 20px;
@@ -572,6 +572,7 @@
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+
   .loading span {
     position: absolute;
     height: 10px;
@@ -579,6 +580,7 @@
     top: 50px;
     overflow: hidden;
   }
+
   .loading span > i {
     position: absolute;
     height: 4px;
@@ -589,10 +591,12 @@
     -o-animation: wait 4s infinite;
     animation: wait 4s infinite;
   }
+
   .loading span > i:nth-of-type(1) {
     left: -28px;
     background: yellow;
   }
+
   .loading span > i:nth-of-type(2) {
     left: -21px;
     -webkit-animation-delay: 0.8s;
@@ -601,28 +605,60 @@
   }
 
   @-webkit-keyframes wait {
-    0%   { left: -7px  }
-    30%  { left: 52px  }
-    60%  { left: 22px  }
-    100% { left: 100px }
+    0% {
+      left: -7px
+    }
+    30% {
+      left: 52px
+    }
+    60% {
+      left: 22px
+    }
+    100% {
+      left: 100px
+    }
   }
   @-moz-keyframes wait {
-    0%   { left: -7px  }
-    30%  { left: 52px  }
-    60%  { left: 22px  }
-    100% { left: 100px }
+    0% {
+      left: -7px
+    }
+    30% {
+      left: 52px
+    }
+    60% {
+      left: 22px
+    }
+    100% {
+      left: 100px
+    }
   }
   @-o-keyframes wait {
-    0%   { left: -7px  }
-    30%  { left: 52px  }
-    60%  { left: 22px  }
-    100% { left: 100px }
+    0% {
+      left: -7px
+    }
+    30% {
+      left: 52px
+    }
+    60% {
+      left: 22px
+    }
+    100% {
+      left: 100px
+    }
   }
   @keyframes wait {
-    0%   { left: -7px  }
-    30%  { left: 52px  }
-    60%  { left: 22px  }
-    100% { left: 100px }
+    0% {
+      left: -7px
+    }
+    30% {
+      left: 52px
+    }
+    60% {
+      left: 22px
+    }
+    100% {
+      left: 100px
+    }
   }
 
 }
