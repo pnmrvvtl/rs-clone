@@ -24,7 +24,7 @@
   justify-content: space-between;
   column-gap: 20px;
   align-items: center;
-  height: 550px;
+  height: 580px;
 }
 
 .bmi-results {
@@ -45,6 +45,7 @@
   background-color: var(--background-result);
   height: 100%;
   width: 100%;
+  padding: 10px 0 40px;
   border-radius: 0.75rem;
   position: relative;
 }
@@ -114,7 +115,7 @@
 
 .plan-text {
   font-size: 1.5rem;
-  color: var(--font-color-sub);
+  color: var(--font-color-head);
   margin: 10px 0;
 }
 
@@ -170,6 +171,12 @@
   width: 24%;
   height: auto;
   border-radius: 20px;
+}
+
+@media(min-width: 1500px) {
+  .bmi-chart {
+    padding-bottom: 50px;
+  }
 }
 
 @media (max-width: 1500px) {
@@ -230,6 +237,9 @@
   }
   .title {
     font-size: 1.5rem;
+  }
+  .bmi-chart {
+    padding-bottom: 40px;
   }
 }
 
@@ -351,6 +361,9 @@
   .chart-title3 {
     top: 41%;
     font-size: 1rem;
+  }
+  .bmi-chart {
+    padding-bottom: 30px;
   }
 }
 
