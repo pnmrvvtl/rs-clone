@@ -29,7 +29,7 @@ export default function MealsPlanPage() {
     CALORIES_DESC,
   } = Sorting;
   const { userData, mealsByParametersResponse, favouritesMeals } = useContext(UserContext);
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [popupMeal, setPopupMeal] = useState<ResultMeal>(mealsByParametersResponse[0]);
   const [sorting, setSorting] = useState(Sorting.DEFAULT);
   const [search, setSearch] = useState('');
@@ -180,7 +180,12 @@ export default function MealsPlanPage() {
           }}
           navButtonsWrapperProps={{
             style: {
-              top: '-15%',
+              top: '38%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             },
           }}
           navButtonsAlwaysVisible={true}
@@ -237,7 +242,14 @@ export default function MealsPlanPage() {
             onChange={handleSearch}
             className={styles.input}
           />
-          <TextField id="sorting" value={String(sorting)} className={styles.input} label="Sorting" select onChange={handleSorting}>
+          <TextField
+            id="sorting"
+            value={String(sorting)}
+            className={styles.input}
+            label="Sorting"
+            select
+            onChange={handleSorting}
+          >
             <MenuItem value={DEFAULT}>Default sorting</MenuItem>
             <MenuItem value={CALORIES_ASC}>Sorting by calories ASC</MenuItem>
             <MenuItem value={CALORIES_DESC}>Sorting by calories DESC</MenuItem>
