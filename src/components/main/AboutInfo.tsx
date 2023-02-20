@@ -9,7 +9,7 @@ export default function AboutInfo() {
   const { user } = useContext(UserContext);
 
   return (
-    <section className={styles['about']}>
+    <section className={styles['about']} title='food photo'>
       <h1 className={styles['about-title']}>A healthier life starts now!</h1>
       <h5 className={styles['about-subtitle']}>
         Custom meal plans, delicious recipes and grocery lists <br /> to help you stay fit and feel better.
