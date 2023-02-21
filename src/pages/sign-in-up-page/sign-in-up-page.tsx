@@ -46,7 +46,7 @@ export default function SignInUpPage() {
 
   const handleSignInClick = async () => {
     try {
-      if (!testEmail.test(signInEmail) || testPassword.test(signInPassword)) {
+      if (!testEmail.test(signInEmail) || !testPassword.test(signInPassword)) {
         return;
       }
       if (!signInEmail || !signInPassword) {
