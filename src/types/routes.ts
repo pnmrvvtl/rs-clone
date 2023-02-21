@@ -4,4 +4,5 @@ export enum Routes {
   DATA_COLLECTION = 'data-collection',
   RESULTS = 'research-results',
   AUTH = 'auth',
+  PERSONAL = 'pesonal-data',
 }

@@ -868,7 +868,6 @@ export default function DataPage() {
               localStorage.setItem('calories-data', JSON.stringify(calories));
               localStorage.setItem('macros-data', JSON.stringify(macros));
               localStorage.setItem('ideal-data', JSON.stringify(idealWeight));
-              localStorage.setItem('favourites', '');
               localStorage.setItem('user', JSON.stringify(user));
 
               setFitnessApiResponse({ bmi, calories, macros, idealWeight });

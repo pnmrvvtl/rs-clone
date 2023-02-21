@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../context/theme-context';
 import { MenuItem, Typography } from '@mui/material';
 
-export default function ThemeSwither() {
+export default function ThemeSwitcher() {
   const { theme, setTheme } = useContext(ThemeContext);
   localStorage.setItem('theme', JSON.stringify(theme));
 

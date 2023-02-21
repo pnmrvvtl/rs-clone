@@ -18,6 +18,7 @@ import { UserContext } from './context/user-context';
 import SignInUpPage from './pages/sign-in-up-page/sign-in-up-page';
 import { Routes } from './types/routes';
 import { ThemeContext } from './context/theme-context';
+import PersonalDataPage from './pages/personal-data-page/personal-data-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="meal/:id" element={<Meal />} />
       <Route path={Routes.DATA_COLLECTION} element={<DataPage />} />
       <Route path={Routes.RESULTS} element={<ResultsPage />} />
+      <Route path={Routes.PERSONAL} element={<PersonalDataPage />} />
       <Route path={Routes.MEALS_PLAN} element={<MealsPlanPage />} />
       <Route path={Routes.FAV_MEALS} element={<FavoritesPage />} />
       <Route path={Routes.AUTH} element={<SignInUpPage />} />
@@ -51,7 +53,6 @@ export const App = () => {
   const localStorageFavourites = localStorage.getItem('favourites');
   const localStorageUser = localStorage.getItem('user');
   const localStorageTheme = localStorage.getItem('theme');
-
 
   const [theme, setTheme] = useState<string>(localStorageTheme ? JSON.parse(localStorageTheme) : 'light');
   const [userData, setUserData] = useState<UserData>(
@@ -176,26 +177,26 @@ export const App = () => {
 
   return (
     <>
-    <React.StrictMode>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <UserContext.Provider
-          value={{
-            userData,
-            setUserData,
-            user,
-            setUser,
-            mealsByParametersResponse,
-            setMealsByParametersResponse,
-            fitnessApiResponse,
-            setFitnessApiResponse,
-            favouritesMeals,
-            setFavouritesMeals,
-          }}
-        >
-          <RouterProvider router={router} />
-        </UserContext.Provider>
-      </ThemeContext.Provider>
-    </React.StrictMode>
-  </>
+      <React.StrictMode>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <UserContext.Provider
+            value={{
+              userData,
+              setUserData,
+              user,
+              setUser,
+              mealsByParametersResponse,
+              setMealsByParametersResponse,
+              fitnessApiResponse,
+              setFitnessApiResponse,
+              favouritesMeals,
+              setFavouritesMeals,
+            }}
+          >
+            <RouterProvider router={router} />
+          </UserContext.Provider>
+        </ThemeContext.Provider>
+      </React.StrictMode>
+    </>
   );
 };

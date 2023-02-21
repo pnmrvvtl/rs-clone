@@ -18,8 +18,11 @@ export default function Meal() {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const { mealsByParametersResponse } = useContext(UserContext);
-  const meal = mealsByParametersResponse?.filter((el) => el.id === +id!)[0];
+  const { mealsByParametersResponse, favouritesMeals } = useContext(UserContext);
+  let meal = mealsByParametersResponse?.filter((el) => el.id === +id!)[0];
+  if (!meal) {
+    meal = favouritesMeals?.filter((el) => el.id === +id!)[0];
+  }
 
   const { nutrients } = meal?.nutrition;
   if (!meal) {
