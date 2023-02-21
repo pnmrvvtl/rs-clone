@@ -1,0 +1,11 @@
+@import "../../scss/constants";
+
+.container {
+  min-height: 700px;
+  background-color: $background-strip;
+  display: flex;
+  font-family: $font-family;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

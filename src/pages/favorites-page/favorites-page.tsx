@@ -1,8 +1,11 @@
-import styles from './favorites-page.module.scss';
-
+//libs
 import React, { useContext } from 'react';
+//context
 import { UserContext } from '../../context/user-context';
+//components
 import MealCard from '../../components/meal-card/meal-card';
+//styles
+import styles from './favorites-page.module.scss';
 
 const FavoritesPage = () => {
   const { favouritesMeals } = useContext(UserContext);
