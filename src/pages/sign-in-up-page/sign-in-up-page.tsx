@@ -46,12 +46,11 @@ export default function SignInUpPage() {
 
   const handleSignInClick = async () => {
     try {
-      if (!signInEmail) {
-        alert('Email field must not be empty');
+      if (!testEmail.test(signInEmail) || testPassword.test(signInPassword)) {
         return;
       }
-      if (!signInPassword) {
-        alert('Password field must not be empty');
+      if (!signInEmail || !signInPassword) {
+        alert('Password and email must not be empty');
         return;
       }
       if (isLoading) return;
@@ -159,13 +158,24 @@ export default function SignInUpPage() {
           console.log('go to data collection');
           navigation(`/${Routes.DATA_COLLECTION}`);
         }
+      } else {
+        setIsLoading(false);
       }
     } catch (e) {
+      console.log(e);
       alert((e as Error).message);
+      setIsLoading(false);
     }
   };
   const handleRegistrationClick = async () => {
     try {
+      if (!testEmail.test(registrationEmail) || testPassword.test(registrationPassword) ||
+        !testEmail.test(repeatRegistrationEmail) || testPassword.test(repeatRegistrationPassword) ||
+        (registrationEmail !== repeatRegistrationEmail) ||
+        (registrationPassword !== repeatRegistrationPassword)) {
+        alert('Fill all fields according to rules and try again');
+        return;
+      }
       if (registrationEmail !== repeatRegistrationEmail) {
         alert('Email and repeated email must be the same.');
         return;
@@ -201,9 +211,12 @@ export default function SignInUpPage() {
     }
   };
 
+  const testEmail = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,20}$/);
+  const testPassword = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/);
+
   return (
     <div className={styles.container}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -216,29 +229,31 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
-          <Box component="form" sx={{ mt: 1 }}>
+          <Box component='form' sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label='Email Address'
+              name='email'
+              error={!!signInEmail && !testEmail.test(signInEmail)}
+              helperText={!!signInEmail && !testEmail.test(signInEmail) && 'Email must be correct.'}
+              autoComplete='email'
               autoFocus
               value={signInEmail}
               onChange={(event) => setSignInEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              autoComplete='current-password'
               value={signInPassword}
               onChange={(event) => setSignInPassword(event.target.value)}
             />
@@ -246,7 +261,7 @@ export default function SignInUpPage() {
               className={styles.button}
               onClick={handleSignInClick}
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
@@ -255,7 +270,7 @@ export default function SignInUpPage() {
               className={styles.button}
               onClick={handleSignInWithGoogleClick}
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               <GoogleIcon />
@@ -264,7 +279,7 @@ export default function SignInUpPage() {
           </Box>
         </Box>
       </Container>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -277,49 +292,68 @@ export default function SignInUpPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Registration
           </Typography>
-          <Box component="form" sx={{ mt: 1 }}>
+          <Box component='form' sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              error={!!registrationEmail && !testEmail.test(registrationEmail)}
+              helperText={!!registrationEmail &&
+                !testEmail.test(registrationEmail)
+                && 'Email must be correct.'}
+              label='Email Address'
+              name='email'
+              autoComplete='email'
               value={registrationEmail}
               onChange={(event) => setRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="Repeat Email Address"
-              name="email"
-              autoComplete="email"
+              label='Repeat Email Address'
+              name='email'
+              autoComplete='email'
               value={repeatRegistrationEmail}
+              error={!!repeatRegistrationEmail && (registrationEmail !== repeatRegistrationEmail
+                || !testEmail.test(repeatRegistrationEmail))}
+              helperText={
+                (!!repeatRegistrationEmail && repeatRegistrationEmail !== registrationEmail
+                  && 'Email and repeat email must be the same') ||
+                (!!repeatRegistrationEmail && !testEmail.test(repeatRegistrationEmail) && 'Repeat email must be correct'
+                )}
               onChange={(event) => setRepeatRegistrationEmail(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              helperText={!!registrationPassword &&
+                !testPassword.test(registrationPassword)
+                && 'Password must be 6 characters or longer and must contain 1 lower case, 1 upper case symbol and 1 digit.'}
+              error={!!registrationPassword && !testPassword.test(registrationPassword)}
+              autoComplete='current-password'
               value={registrationPassword}
               onChange={(event) => setRegistrationPassword(event.target.value)}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="repeat-password"
-              label="Repeat password"
-              type="password"
-              autoComplete="current-password"
+              name='repeat-password'
+              label='Repeat password'
+              type='password'
+              error={!!repeatRegistrationPassword && registrationPassword !== repeatRegistrationPassword}
+              helperText={
+                repeatRegistrationPassword !== registrationPassword
+                && 'Password and repeat password must be the same'}
+              autoComplete='current-password'
               value={repeatRegistrationPassword}
               onChange={(event) => setRepeatRegistrationPassword(event.target.value)}
             />
@@ -327,7 +361,7 @@ export default function SignInUpPage() {
               className={styles.button}
               onClick={handleRegistrationClick}
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Registration
