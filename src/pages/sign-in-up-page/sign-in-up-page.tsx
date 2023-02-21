@@ -169,8 +169,8 @@ export default function SignInUpPage() {
   };
   const handleRegistrationClick = async () => {
     try {
-      if (!testEmail.test(registrationEmail) || testPassword.test(registrationPassword) ||
-        !testEmail.test(repeatRegistrationEmail) || testPassword.test(repeatRegistrationPassword) ||
+      if (!testEmail.test(registrationEmail) || !testPassword.test(registrationPassword) ||
+        !testEmail.test(repeatRegistrationEmail) || !testPassword.test(repeatRegistrationPassword) ||
         (registrationEmail !== repeatRegistrationEmail) ||
         (registrationPassword !== repeatRegistrationPassword)) {
         alert('Fill all fields according to rules and try again');

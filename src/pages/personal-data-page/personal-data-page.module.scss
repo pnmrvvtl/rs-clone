@@ -1,6 +1,7 @@
 @import "../../scss/constants";
 
 .container {
+  padding: 0 100px;
   min-height: 700px;
   background-color: $background-strip;
   display: flex;
