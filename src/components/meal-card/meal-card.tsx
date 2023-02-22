@@ -11,7 +11,6 @@ type MealCardProps = {
   clickOnCardHandler?: React.MouseEventHandler<HTMLDivElement>;
   mealCardInfo: MealCardInfo;
   isColumnLayout: boolean;
-  isFavourite: boolean;
   fromFavourite?: boolean;
 };
 
@@ -21,7 +20,7 @@ export default function MealCard(props: MealCardProps) {
 
   const navigate = useNavigate();
   const { favouritesMeals, setFavouritesMeals, mealsByParametersResponse, user } = useContext(UserContext);
-  const [isInFavourites, setIsInFavourites] = useState(props.isFavourite);
+  const [isInFavourites, setIsInFavourites] = useState(favouritesMeals.some((el) => el.id === id));
 
   const handleFavouriteClick = async () => {
     if (favouritesMeals.some((el) => el.id === id)) {
@@ -77,9 +76,7 @@ export default function MealCard(props: MealCardProps) {
             <span title="fats">{fats} g</span>
           </div>
           <span
-            className={`${styles.star} ${isInFavourites && styles.favourite} ${
-              props.fromFavourite && styles.favourite
-            }`}
+            className={`${styles.star} ${isInFavourites && styles.favourite}`}
             onClick={handleFavouriteClick}
           >
             ★

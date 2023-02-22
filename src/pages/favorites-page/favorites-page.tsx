@@ -39,7 +39,6 @@ const FavoritesPage = () => {
                 likes: meal.likes + meal.aggregateLikes,
               }}
               isColumnLayout={true}
-              isFavourite={true}
               fromFavourite={true}
             />
           );

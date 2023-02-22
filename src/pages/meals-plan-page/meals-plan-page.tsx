@@ -40,13 +40,13 @@ export default function MealsPlanPage() {
     return <ErrorPage />;
   }
 
-  const ITEMS_PER_PAGE = 12;
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + ITEMS_PER_PAGE;
   let dinnerIdeas = mealsByParametersResponse.slice(
     daysArray.length * (userData.mealsCount || 3),
     mealsByParametersResponse.length,
   );
+  const ITEMS_PER_PAGE = 12;
+  const [currentItems, setCurrentItems] = useState(dinnerIdeas.slice(0, ITEMS_PER_PAGE));
+
   if (search !== '') {
     dinnerIdeas = dinnerIdeas.filter((meal) => {
       return (
@@ -130,12 +130,12 @@ export default function MealsPlanPage() {
     }
   }
 
-  const currentItems = dinnerIdeas.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(dinnerIdeas.length / ITEMS_PER_PAGE);
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * ITEMS_PER_PAGE) % mealsByParametersResponse.length;
-    setItemOffset(newOffset);
+    setCurrentItems(
+      dinnerIdeas.slice(event.selected * ITEMS_PER_PAGE, event.selected * ITEMS_PER_PAGE + ITEMS_PER_PAGE),
+    );
   };
   const handleSearch = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setSearch(event.target.value.toLowerCase());
@@ -221,7 +221,6 @@ export default function MealsPlanPage() {
                           likes: meal.likes + meal.aggregateLikes,
                         }}
                         isColumnLayout={true}
-                        isFavourite={favouritesMeals.some((favEl) => favEl.id === meal.id)}
                       />
                     );
                   })}
@@ -265,7 +264,7 @@ export default function MealsPlanPage() {
           {currentItems.map((item, i) => (
             <MealCard
               clickOnCardHandler={() => setPopupMeal({ ...item })}
-              key={i}
+              key={item.id}
               mealCardInfo={{
                 id: item.id,
                 duration: item.cookingMinutes + item.readyInMinutes + item.preparationMinutes,
@@ -283,7 +282,6 @@ export default function MealsPlanPage() {
                 likes: item.likes + item.aggregateLikes,
               }}
               isColumnLayout={false}
-              isFavourite={favouritesMeals.some((favEl) => favEl.id === item.id)}
             />
           ))}
         </div>
