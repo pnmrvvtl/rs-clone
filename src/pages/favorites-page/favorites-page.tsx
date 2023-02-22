@@ -21,7 +21,7 @@ const FavoritesPage = () => {
         {favouritesMeals.map((meal, idx) => {
           return (
             <MealCard
-              key={idx}
+              key={meal.id}
               mealCardInfo={{
                 id: meal.id,
                 duration: meal.cookingMinutes + meal.readyInMinutes + meal.preparationMinutes,
@@ -39,8 +39,6 @@ const FavoritesPage = () => {
                 likes: meal.likes + meal.aggregateLikes,
               }}
               isColumnLayout={true}
-              isFavourite={true}
-              fromFavourite={true}
             />
           );
         })}

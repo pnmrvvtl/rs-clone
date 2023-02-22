@@ -17,6 +17,8 @@ import Sorting from '../../types/sorting';
 import { ThemeContext } from '../../context/theme-context';
 
 export default function MealsPlanPage() {
+  const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
   const {
     DEFAULT,
     CALORIES_ASC,
@@ -28,25 +30,22 @@ export default function MealsPlanPage() {
     PROTEINS_DESC,
     CALORIES_DESC,
   } = Sorting;
-  const { userData, mealsByParametersResponse, favouritesMeals } = useContext(UserContext);
+  const { userData, mealsByParametersResponse } = useContext(UserContext);
   const { theme } = useContext(ThemeContext);
+
   const [popupMeal, setPopupMeal] = useState<ResultMeal>(mealsByParametersResponse[0]);
   const [sorting, setSorting] = useState(Sorting.DEFAULT);
   const [search, setSearch] = useState('');
+  const [currentOffset, setCurrentOffset] = useState(0);
 
-  const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  if (!userData.isEditedByUser) {
-    return <ErrorPage />;
-  }
-
-  const ITEMS_PER_PAGE = 12;
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + ITEMS_PER_PAGE;
   let dinnerIdeas = mealsByParametersResponse.slice(
     daysArray.length * (userData.mealsCount || 3),
     mealsByParametersResponse.length,
   );
+  if (!userData.isEditedByUser) {
+    return <ErrorPage />;
+  }
+
   if (search !== '') {
     dinnerIdeas = dinnerIdeas.filter((meal) => {
       return (
@@ -130,12 +129,12 @@ export default function MealsPlanPage() {
     }
   }
 
-  const currentItems = dinnerIdeas.slice(itemOffset, endOffset);
+  const ITEMS_PER_PAGE = 12;
   const pageCount = Math.ceil(dinnerIdeas.length / ITEMS_PER_PAGE);
+  const currentItems = dinnerIdeas.slice(currentOffset, currentOffset + ITEMS_PER_PAGE);
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * ITEMS_PER_PAGE) % mealsByParametersResponse.length;
-    setItemOffset(newOffset);
+    setCurrentOffset(event.selected * ITEMS_PER_PAGE);
   };
   const handleSearch = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setSearch(event.target.value.toLowerCase());
@@ -199,7 +198,7 @@ export default function MealsPlanPage() {
                     const meal = mealsByParametersResponse[(elem - 1) * (userData.mealsCount || 3) + i];
                     return (
                       <MealCard
-                        key={(i + 1) * elem}
+                        key={item.id}
                         mealCardInfo={{
                           id: meal.id,
                           duration: meal.cookingMinutes + meal.readyInMinutes + meal.preparationMinutes,
@@ -221,7 +220,6 @@ export default function MealsPlanPage() {
                           likes: meal.likes + meal.aggregateLikes,
                         }}
                         isColumnLayout={true}
-                        isFavourite={favouritesMeals.some((favEl) => favEl.id === meal.id)}
                       />
                     );
                   })}
@@ -262,10 +260,10 @@ export default function MealsPlanPage() {
           </TextField>
         </div>
         <div className={styles['ideas-cards']}>
-          {currentItems.map((item, i) => (
+          {currentItems.map((item) => (
             <MealCard
               clickOnCardHandler={() => setPopupMeal({ ...item })}
-              key={i}
+              key={item.id}
               mealCardInfo={{
                 id: item.id,
                 duration: item.cookingMinutes + item.readyInMinutes + item.preparationMinutes,
@@ -283,7 +281,6 @@ export default function MealsPlanPage() {
                 likes: item.likes + item.aggregateLikes,
               }}
               isColumnLayout={false}
-              isFavourite={favouritesMeals.some((favEl) => favEl.id === item.id)}
             />
           ))}
         </div>
