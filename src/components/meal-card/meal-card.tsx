@@ -11,7 +11,6 @@ type MealCardProps = {
   clickOnCardHandler?: React.MouseEventHandler<HTMLDivElement>;
   mealCardInfo: MealCardInfo;
   isColumnLayout: boolean;
-  fromFavourite?: boolean;
 };
 
 export default function MealCard(props: MealCardProps) {
