@@ -22,7 +22,7 @@ export default class FitnessApi {
         this.headers = headers
     }
 
-    async getData<T, S>(path: string, queryParams: T): Promise<S> {
+    private async getData<T, S>(path: string, queryParams: T): Promise<S> {
         let queryString = ''
         for (const key in queryParams) {
             queryString += `&${key}=${queryParams[key]}`
