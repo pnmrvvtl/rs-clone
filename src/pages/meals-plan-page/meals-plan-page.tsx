@@ -1,20 +1,20 @@
+//libs
 import { useContext, useState } from 'react';
-
+//components
 import ReactPaginate from 'react-paginate';
 import Carousel from 'react-material-ui-carousel';
-
+import { TextField, MenuItem } from '@mui/material';
 import MealCard from '../../components/meal-card/meal-card';
 import ErrorPage from '../error-page/error-page';
 import MealPopup from '../../components/meal-popup/meal-popup';
-
-import { UserContext } from '../../context/user-context';
-import { ResultMeal } from '../../types/meals-api-types';
-
-import styles from './meals-plan.page.module.scss';
-import { TextField } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import Sorting from '../../types/sorting';
+//context
 import { ThemeContext } from '../../context/theme-context';
+import { UserContext } from '../../context/user-context';
+//types
+import { ResultMeal } from '../../types/meals-api-types';
+import Sorting from '../../types/sorting';
+//styles
+import styles from './meals-plan.page.module.scss';
 
 export default function MealsPlanPage() {
   const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -233,18 +233,18 @@ export default function MealsPlanPage() {
         <div className={styles.filters}>
           <h2>Dinner ideas</h2>
           <TextField
-            id="outlined-basic"
-            label="Search by parameters"
-            variant="outlined"
+            id='outlined-basic'
+            label='Search by parameters'
+            variant='outlined'
             value={search}
             onChange={handleSearch}
             className={styles.input}
           />
           <TextField
-            id="sorting"
+            id='sorting'
             value={String(sorting)}
             className={styles.input}
-            label="Sorting"
+            label='Sorting'
             select
             onChange={handleSorting}
           >
@@ -292,12 +292,12 @@ export default function MealsPlanPage() {
         previousClassName={styles.previous}
         containerClassName={styles.next}
         disabledClassName={styles.disabled}
-        breakLabel="..."
-        nextLabel="next >"
+        breakLabel='...'
+        nextLabel='next >'
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel='< previous'
       />
     </div>
   );

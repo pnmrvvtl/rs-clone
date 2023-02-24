@@ -36,8 +36,9 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-
-console.log(firebaseApp);
+if (!firebaseApp) {
+  console.log('Error connecting to firebase');
+}
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -69,7 +70,6 @@ export const addCollectionAndDocument = async <T extends objectsToAdd>(
     batch.set(docRef, object);
   });
   await batch.commit();
-  console.log('done');
 };
 
 export const getCollectionAndDocuments = async (userId: string): Promise<objectsToAdd[]> => {

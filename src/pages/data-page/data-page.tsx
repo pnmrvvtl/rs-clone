@@ -1,19 +1,22 @@
+//libs
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+//api
 import MealsApi from '../../api/meals-api';
 import FitnessApi from '../../api/fitness-api';
-
+//types
 import { UserData, UserStatus } from '../../types/user-data';
+//context
 import { UserContext } from '../../context/user-context';
-
+import { ThemeContext } from '../../context/theme-context';
+//helpers
 import { calculateGoal } from '../../helpers/calculateGoal';
-
+//components
 import ContinueButton from '../../components/data/continue-button';
 import CheckableList from '../../components/data/checkable-list';
 import RadioList from '../../components/data/radio-list';
 import RadioSubList from '../../components/data/radio-sub-list';
-
+//styles
 import styles from './data-page.module.scss';
 import {
   setFavouriteToFirestore,
@@ -22,7 +25,6 @@ import {
   setUserDataToFirestore,
   setUserStatusToFirestore,
 } from '../../helpers/firebase';
-import { ThemeContext } from '../../context/theme-context';
 
 export default function DataPage() {
   const { setUserData, setMealsByParametersResponse, setFitnessApiResponse, user, favouritesMeals } =
@@ -34,7 +36,7 @@ export default function DataPage() {
   const initialUser: UserData = localDataUser && JSON.parse(localDataUser);
 
   const [selectedSex, setSelectedSex] = useState(initialUser?.selectedSex || 'male');
-  const [currentQuestion, setCurrentQuestion] = useState(28);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [currentGoals, setCurrentGoals] = useState<string[]>(initialUser?.currentGoals || []);
   const [healthConditions, setHealthConditions] = useState<string[]>(initialUser?.healthConditions || []);
   const [foodAtTheMoment, setFoodAtTheMoment] = useState<string[]>(initialUser?.foodAtTheMoment || []);
@@ -122,7 +124,7 @@ export default function DataPage() {
     'Cravings for carbs/sweets',
     'The food wasn’t very good',
     'Options were too limited',
-    "I haven't dieted/I'm not here to lose weight",
+    'I haven\'t dieted/I\'m not here to lose weight',
   ];
   const foodCuisinesArr = ['Indian', 'Chinese', 'Mexican', 'Italian', 'Middle Eastern', 'Mediterranean'];
   const foodKindsArr = ['Main course', 'Side dish', 'Dessert', 'Salad', 'Breakfast', 'Soup'];
@@ -159,7 +161,7 @@ export default function DataPage() {
     ['Plenty', 'More than 45 minutes per meal'],
   ];
   const foodCookSkillsArr = [
-    ['Beginner', "I'm still learning"],
+    ['Beginner', 'I\'m still learning'],
     ['Average', 'I know my way around'],
     ['Pro', 'Prepare to be wowed'],
   ];
@@ -167,10 +169,10 @@ export default function DataPage() {
     ['Keto', 'Less than 20 grams of carbs per day'],
     ['Moderate', '20 to 50 grams of carbs per day'],
     ['Liberal', '50 to 100 grams of carbs per day'],
-    ["I'm not sure", 'Let us choose the best one for you'],
+    ['I\'m not sure', 'Let us choose the best one for you'],
   ];
   const foodCookProteinArr = [
-    ["I'm not sure", 'Let us choose the best one for you'],
+    ['I\'m not sure', 'Let us choose the best one for you'],
     ['Moderate', '90 to 120 grams per day'],
     ['High', 'More than 120 grams per day'],
   ];
@@ -238,7 +240,7 @@ export default function DataPage() {
         <h2>Age & height</h2>
         <p>Age</p>
         <input
-          type="number"
+          type='number'
           className={styles['input-age']}
           max={150}
           min={0}
@@ -252,7 +254,7 @@ export default function DataPage() {
         <div className={`${styles['ft-div']} ${heightSystem !== 'ft' && styles.hidden}`}>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={20}
               value={currentFtHeight}
@@ -265,7 +267,7 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={100}
               value={currentInHeight}
@@ -280,7 +282,7 @@ export default function DataPage() {
         <div className={`${styles['cm-div']} ${heightSystem !== 'cm' && styles.hidden}`}>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={280}
               value={currentCmHeight}
@@ -308,7 +310,15 @@ export default function DataPage() {
         </div>
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
-          clickHandler={() => setCurrentQuestion(currentQuestion + 1)}
+          clickHandler={() => {
+            if ((heightSystem === 'cm' && !currentCmHeight) ||
+              (heightSystem === 'ft' && !currentFtHeight) ||
+              !currentAge) {
+              alert('Input correct value');
+              return;
+            }
+            setCurrentQuestion(currentQuestion + 1);
+          }}
         />
       </div>
 
@@ -321,7 +331,7 @@ export default function DataPage() {
         <div className={`${styles['pounds-div']} ${weightSystem !== 'pounds' && styles.hidden}`}>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={500}
               value={currentLbsWeight}
@@ -334,7 +344,7 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={500}
               value={goalLbsWeight}
@@ -350,7 +360,7 @@ export default function DataPage() {
         <div className={`${styles['kilos-div']} ${weightSystem !== 'kilos' && styles.hidden}`}>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={500}
               value={currentKgWeight}
@@ -363,7 +373,7 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type="number"
+              type='number'
               min={0}
               max={500}
               value={goalKgWeight}
@@ -392,7 +402,15 @@ export default function DataPage() {
         </div>
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
-          clickHandler={() => setCurrentQuestion(currentQuestion + 1)}
+          clickHandler={() => {
+            if ((weightSystem === 'kilos' && (!currentKgWeight || !goalKgWeight)) ||
+              (weightSystem === 'pounds' && (!currentLbsWeight || !goalLbsWeight))) {
+              alert('Input correct values');
+              return;
+            }
+            setCurrentQuestion(currentQuestion + 1);
+          }
+          }
         />
       </div>
 
@@ -786,7 +804,6 @@ export default function DataPage() {
               foodCookProtein,
               mealsCount: +mealsCount,
             };
-            console.log(`user data= `, userData);
             setIsLoading(true);
             window.scrollTo(0, 0);
             const goalData = calculateGoal(
@@ -821,9 +838,6 @@ export default function DataPage() {
               height: userData.cmHeight,
               gender: userData.selectedSex.toLowerCase(),
             });
-            console.log('bmi = ', bmi);
-            console.log('calories = ', calories);
-            console.log('macros = ', macros);
 
             const meals = await new MealsApi().getMealsByParameters({
               query: 'a',
@@ -846,15 +860,14 @@ export default function DataPage() {
                 userData.foodCookCarb === 'Keto'
                   ? 8
                   : userData.foodCookCarb === 'Moderate'
-                  ? 35
-                  : userData.foodCookCarb === 'Moderate'
-                  ? 50
-                  : 100,
+                    ? 35
+                    : userData.foodCookCarb === 'Moderate'
+                      ? 50
+                      : 100,
               maxProtein: userData.foodCookCarb === 'Moderate' ? 50 : 500,
-              maxCalories: Math.ceil(macros.calorie / userData.mealsCount) / 2,
+              maxCalories: (Math.ceil(macros?.calorie / userData?.mealsCount) / 2) || 500,
               number: 100,
             });
-            console.log('meals response = ', meals);
             if (userData && meals && bmi && calories && macros) {
               await setMealsToFirestore(user.uid, meals.results, favouritesMeals);
               await setFavouriteToFirestore(user.uid, meals.results, favouritesMeals);
