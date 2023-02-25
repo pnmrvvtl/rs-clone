@@ -177,7 +177,7 @@ export default function DataPage() {
     ['High', 'More than 120 grams per day'],
   ];
   const mealsCountArr = [
-    ['2', 'Lunch and dinner (intermittent fasting)'],
+    ['2', 'Breakfast and lunch(intermittent fasting)'],
     ['3', 'Breakfast, lunch, and dinner'],
   ];
 
@@ -311,10 +311,12 @@ export default function DataPage() {
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => {
-            if ((heightSystem === 'cm' && !currentCmHeight) ||
-              (heightSystem === 'ft' && !currentFtHeight) ||
-              !currentAge) {
-              alert('Input correct value');
+            if ((heightSystem === 'cm' && !currentCmHeight || currentCmHeight > 250 ||
+                currentCmHeight < 60) ||
+              (heightSystem === 'ft' && !currentFtHeight || +currentFtHeight < 2 ||
+                +currentFtHeight > 10) ||
+              !currentAge || currentAge > 150 || currentAge < 10) {
+              alert('Input correct value (age in [10-100], height in [60cm - 250cm])');
               return;
             }
             setCurrentQuestion(currentQuestion + 1);
@@ -403,9 +405,12 @@ export default function DataPage() {
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => {
-            if ((weightSystem === 'kilos' && (!currentKgWeight || !goalKgWeight)) ||
-              (weightSystem === 'pounds' && (!currentLbsWeight || !goalLbsWeight))) {
-              alert('Input correct values');
+            if ((weightSystem === 'kilos' && (!currentKgWeight || !goalKgWeight ||
+                goalKgWeight > 300 || currentKgWeight > 300 || goalKgWeight < 30 ||
+                currentKgWeight < 30)) ||
+              (weightSystem === 'pounds' && (!currentLbsWeight || !goalLbsWeight || +goalLbsWeight < 50 ||
+                +currentLbsWeight < 50 || +goalLbsWeight > 600 || +currentLbsWeight > 600))) {
+              alert('Input correct values of weight in [30kg - 300kg]');
               return;
             }
             setCurrentQuestion(currentQuestion + 1);
