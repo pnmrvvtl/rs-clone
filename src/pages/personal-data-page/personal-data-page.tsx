@@ -1,9 +1,9 @@
 //libs
 import React, { useContext } from 'react';
+//context
+import { UserContext } from '../../context/user-context';
 //styles
 import styles from './personal-data-page.module.scss';
-import { UserContext } from '../../context/user-context';
-
 
 const PersonalDataPage = () => {
   const { userData, user } = useContext(UserContext);

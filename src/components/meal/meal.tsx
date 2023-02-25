@@ -1,15 +1,17 @@
+//libs
 import { useParams } from 'react-router';
 import { useContext, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import styles from './meal.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
-
+//types
 import { UserContext } from '../../context/user-context';
 import { ResultMeal, ExtendedIngredient, Step, Nutrient } from '../../types/meals-api-types';
-
+//components
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorPage from '../../pages/error-page/error-page';
+//styles
+import styles from './meal.module.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function Meal() {
   const { id } = useParams();
@@ -26,8 +28,6 @@ export default function Meal() {
 
   const { nutrients } = meal?.nutrition;
   if (!meal) {
-    console.log(mealsByParametersResponse);
-    console.log(id);
     return <ErrorPage />;
   }
 
@@ -37,7 +37,7 @@ export default function Meal() {
         <div className={styles['description__content-wrapper']}>
           <DescriptionBox title={meal?.title} duration={meal?.readyInMinutes} summary={meal?.summary} />
         </div>
-        <img className={styles['description__meal-img']} src={`${meal?.image}`} alt="dish"></img>
+        <img className={styles['description__meal-img']} src={`${meal?.image}`} alt='dish'></img>
       </div>
 
       <div className={styles['content-wrapper']}>
@@ -86,8 +86,8 @@ const IngredientsList = (props: { extendedIngredients: ExtendedIngredient[] }) =
           <span>
             {el?.amount} {el?.unit}
           </span>
-          <div className="image-wrapper">
-            <img src={'https://spoonacular.com/cdn/ingredients_100x100/' + el?.image} alt="ingredients" />
+          <div className='image-wrapper'>
+            <img src={'https://spoonacular.com/cdn/ingredients_100x100/' + el?.image} alt='ingredients' />
           </div>
           <span className={styles.name}>{el?.name}</span>
         </li>
@@ -101,8 +101,8 @@ const Instructions = (props: { steps: Step[] }) => {
     <section className={styles['instructions']}>
       <h3 className={styles['instructions-title']}>Instructions</h3>
       <ul className={styles['instructions-list']}>
-        {props?.steps?.map((el) => (
-          <li key={el?.number}>
+        {props?.steps?.map((el, idx) => (
+          <li key={idx}>
             <span>{el?.number}</span>
             {el?.step}
           </li>
@@ -151,7 +151,7 @@ const Nutritional = (props: { nutrients: Nutrient[]; meal: ResultMeal }) => {
 
       <div className={styles['composition__line']}>
         {props?.nutrients?.map((el) => (
-          <div className={styles['composition__item']}>
+          <div key={el?.name} className={styles['composition__item']}>
             <span className={styles['name']}>{el?.name}</span>
             <div className={styles['property-persens']}>
               <span className={styles['property']}>
