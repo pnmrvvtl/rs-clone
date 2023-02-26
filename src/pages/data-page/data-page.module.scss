@@ -305,6 +305,12 @@
       }
     }
 
+    .recommended {
+      color: var(--sun-color);
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
     //question 3
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {

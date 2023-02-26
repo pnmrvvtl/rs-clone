@@ -598,6 +598,7 @@ export default function DataPage() {
 
       <div className={`${styles.question} ${currentQuestion !== 16 && styles.hidden}`}>
         <h2>What cuisines make your mouth water?</h2>
+        <p className={styles.recommended}>please, select at least 3 options</p>
         <CheckableList
           classElem={styles.goal}
           classCheck={styles.check}
@@ -620,6 +621,7 @@ export default function DataPage() {
 
       <div className={`${styles.question} ${currentQuestion !== 17 && styles.hidden}`}>
         <h2>What kind of dishes do you like?</h2>
+        <p className={styles.recommended}>please, select at least 3 options</p>
         <CheckableList
           classElem={styles.goal}
           classCheck={styles.check}
@@ -631,7 +633,7 @@ export default function DataPage() {
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => {
-            if (foodCuisines.length >= 3 || foodCuisines.length === 0) {
+            if (foodKinds.length >= 3 || foodKinds.length === 0) {
               setCurrentQuestion(currentQuestion + 1);
             } else {
               alert('please, select at least 3 options')
