@@ -1,0 +1,375 @@
+@import '../../scss/constants';
+
+@mixin chart-title {
+  font-size: 1.2rem;
+  color: #fff;
+  position: absolute;
+}
+
+.content {
+  margin: 100px auto;
+  font-family: $font-family;
+  width: 70%;
+}
+
+.result-title {
+  font-size: 3rem;
+  color: var(--font-color-main);
+  text-align: center;
+}
+
+.bmi {
+  margin: 60px 0;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+  align-items: center;
+  height: 580px;
+}
+
+.bmi-results {
+  flex: 0 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--background-result);
+  height: 100%;
+  row-gap: 20px;
+  border-radius: 0.75rem;
+  position: relative;
+}
+
+.bmi-chart {
+  flex: 0 1 52%;
+  background-color: var(--background-result);
+  height: 100%;
+  width: 100%;
+  padding: 10px 0 40px;
+  border-radius: 0.75rem;
+  position: relative;
+}
+
+.chart {
+  width: 100% !important;
+  height: 85% !important;
+}
+
+.chart-title0 {
+  @include chart-title();
+  top: 30%;
+  left: 30%;
+}
+.chart-title1 {
+  @include chart-title();
+  top: 40%;
+  left: 45%;
+}
+.chart-title2 {
+  @include chart-title();
+  top: 50%;
+  left: 55%;
+}
+.chart-title3 {
+  @include chart-title();
+  top: 60%;
+  left: 65%;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--font-color-sub);
+  font-weight: 500;
+}
+
+.value {
+  color: var(--font-color-main);
+}
+.recommended {
+  color: var(--sun-color);
+  font-size: 1.2rem;
+  font-style: italic;
+}
+.text {
+  color: var(--button-color);
+  font-size: 1.4rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.meal-plan {
+  margin: 30px auto;
+  height: 350px;
+  padding: 25px 20px;
+  border-radius: 0.75rem;
+  background-image: url('../../assets/image/results/meal-plans-cta-desktop.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.plan-title {
+  color: var(--font-color-head);
+  font-size: 2.8rem;
+  margin: 30px 0 20px;
+}
+
+.plan-text {
+  font-size: 1.5rem;
+  color: var(--font-color-head);
+  margin: 10px 0;
+}
+
+.plan-button {
+  color: #fff;
+  background-color: var(--button-color);
+  width: 240px;
+  height: 60px;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 20px 0;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-color-hover);
+  }
+}
+
+.gym-map {
+  height: 500px;
+  background-color: var(--background-light);
+  border-radius: 20px;
+  margin: 30px 0 100px;
+}
+
+.map-title {
+  font-size: 2.5rem;
+  color: var(--font-color-main);
+  text-align: center;
+  margin-top: 90px;
+}
+.map-subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--font-color-main);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 80px;
+}
+
+.result-aticle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.result-img {
+  width: 24%;
+  height: auto;
+  border-radius: 20px;
+}
+
+@media(min-width: 1500px) {
+  .bmi-chart {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .content {
+    width: 80%;
+  }
+  .plan-title {
+    font-size: 2.2rem;
+  }
+  .chart-title {
+    margin: 30px;
+  }
+  .bmi {
+    height: 500px;
+  }
+  .bmi-results {
+    row-gap: 10px;
+  }
+  .bmi-chart {
+    flex: 0 1 50%;
+  }
+}
+
+@media (max-width: 1370px) {
+  .chart-title0 {
+    top: 20%;
+  }
+  .chart-title1 {
+    top: 30%;
+  }
+  .chart-title2 {
+    top: 40%;
+  }
+  .chart-title3 {
+    top: 50%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .content {
+    width: 90%;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+  .bmi-chart {
+    flex: 0 1 45%;
+  }
+  canvas {
+    height: 90%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .bmi {
+    height: 450px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .bmi-chart {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bmi {
+    height: auto;
+    flex-wrap: wrap;
+    row-gap: 20px;
+  }
+
+  .bmi-results {
+    flex: 0 1 100%;
+    row-gap: 0;
+  }
+
+  .bmi-chart {
+    flex: 0 1 80%;
+  }
+  .chart-title0 {
+    top: 30%;
+  }
+  .chart-title1 {
+    top: 40%;
+  }
+  .chart-title2 {
+    top: 50%;
+  }
+  .chart-title3 {
+    top: 60%;
+  }
+
+  .plan-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 740px) {
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  .map-title {
+    font-size: 1.5rem;
+  }
+  .map-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .bmi {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 740px) {
+  .result-aticle {
+    justify-content: center;
+    column-gap: 5px;
+  }
+  .bmi-chart {
+    flex: 0 1 100%;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 570px) {
+  .chart-title0 {
+    top: 20%;
+    font-size: 1rem;
+  }
+  .chart-title1 {
+    top: 30%;
+    font-size: 1rem;
+  }
+  .chart-title2 {
+    top: 40%;
+    font-size: 1rem;
+  }
+  .chart-title3 {
+    top: 50%;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .result-title {
+    font-size: 2rem;
+  }
+
+  .meal-plan {
+    padding: 10px 10px 0 15px;
+  }
+
+  .plan-title {
+    margin: 10px 0;
+  }
+
+  .plan-button {
+    width: 220px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 450px) {
+  .chart-title0 {
+    top: 15%;
+    font-size: 1rem;
+  }
+  .chart-title1 {
+    top: 23%;
+    font-size: 1rem;
+  }
+  .chart-title2 {
+    top: 33%;
+    font-size: 1rem;
+  }
+  .chart-title3 {
+    top: 41%;
+    font-size: 1rem;
+  }
+  .bmi-chart {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 370px) {
+  .chart-title3 {
+    top: 38%;
+    font-size: 1rem;
+  }
+}

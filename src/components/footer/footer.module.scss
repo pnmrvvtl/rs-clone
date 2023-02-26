@@ -1,0 +1,37 @@
+@import "../../scss/constants";
+
+.footer {
+  position: relative;
+  background-color: var(--footer-color);
+  width: 100%;
+  color: white;
+  font-family: sans-serif;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-sizing: border-box;
+
+  a:link, a:hover, a:active, a:focus, a:visited {
+    color: white;
+    text-decoration: none;
+    transition: scale 0.3s ease;
+
+    &:hover {
+      transform: scale(110%);
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo {
+    width: 100px;
+    height: 30px;
+    background-image: url('https://rs.school/images/rs_school_js.svg');
+    background-repeat: no-repeat;
+  }
+}

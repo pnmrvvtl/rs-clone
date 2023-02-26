@@ -1,0 +1,31 @@
+@import "../../scss/constants";
+
+.container {
+  padding: 0 100px;
+  min-height: 700px;
+  background-color: var(--background-strip);
+  color: var(--font-color-main);
+  display: flex;
+  font-family: $font-family;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 70px 80px;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 70px 30px;
+  }
+}
+
+@media (max-width: 380px) {
+  h1{
+    margin: 10px;
+    font-size: 1.5rem;
+  }
+}

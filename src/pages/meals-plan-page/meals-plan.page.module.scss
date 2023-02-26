@@ -1,0 +1,146 @@
+@import "../../scss/constants";
+
+.container {
+
+  width: 100%;
+  color: var(--font-color-main);
+
+  a:link, a:active, a:hover, a:visited {
+    color: var(--font-color-link);
+    text-decoration: none;
+  }
+
+  .current-meals {
+    padding: 20px 50px;
+    background-color: var(--background-light);
+
+    .meals {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+  }
+
+  .dinner-ideas {
+    padding: 20px 50px;
+    background-color: var(--background-strip);
+    width: 100%;
+    min-height: 400px;
+
+    input, select, textarea {
+      color: var(--font-color-main);
+  }
+
+    .filters {
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: var(--font-color-main);
+
+      & > div {
+        margin: 10px;
+       
+        span {
+          color: var(--font-color-main);
+        }
+
+        width: 300px;
+      }
+    }
+
+    .ideas-cards {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      & > div {
+
+        & > div:nth-child(1) {
+          max-width: 250px;
+          
+        }
+
+        & > div:nth-child(2) {
+          max-width: 200px;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    background-color: var(--background-light);
+
+    * {
+      padding: 10px;
+      margin: 5px;
+      list-style: none;
+    }
+
+    li {
+      background-color: var(--font-color-link);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: var(--font-color-inverted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s ease;
+
+      &.disabled {
+        &:hover {
+          cursor: not-allowed;
+        }
+
+        background-color: var(--font-color-link);
+
+        a {
+          text-decoration: line-through;
+
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      &.selected {
+        width: 45px;
+        height: 45px;
+
+        a {
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+
+        box-shadow: 5px 5px 5px $font-color-main;
+      }
+
+      &.next, &.previous {
+        width: unset;
+        border-radius: 10px;
+        &:hover {
+          background-color: var(--button-color-hover);
+        }
+      }
+
+    }
+
+    a, a:link, a:active, a:visited, a:hover {
+      color: var(--font-color-inverted);
+      text-decoration: none;
+    }
+
+  }
+}

@@ -1,0 +1,327 @@
+@import "../../scss/constants";
+
+.container {
+    background-color: var(--background-light);
+    color: var(--font-color-main);
+
+    .description-wrapper {
+        padding: 30px 0;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 60px;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+.summary-wrapper {
+    .summary {
+        position: relative;
+        min-width: 390px;
+        width: 100%;
+        padding: 62px 35px 35px;
+        box-sizing: border-box;
+        min-height: 250px;
+        border-radius: 15px;
+        background-color: var(--background-strip);
+
+        .summary__title {
+            font-size: 38px;
+            line-height: 1.2;
+        }
+
+        .summary__time-info {
+            position: absolute;
+            top: 35px;
+            font-size: 15px;
+            color: #95989a;
+
+            .summary__time-icon {
+                margin-right: 5px;
+            }
+
+            .summary__skill-level {
+                border-left: solid 1px;
+                margin-left: 10px;
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+.description__meal-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 250px;
+    border-radius: 15px;
+}
+
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px 60px;
+    padding: 0px 35px 0px 0px;
+}
+
+.ingredients {
+    padding: 32px 35px;
+    background-color: var(--background-super-light);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    h3 {
+        margin-top: 0px;
+        margin-bottom: 12px;
+        font-size: 36px;
+        color: var(--font-color-head);
+    }
+
+    ul {
+        padding-left: 2.5em;
+    }
+
+    span {
+        margin: 5px 0;
+        color: var(--font-color-head);
+    }
+
+    .ingredients-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+        padding: 0;
+
+        .ingredient {
+            margin-top: 1.5em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+
+            .image-wrapper {
+                max-width: 80px;
+                max-height: 69px;
+            }
+
+            .name {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+.instructions {
+    width: auto;
+    padding-bottom: 35px;
+
+    .instructions-title {
+        margin-top: 32px;
+        margin-bottom: 12px;
+        color: var(--font-color-main);
+        font-size: 36px;
+    }
+
+    .instructions-list {
+        padding-left: 2.5em;
+
+        li {
+            margin-top: 1.5em;
+            list-style: none;
+
+            span {
+                position: absolute;
+                margin-left: -2.5em;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                background-color: var(--font-color-link);
+                border-radius: 59%;
+                text-align: center;
+                color: var(--font-color-inverted);
+            }
+        }
+    }
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+
+.composition__other {
+    border-radius: 1em;
+
+    .composition__nutrients {
+        .composition__title {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 500;
+            color: var(--font-color-main)
+        }
+
+    }
+}
+
+.composition__blocks {
+    margin-top: 36px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+
+    .composition__block-carbs {
+        display: flex;
+        flex-direction: column;
+
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: var(--carbs-color);
+        }
+
+        .composition__block-percent {
+            font-size: 14px;
+            color: var(--carbs-color);
+        }
+    }
+
+    .composition__block-protein {
+        display: flex;
+        flex-direction: column;
+
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: var(--carbs-protein);
+        }
+
+        .composition__block-percent {
+            font-size: 14px;
+            color: var(--carbs-protein);
+        }
+    }
+
+    .composition__block-fat {
+        display: flex;
+        flex-direction: column;
+
+        .composition__block-line {
+            height: 6px;
+            border-radius: 3px;
+            background-color: var(--carbs-fat);
+        }
+
+        .composition__block-percent {
+            font-size: 14px;
+            color: var(--carbs-fat);
+        }
+    }
+
+    .composition__block-name {
+        font-size: 14px;
+    }
+
+    .composition__block-weight {
+        font-size: 18px;
+    }
+}
+
+.composition__line {
+    margin: 36px 0;
+
+    .composition__item {
+        display: flex;
+        border-top: solid 1px rgba(240, 239, 238);
+        padding: 12px 0;
+
+        .property-persens {
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+        }
+
+        .name {
+            display: inline-block;
+            width: 70%;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .container {
+        .description-wrapper {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            justify-content: center;
+        }
+    }
+
+    .description__meal-img {
+        margin: 0 auto;
+        width: 280px;
+    }
+
+    .instructions {
+        .instructions-list {
+            margin-bottom: 0;
+        }
+    }
+
+    .composition__line {
+        .composition__item {
+            .property-persens {
+                width: 50%;
+
+                .property {
+                    font-weight: 500;
+                }
+            }
+
+            .name {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .summary {
+        padding: 31px 16px;
+    }
+
+    .summary-wrapper {
+        .summary {
+            padding: 62px 16px;
+            min-width: 280px;
+        }
+    }
+
+    .content {
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+
+        .ingredients {
+            padding: 25px 20px;
+            border-radius: 15px;
+        }
+
+        .instructions {
+            padding-left: 20px;
+            padding-right: 20px;
+
+            .instructions-title {
+                margin-top: 32px;
+            }
+        }
+    }
+}

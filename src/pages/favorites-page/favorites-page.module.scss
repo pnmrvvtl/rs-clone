@@ -1,0 +1,21 @@
+@import "../../scss/constants";
+
+.container {
+  min-height: 600px;
+  padding: 40px 50px;
+  background-color: var(--background-main);
+  color: var(--font-color-main);
+
+  .meals {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .title {
+    text-align: center;
+  }
+}

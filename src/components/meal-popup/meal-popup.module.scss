@@ -1,0 +1,282 @@
+@import "../../scss/constants";
+
+.container {
+  padding: 76px 0;
+  position: absolute;
+  display: flex;
+  top: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 100;
+  color: var(--font-color-main);
+  justify-content: center;
+}
+
+.window {
+  position: relative;
+  padding: 48px;
+  margin: 32px 60px;
+  max-width: 80%;
+  background-color: var(--background-color);
+  border-radius: 12px;
+  height: fit-content;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  height: max-content;
+
+  .description__img {
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .description__text {
+    .description__time-serving {
+      margin: 9px 0;
+      font-size: 14px;
+
+      .summary__time-qty {
+        display: inline-block;
+      }
+
+      .summary__skill-level {
+        margin-left: 15px;
+        padding-left: 15px;
+        border-left: 1px solid black;
+        display: inline-block;
+      }
+    }
+
+    .description__title {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 500;
+    }
+  }
+}
+
+.composition {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+
+  .composition__ingredients {
+    border-radius: 1em;
+    border: 2px solid rgba(240, 239, 238);
+    padding: 24px;
+    height: max-content;
+
+    .composition__title {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+
+    .composition__list {
+      list-style: none;
+      padding-left: 2.5em;
+
+      .ingredient {
+        margin-bottom: 15px;
+      }
+
+      span {
+        position: absolute;
+        margin-left: -2.5em;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        background-color: var(--font-color-link);
+        border-radius: 59%;
+        text-align: center;
+        color: var(--font-color-inverted);
+      }
+    }
+  }
+
+  .composition__other {
+    border-radius: 1em;
+
+    .composition__nutrients {
+      .composition__title {
+        margin: 0;
+        font-size: 36px;
+        font-weight: 500;
+      }
+
+    }
+  }
+}
+
+.composition__blocks {
+  margin-top: 36px;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+
+  .composition__block-carbs {
+    display: flex;
+    flex-direction: column;
+
+    .composition__block-line {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--carbs-color);
+    }
+
+    .composition__block-percent {
+      font-size: 14px;
+      color: var(--carbs-color);
+    }
+  }
+
+  .composition__block-protein {
+    display: flex;
+    flex-direction: column;
+
+    .composition__block-line {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--carbs-protein);
+    }
+
+    .composition__block-percent {
+      font-size: 14px;
+      color: var(--carbs-protein);
+    }
+  }
+
+  .composition__block-fat {
+    display: flex;
+    flex-direction: column;
+
+    .composition__block-line {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--carbs-fat);
+    }
+
+    .composition__block-percent {
+      font-size: 14px;
+      color: var(--carbs-fat);
+    }
+  }
+
+  .composition__block-name {
+    font-size: 14px;
+  }
+
+  .composition__block-weight {
+    font-size: 18px;
+  }
+}
+
+.composition__line {
+  margin-top: 36px;
+
+  .composition__fiber {
+    border-top: solid 1px rgba(240, 239, 238);
+    padding: 12px 0;
+  }
+
+  .composition__total-carbs {
+    border-top: solid 1px rgba(240, 239, 238);
+    padding: 12px 0;
+  }
+
+  .composition__satiety-score {
+    border-top: solid 1px rgba(240, 239, 238);
+    border-bottom: solid 1px rgba(240, 239, 238);
+    padding: 12px 0;
+  }
+
+  .property {
+    font-weight: 500;
+  }
+
+  .name {
+    display: inline-block;
+    width: 70%;
+  }
+}
+
+.instructions {
+  width: auto;
+  margin-top: 36px;
+  font-weight: 500;
+
+  .instructions-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  .instructions-list {
+    padding-left: 2.5em;
+
+    li {
+      margin-top: 1.5em;
+      list-style: none;
+      font-weight: 400;
+
+      span {
+        position: absolute;
+        margin-left: -2.5em;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        background-color: var(--font-color-link);
+        border-radius: 59%;
+        text-align: center;
+        color: var(--font-color-main);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.xmark {
+  position: absolute;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  top: 12px;
+  right: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .window {
+    padding: 24px;
+  }
+
+  .description {
+    display: block;
+
+    .description__img {
+      height: 320px;
+      min-width: 270px;
+      max-width: fit-content;
+      margin-bottom: 24px;
+    }
+  }
+
+  .composition {
+    display: block;
+
+    .composition__nutrients {
+      .composition__title {
+        margin-top: 36px !important;
+      }
+    }
+  }
+
+  .xmark {
+    top: 0px;
+    right: 0px;
+  }
+}

@@ -1,0 +1,110 @@
+@import "../../scss/constants";
+
+.meal {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+
+  &.rowed {
+    flex-direction: row;
+    height: 200px;
+
+    @media screen and (max-width: 680px) {
+      flex-direction: column;
+    }
+
+    .meal-title {
+      margin-left: 20px;
+    }
+  }
+
+  .meal-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+
+    & > div:nth-child(2) {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .star {
+        background-color: var(--font-color-link);
+        height: 30px;
+        width: 30px;
+        border-radius: 8px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--font-color-inverted);
+
+        &.favourite {
+          color: var(--sun-color);
+        }
+      }
+
+      & > div {
+        display: flex;
+        flex-direction: row;
+
+        span {
+          font-size: 0.8rem;
+          color: var(--font-color-inverted);
+          padding: 3px;
+          display: flex;
+          align-items: center;
+          border-radius: 8px;
+          justify-content: center;
+          margin: 5px;
+          height: 30px;
+          background-color: var(--button-color);
+        }
+      }
+    }
+
+    > div:nth-child(1) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        color: var(--font-color-main);
+        background-color: var(--background-strip);
+        font-weight: bolder;
+      }
+
+      span:nth-child(1) {
+        font-size: 1.3rem;
+      }
+    }
+
+    width: 320px;
+    height: 170px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .meal-title {
+    width: 250px;
+    color: var(--font-color-sub);
+
+    span:nth-child(2) {
+      color: darkred;
+    }
+
+    h5 {
+      color: var(--font-color-main);
+    }
+  }
+}
