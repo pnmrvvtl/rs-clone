@@ -16,7 +16,7 @@ const PersonalDataPage = () => {
           if (typeof el[1] !== 'boolean') {
             if ((Array.isArray(el[1]) && el[1].length) || typeof el[1] === 'string' || typeof el[1] === 'number')
               return (
-                <li>
+                <li key={el[0]}>
                   <b>{el[0].split(/(?=[A-Z])/).join(' ').toUpperCase()}</b>:{'   '}{Array.isArray(el[1]) ? el[1].join(', ') : el[1]}
                 </li>);
           }
