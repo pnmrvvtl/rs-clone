@@ -58,7 +58,7 @@ export default function DataPage() {
   const [weightSystem, setWeightSystem] = useState('kilos');
   const [basicActivities, setBasicAct] = useState(initialUser?.basicActivities || '');
   const [pastPains, setPastPain] = useState(initialUser?.pastPains || '');
-  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '12 weeks');
+  const [weightProgramm, setWeightProgramm] = useState(initialUser?.weightProgramm || '');
   const [foodCookTime, setFoodCookTime] = useState(initialUser?.foodCookTime || '');
   const [foodCookSkills, setFoodCookSkills] = useState(initialUser?.foodCookSkills || '');
   const [foodCookCarb, setFoodCookCarb] = useState(initialUser?.foodCookCarb || '');
@@ -124,7 +124,7 @@ export default function DataPage() {
     'Cravings for carbs/sweets',
     'The food wasn’t very good',
     'Options were too limited',
-    'I haven\'t dieted/I\'m not here to lose weight',
+    "I haven't dieted/I'm not here to lose weight",
   ];
   const foodCuisinesArr = ['Indian', 'Chinese', 'Mexican', 'Italian', 'Middle Eastern', 'Mediterranean'];
   const foodKindsArr = ['Main course', 'Side dish', 'Dessert', 'Salad', 'Breakfast', 'Soup'];
@@ -161,7 +161,7 @@ export default function DataPage() {
     ['Plenty', 'More than 45 minutes per meal'],
   ];
   const foodCookSkillsArr = [
-    ['Beginner', 'I\'m still learning'],
+    ['Beginner', "I'm still learning"],
     ['Average', 'I know my way around'],
     ['Pro', 'Prepare to be wowed'],
   ];
@@ -169,10 +169,10 @@ export default function DataPage() {
     ['Keto', 'Less than 20 grams of carbs per day'],
     ['Moderate', '20 to 50 grams of carbs per day'],
     ['Liberal', '50 to 100 grams of carbs per day'],
-    ['I\'m not sure', 'Let us choose the best one for you'],
+    ["I'm not sure", 'Let us choose the best one for you'],
   ];
   const foodCookProteinArr = [
-    ['I\'m not sure', 'Let us choose the best one for you'],
+    ["I'm not sure", 'Let us choose the best one for you'],
     ['Moderate', '90 to 120 grams per day'],
     ['High', 'More than 120 grams per day'],
   ];
@@ -240,9 +240,9 @@ export default function DataPage() {
         <h2>Age & height</h2>
         <p>Age</p>
         <input
-          type='number'
+          type="number"
           className={styles['input-age']}
-          max={150}
+          max={80}
           min={0}
           value={currentAge}
           onChange={(event) => {
@@ -254,9 +254,9 @@ export default function DataPage() {
         <div className={`${styles['ft-div']} ${heightSystem !== 'ft' && styles.hidden}`}>
           <div>
             <input
-              type='number'
-              min={0}
-              max={20}
+              type="number"
+              min={4}
+              max={7}
               value={currentFtHeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -267,9 +267,9 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type='number'
+              type="number"
               min={0}
-              max={100}
+              max={10}
               value={currentInHeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -282,9 +282,9 @@ export default function DataPage() {
         <div className={`${styles['cm-div']} ${heightSystem !== 'cm' && styles.hidden}`}>
           <div>
             <input
-              type='number'
-              min={0}
-              max={280}
+              type="number"
+              min={130}
+              max={230}
               value={currentCmHeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -311,12 +311,18 @@ export default function DataPage() {
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => {
-            if ((heightSystem === 'cm' && !currentCmHeight || currentCmHeight > 250 ||
-                currentCmHeight < 60) ||
-              (heightSystem === 'ft' && !currentFtHeight || +currentFtHeight < 2 ||
-                +currentFtHeight > 10) ||
-              !currentAge || currentAge > 150 || currentAge < 10) {
-              alert('Input correct value (age in [10-100], height in [60cm - 250cm])');
+            if (
+              (heightSystem === 'cm' && !currentCmHeight) ||
+              currentCmHeight > 230 ||
+              currentCmHeight < 130 ||
+              (heightSystem === 'ft' && !currentFtHeight) ||
+              +currentFtHeight < 2 ||
+              +currentFtHeight > 10 ||
+              !currentAge ||
+              currentAge > 80 ||
+              currentAge < 10
+            ) {
+              alert('Input correct value (age in (10-80y.o), height in (130cm - 230cm / 4\' 3" - 7\' 7")');
               return;
             }
             setCurrentQuestion(currentQuestion + 1);
@@ -333,9 +339,9 @@ export default function DataPage() {
         <div className={`${styles['pounds-div']} ${weightSystem !== 'pounds' && styles.hidden}`}>
           <div>
             <input
-              type='number'
-              min={0}
-              max={500}
+              type="number"
+              min={88}
+              max={360}
               value={currentLbsWeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -346,9 +352,9 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type='number'
-              min={0}
-              max={500}
+              type="number"
+              min={88}
+              max={360}
               value={goalLbsWeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -362,9 +368,9 @@ export default function DataPage() {
         <div className={`${styles['kilos-div']} ${weightSystem !== 'kilos' && styles.hidden}`}>
           <div>
             <input
-              type='number'
-              min={0}
-              max={500}
+              type="number"
+              min={40}
+              max={160}
               value={currentKgWeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -375,9 +381,9 @@ export default function DataPage() {
           </div>
           <div>
             <input
-              type='number'
-              min={0}
-              max={500}
+              type="number"
+              min={40}
+              max={160}
               value={goalKgWeight}
               onChange={(event) => {
                 onNumberChange(event);
@@ -405,17 +411,27 @@ export default function DataPage() {
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
           clickHandler={() => {
-            if ((weightSystem === 'kilos' && (!currentKgWeight || !goalKgWeight ||
-                goalKgWeight > 300 || currentKgWeight > 300 || goalKgWeight < 30 ||
-                currentKgWeight < 30)) ||
-              (weightSystem === 'pounds' && (!currentLbsWeight || !goalLbsWeight || +goalLbsWeight < 50 ||
-                +currentLbsWeight < 50 || +goalLbsWeight > 600 || +currentLbsWeight > 600))) {
-              alert('Input correct values of weight in [30kg - 300kg]');
+            if (
+              (weightSystem === 'kilos' &&
+                (!currentKgWeight ||
+                  !goalKgWeight ||
+                  goalKgWeight > 160 ||
+                  currentKgWeight > 160 ||
+                  goalKgWeight < 40 ||
+                  currentKgWeight < 40)) ||
+              (weightSystem === 'pounds' &&
+                (!currentLbsWeight ||
+                  !goalLbsWeight ||
+                  +goalLbsWeight < 88 ||
+                  +currentLbsWeight < 88 ||
+                  +goalLbsWeight > 360 ||
+                  +currentLbsWeight > 360))
+            ) {
+              alert('Input correct values of weight in (40kg - 160kg)/(88ib - 360ib)');
               return;
             }
             setCurrentQuestion(currentQuestion + 1);
-          }
-          }
+          }}
         />
       </div>
 
@@ -592,7 +608,13 @@ export default function DataPage() {
         />
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
-          clickHandler={() => setCurrentQuestion(currentQuestion + 1)}
+          clickHandler={() => {
+            if (foodCuisines.length >= 3 || foodCuisines.length === 0) {
+              setCurrentQuestion(currentQuestion + 1);
+            } else {
+              alert('please, select at least 3 options ')
+            }
+          }}
         />
       </div>
 
@@ -608,7 +630,13 @@ export default function DataPage() {
         />
         <ContinueButton
           classes={`${styles.button} ${styles.selected}`}
-          clickHandler={() => setCurrentQuestion(currentQuestion + 1)}
+          clickHandler={() => {
+            if (foodCuisines.length >= 3 || foodCuisines.length === 0) {
+              setCurrentQuestion(currentQuestion + 1);
+            } else {
+              alert('please, select at least 3 options')
+            }
+          }}
         />
       </div>
 
@@ -865,12 +893,12 @@ export default function DataPage() {
                 userData.foodCookCarb === 'Keto'
                   ? 8
                   : userData.foodCookCarb === 'Moderate'
-                    ? 35
-                    : userData.foodCookCarb === 'Moderate'
-                      ? 50
-                      : 100,
+                  ? 35
+                  : userData.foodCookCarb === 'Moderate'
+                  ? 50
+                  : 100,
               maxProtein: userData.foodCookCarb === 'Moderate' ? 50 : 500,
-              maxCalories: (Math.ceil(macros?.calorie / userData?.mealsCount) / 2) || 500,
+              maxCalories: Math.ceil(macros?.calorie / userData?.mealsCount) / 2 || 500,
               number: 100,
             });
             if (userData && meals && bmi && calories && macros) {
