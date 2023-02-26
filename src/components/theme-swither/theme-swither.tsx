@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import { ThemeContext } from '../../context/theme-context';
 import { MenuItem, Typography } from '@mui/material';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -71,7 +72,9 @@ export default function ThemeSwitcher() {
         toggleTheme();
       }}
     >
-      <Typography textAlign="center">{`${theme[0].toUpperCase()}${theme.slice(1)}`} theme</Typography>
+      <div>
+        <Typography textAlign="center">Dark theme {theme === 'dark' ? <CheckOutlinedIcon/> : ''}</Typography>
+      </div>
     </MenuItem>
   );
 }
